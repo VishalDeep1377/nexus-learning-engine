@@ -1,0 +1,61 @@
+{
+  "compilerOptions": {
+    "target": "ES2017",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "react-jsx",
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "./*"
+      ]
+    },
+    "typeRoots": [
+      "./node_modules/@types",
+      "./types"
+    ]
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "app/api/auth/[...nextauth]/route.js",
+    "store/userStore.ts",
+    "app/api/auth/login/route.ts",
+    "lib/auth.js",
+    "components/EncrytButton.jsx",
+    "components/FeatureSection/TextParallaxContent.jsx",
+    "components/User/Home/SmoothScrollHero.jsx",
+    "lib/gemini/gemini.js",
+    "components/MentorChat/MentorChat.jsx",
+    "lib/geminiMentorPrompt.ts",
+    "app/api/(user)/mentor/chat/allchats/route.ts",
+    "components/UserProfile/UserProfile.jsx",
+    ".next/dev/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    ".next",
+    "build"
+  ]
+}
