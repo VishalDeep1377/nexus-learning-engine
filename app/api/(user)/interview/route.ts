@@ -6,6 +6,7 @@ import { geminiInterviewPrompt } from "@/lib/geminiInterviewPrompt";
 import { CustomSession } from "../mentor/chat/route";
 
 // POST /api/interview — Generate AI interview questions for a given skill
+export const dynamic = 'force-dynamic';
 export async function POST(req: NextRequest) {
     const session = (await getServerSession(authOptions as any)) as CustomSession;
 
