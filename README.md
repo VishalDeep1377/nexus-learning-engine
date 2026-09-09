@@ -77,30 +77,6 @@
 
 </div>
 
----
-
-## 🏆 Hackathon Judging Criteria
-
-This project is built specifically to address the core judging metrics:
-
-### 1. Technical Quality (25%)
-- **Clean MCP Server Implementation:** We built a standalone MCP Server (`mcp-servers/mentor-context`) using Express that securely exposes user roadmap contexts via the `resource://` protocol. This allows AI agents to fetch student data cleanly without polluting the main API architecture.
-- **Error Handling & Resilience:** Core features (like Gemini API calls) implement exponential backoff for `429 Too Many Requests`. The Mentor AI falls back gracefully to a standard prompt if the DB fetch fails.
-- **Security:** Fully authenticated using NextAuth with Google, GitHub, and secure Email/Password. All AI context injection is scoped strictly to the authenticated `userId`.
-
-### 2. Innovation & Creativity (25%)
-- **Novel Use of MCP Primitives:** Instead of treating the AI Mentor as a generic chat, we expose the student's *actual database state* (their roadmaps, completed steps, and inferred weak areas) as an **MCP Resource**. The Mentor agent reads this resource before every reply, creating a hyper-personalized conversation.
-- **Two-Agent Roadmap Pipeline:** Roadmap generation doesn't just rely on Gemini's latent knowledge. It first invokes an agent to search the **LinkedIn Jobs API** in real-time for the user's skill, fetching actual employer requirements, and uses *that* data to ground the AI's roadmap generation.
-
-### 3. Real-World Impact (20%)
-- **Solving the "Tutorial Hell" Problem:** Junior developers often learn skills that employers don't actually ask for. By grounding our AI roadmaps in live LinkedIn job data, we ensure students learn exactly what the market demands.
-- **Scalable Mentorship:** Access to senior developers is expensive. Our Context-Aware AI Mentor and AI Interview prep system democratize access to high-quality, personalized feedback.
-
-### 4. Completeness (10%)
-- **End-to-End Functionality:** From user authentication, generating job-grounded roadmaps, testing skills with AI-generated MCQs, to seeking help from an AI Mentor—the entire user journey is functional, styled, and deployed.
-- **External Data Integrations:** The platform integrates with the **LinkedIn Jobs API** for market research and the **NewsAPI** for live tech updates.
-
----
 
 ## 🆕 What's New
 
@@ -387,19 +363,19 @@ flowchart TD
     
     C --> D([💡 Generate Ideas])
     D --> E[POST /api/hackathons/projects]
-    E --> F[ideaGenerator Agent\n(Gemini 3.6 Flash)]
-    F --> G[Extracts 3 Unique Project Angles]
-    G --> H[(MongoDB: HackathonProject)]
+    E --> F["ideaGenerator Agent<br/>(Gemini 3.6 Flash)"]
+    F --> G["Extracts 3 Unique Project Angles"]
+    G --> H[("(MongoDB: HackathonProject)")]
     
     H --> I([⚡ Select Idea & Analyze])
     I --> J[POST /api/hackathons/analyze]
-    J --> K[hackathonAnalyzer Agent\nEvaluates Feasibility & Tech Stack]
-    K --> L[AnalysisResult View]
+    J --> K["hackathonAnalyzer Agent<br/>Evaluates Feasibility & Tech Stack"]
+    K --> L["AnalysisResult View"]
     
     L --> M([🏗️ Generate Build Plan])
     M --> N[POST /api/hackathons/plan]
-    N --> O[buildPlanner Agent\nArchitects Folders & APIs]
-    O --> P[BuildPlan View + AgentTrace UI]
+    N --> O["buildPlanner Agent<br/>Architects Folders & APIs"]
+    O --> P["BuildPlan View + AgentTrace UI"]
     
     P --> Q([🚀 Submit & Tracking])
     
