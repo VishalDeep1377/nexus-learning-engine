@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useUserStore } from '@/store/userStore';
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-hot-toast';
+import confetti from 'canvas-confetti';
 
 interface Roadmap {
   _id?: string;
@@ -46,6 +47,23 @@ function Roadmaps() {
 
   const handleStepCompletion = async (roadmapId: string, stepIndex: number, isCompleted: boolean) => {
     try {
+      const roadmap = roadmaps.find(r => r._id === roadmapId);
+      if (roadmap && !isCompleted) {
+        const userProgress = roadmap.completedSteps?.find(progress => progress.userId === userData?._id);
+        const currentCompleteCount = userProgress?.stepIndices.length || 0;
+        const totalSteps = roadmap.steps?.length || 0;
+        
+        // If this is the *last* step to be checked off, fire confetti!
+        if (currentCompleteCount + 1 === totalSteps) {
+          confetti({
+            particleCount: 150,
+            spread: 80,
+            origin: { y: 0.6 },
+            colors: ['#6366f1', '#06b6d4', '#10b981', '#f59e0b']
+          });
+        }
+      }
+
       // Optimistically update UI
       setRoadmaps(prevRoadmaps =>
         prevRoadmaps.map(roadmap =>
@@ -232,24 +250,38 @@ function Roadmaps() {
                   </span> Roadmap
                 </h2>
                 
-                {/* Completion Progress */}
+                {/* Completion Progress (Gamified) */}
                 <div className="mb-8">
-                  <div className="flex justify-between items-end mb-2">
-                    <h3 className="text-[13px] font-bold text-gray-400 uppercase tracking-wider">Progress</h3>
-                    <div className="text-[14px] font-bold text-indigo-300">
-                      {Math.round(calculateCompletionPercentage(roadmap))}% Complete
+                  {Math.round(calculateCompletionPercentage(roadmap)) === 100 ? (
+                    <div className="flex items-center gap-4 bg-gradient-to-r from-emerald-500/10 to-teal-500/10 border border-emerald-500/30 rounded-2xl p-4 shadow-[0_0_30px_rgba(16,185,129,0.1)]">
+                      <div className="w-12 h-12 flex shrink-0 items-center justify-center bg-gradient-to-br from-emerald-400 to-teal-500 rounded-xl shadow-lg shadow-emerald-500/30">
+                        <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                      </div>
+                      <div>
+                        <h3 className="text-lg font-black text-emerald-400">Mastery Achieved! 🎉</h3>
+                        <p className="text-[13px] text-emerald-200/70 font-medium">You have fully completed this roadmap. Excellent work!</p>
+                      </div>
                     </div>
-                  </div>
-                  <div className="h-2 bg-white/10 rounded-full overflow-hidden">
-                    <div
-                      className="h-full rounded-full transition-all duration-1000 ease-out"
-                      style={{
-                        width: `${calculateCompletionPercentage(roadmap)}%`,
-                        background: "linear-gradient(90deg, #6366f1, #06b6d4)",
-                        boxShadow: "0 0 10px rgba(6,182,212,0.5)"
-                      }}
-                    ></div>
-                  </div>
+                  ) : (
+                    <>
+                      <div className="flex justify-between items-end mb-2">
+                        <h3 className="text-[13px] font-bold text-gray-400 uppercase tracking-wider">Progress</h3>
+                        <div className="text-[14px] font-bold text-indigo-300">
+                          {Math.round(calculateCompletionPercentage(roadmap))}% Complete
+                        </div>
+                      </div>
+                      <div className="h-2 bg-white/10 rounded-full overflow-hidden">
+                        <div
+                          className="h-full rounded-full transition-all duration-1000 ease-out"
+                          style={{
+                            width: `${calculateCompletionPercentage(roadmap)}%`,
+                            background: "linear-gradient(90deg, #6366f1, #06b6d4)",
+                            boxShadow: "0 0 10px rgba(6,182,212,0.5)"
+                          }}
+                        ></div>
+                      </div>
+                    </>
+                  )}
                 </div>
 
                 <div className="grid md:grid-cols-3 gap-8">
