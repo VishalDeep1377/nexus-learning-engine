@@ -6,7 +6,7 @@ import { useRouter, usePathname } from 'next/navigation';
 import { useUserStore } from '@/store/userStore';
 import Link from 'next/link';
 import { IoHome } from "react-icons/io5";
-import { Trophy, Code2, Mic, Brain, ClipboardCheck, ChevronDown, ArrowRight, BarChart3 } from 'lucide-react';
+import { Trophy, Code2, Mic, Brain, ClipboardCheck, ChevronDown, ArrowRight, BarChart3, Bot, MessagesSquare, Newspaper, Users, Briefcase, UserCircle, LayoutGrid, BookOpen } from 'lucide-react';
 import Image from 'next/image';
 
 interface NavbarProps {
@@ -166,6 +166,168 @@ function SelfAssessmentDropdown({ pathname }: { pathname: string }) {
   );
 }
 
+const LEARNING_ITEMS = [
+  {
+    href: '/AiMentor',
+    icon: Bot,
+    label: 'Zeno AI Mentor',
+    desc: 'Intelligent technical guidance',
+    iconBg: 'bg-indigo-500/10 dark:bg-indigo-500/20',
+    iconColor: 'text-indigo-500',
+    hoverBorder: 'hover:border-indigo-500/40',
+    hoverGlow: 'hover:shadow-indigo-500/10',
+  },
+  {
+    href: '/interview',
+    icon: MessagesSquare,
+    label: 'Interview Prep',
+    desc: 'Mock technical interviews',
+    iconBg: 'bg-violet-500/10 dark:bg-violet-500/20',
+    iconColor: 'text-violet-500',
+    hoverBorder: 'hover:border-violet-500/40',
+    hoverGlow: 'hover:shadow-violet-500/10',
+  },
+];
+
+function LearningDropdown({ pathname }: { pathname: string }) {
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+  const isActive = pathname?.startsWith('/AiMentor') || pathname?.startsWith('/interview');
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  return (
+    <div ref={ref} className="relative flex items-center h-full" onMouseEnter={() => setOpen(true)} onMouseLeave={() => setOpen(false)}>
+      <button className={`flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 ${isActive ? 'text-indigo-500 dark:text-indigo-400' : 'text-slate-700 dark:text-slate-200 hover:text-indigo-500 dark:hover:text-indigo-400'}`}>
+        Learning
+        <ChevronDown className={`w-3.5 h-3.5 opacity-60 transition-transform duration-200 ${open ? 'rotate-180' : ''}`} />
+      </button>
+
+      <div className={`absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[340px] transition-all duration-200 origin-top ${open ? 'opacity-100 scale-100 pointer-events-auto' : 'opacity-0 scale-95 pointer-events-none'}`} style={{ zIndex: 9999 }}>
+        <div className="relative overflow-hidden rounded-2xl border border-slate-200/80 dark:border-white/10 bg-white/80 dark:bg-slate-900/90 backdrop-blur-xl shadow-2xl shadow-black/20 dark:shadow-black/60">
+          <div className="h-0.5 w-full bg-gradient-to-r from-blue-500 via-indigo-500 to-violet-500" />
+          <div className="p-3 space-y-1">
+            <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400 dark:text-slate-500 px-2 pb-1">AI Interactions</p>
+            {LEARNING_ITEMS.map((item) => {
+              const Icon = item.icon;
+              const isItemActive = pathname?.startsWith(item.href);
+              return (
+                <Link key={item.href} href={item.href} onClick={() => setOpen(false)} className={`flex items-center gap-3 px-3 py-2.5 rounded-xl border transition-all duration-150 group ${isItemActive ? 'bg-indigo-50 dark:bg-indigo-950/40 border-indigo-200/60 dark:border-indigo-700/40' : `border-transparent hover:bg-slate-50 dark:hover:bg-white/5 ${item.hoverBorder} hover:shadow-sm ${item.hoverGlow}`}`}>
+                  <span className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 ${item.iconBg}`}>
+                    <Icon className={`w-4 h-4 ${item.iconColor}`} />
+                  </span>
+                  <div className="flex-1 min-w-0">
+                    <p className={`text-sm font-semibold leading-none mb-0.5 ${isItemActive ? 'text-indigo-600 dark:text-indigo-400' : 'text-slate-800 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400'} transition-colors`}>{item.label}</p>
+                    <p className="text-xs text-slate-500 dark:text-slate-400 leading-none">{item.desc}</p>
+                  </div>
+                  <ArrowRight className="w-3.5 h-3.5 text-slate-300 dark:text-slate-600 group-hover:text-indigo-400 group-hover:translate-x-0.5 transition-all shrink-0" />
+                </Link>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+const MORE_ITEMS = [
+  {
+    href: '/technews',
+    icon: Newspaper,
+    label: 'Tech News',
+    desc: 'Latest dev updates',
+    iconBg: 'bg-emerald-500/10 dark:bg-emerald-500/20',
+    iconColor: 'text-emerald-500',
+    hoverBorder: 'hover:border-emerald-500/40',
+    hoverGlow: 'hover:shadow-emerald-500/10',
+  },
+  {
+    href: '/learners-community',
+    icon: Users,
+    label: 'Community',
+    desc: 'Discussions & forums',
+    iconBg: 'bg-cyan-500/10 dark:bg-cyan-500/20',
+    iconColor: 'text-cyan-500',
+    hoverBorder: 'hover:border-cyan-500/40',
+    hoverGlow: 'hover:shadow-cyan-500/10',
+  },
+  {
+    href: '/job-search',
+    icon: Briefcase,
+    label: 'Job Search',
+    desc: 'Find remote tech roles',
+    iconBg: 'bg-amber-500/10 dark:bg-amber-500/20',
+    iconColor: 'text-amber-500',
+    hoverBorder: 'hover:border-amber-500/40',
+    hoverGlow: 'hover:shadow-amber-500/10',
+  },
+  {
+    href: '/profile',
+    icon: UserCircle,
+    label: 'Profile',
+    desc: 'Manage your identity',
+    iconBg: 'bg-blue-500/10 dark:bg-blue-500/20',
+    iconColor: 'text-blue-500',
+    hoverBorder: 'hover:border-blue-500/40',
+    hoverGlow: 'hover:shadow-blue-500/10',
+  },
+];
+
+function MoreDropdown({ pathname }: { pathname: string }) {
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+  const isActive = MORE_ITEMS.some(item => pathname?.startsWith(item.href));
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  return (
+    <div ref={ref} className="relative flex items-center h-full" onMouseEnter={() => setOpen(true)} onMouseLeave={() => setOpen(false)}>
+      <button className={`flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 ${isActive ? 'text-indigo-500 dark:text-indigo-400' : 'text-slate-700 dark:text-slate-200 hover:text-indigo-500 dark:hover:text-indigo-400'}`}>
+        More
+        <ChevronDown className={`w-3.5 h-3.5 opacity-60 transition-transform duration-200 ${open ? 'rotate-180' : ''}`} />
+      </button>
+
+      <div className={`absolute top-full right-0 mt-2 w-[340px] transition-all duration-200 origin-top-right ${open ? 'opacity-100 scale-100 pointer-events-auto' : 'opacity-0 scale-95 pointer-events-none'}`} style={{ zIndex: 9999 }}>
+        <div className="relative overflow-hidden rounded-2xl border border-slate-200/80 dark:border-white/10 bg-white/80 dark:bg-slate-900/90 backdrop-blur-xl shadow-2xl shadow-black/20 dark:shadow-black/60">
+          <div className="h-0.5 w-full bg-gradient-to-r from-emerald-500 via-cyan-500 to-blue-500" />
+          <div className="p-3 space-y-1">
+             <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400 dark:text-slate-500 px-2 pb-1">Platform Tools</p>
+            {MORE_ITEMS.map((item) => {
+              const Icon = item.icon;
+              const isItemActive = pathname?.startsWith(item.href);
+              return (
+                <Link key={item.href} href={item.href} onClick={() => setOpen(false)} className={`flex items-center gap-3 px-3 py-2.5 rounded-xl border transition-all duration-150 group ${isItemActive ? 'bg-indigo-50 dark:bg-indigo-950/40 border-indigo-200/60 dark:border-indigo-700/40' : `border-transparent hover:bg-slate-50 dark:hover:bg-white/5 ${item.hoverBorder} hover:shadow-sm ${item.hoverGlow}`}`}>
+                  <span className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 ${item.iconBg}`}>
+                    <Icon className={`w-4 h-4 ${item.iconColor}`} />
+                  </span>
+                  <div className="flex-1 min-w-0">
+                    <p className={`text-sm font-semibold leading-none mb-0.5 ${isItemActive ? 'text-cyan-600 dark:text-cyan-400' : 'text-slate-800 dark:text-slate-100 group-hover:text-cyan-600 dark:group-hover:text-cyan-400'} transition-colors`}>{item.label}</p>
+                    <p className="text-xs text-slate-500 dark:text-slate-400 leading-none">{item.desc}</p>
+                  </div>
+                  <ArrowRight className="w-3.5 h-3.5 text-slate-300 dark:text-slate-600 group-hover:text-cyan-400 group-hover:translate-x-0.5 transition-all shrink-0" />
+                </Link>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function Navbar({ isDarkMode, setIsDarkMode }: NavbarProps) {
   const { data: session } = useSession();
   const router = useRouter();
@@ -293,27 +455,34 @@ function Navbar({ isDarkMode, setIsDarkMode }: NavbarProps) {
       {session ? (
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1 text-base font-medium items-center">
-            <li>
-              <Link href={"/dashboard"} className={`px-4 py-2 hover:text-blue-600 transition-colors ${pathname?.startsWith('/dashboard') ? 'text-blue-500 font-semibold flex items-center gap-2' : 'flex items-center gap-2'}`}>
+            <li className="relative flex items-center h-full">
+              <Link href={"/dashboard"} className={`flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 ${pathname?.startsWith('/dashboard') ? 'text-indigo-500 dark:text-indigo-400' : 'text-slate-700 dark:text-slate-200 hover:text-indigo-500 dark:hover:text-indigo-400'}`}>
+                <LayoutGrid className="w-4 h-4" />
                 Dashboard
               </Link>
             </li>
-            <li><Link href={"/learning-path"} className="px-4 py-2 hover:text-blue-600 transition-colors">Learning paths</Link></li>
-            <li className="dropdown dropdown-hover">
-              <div tabIndex={0} role="button" className="px-4 py-2 hover:text-blue-600 transition-colors">Learning</div>
-              <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 dark:bg-black rounded-box w-52">
-                <li><Link href={"/AiMentor"} className="hover:text-blue-600 transition-colors">AI Mentor</Link></li>
-                <li><Link href={"/interview"} className="hover:text-blue-600 transition-colors">Interview</Link></li>
-              </ul>
+            <li className="relative flex items-center h-full">
+              <Link href={"/learning-path"} className={`flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 ${pathname?.startsWith('/learning-path') ? 'text-indigo-500 dark:text-indigo-400' : 'text-slate-700 dark:text-slate-200 hover:text-indigo-500 dark:hover:text-indigo-400'}`}>
+                <BookOpen className="w-4 h-4" />
+                Learning Paths
+              </Link>
+            </li>
+            <li className="relative flex items-center h-full">
+              <LearningDropdown pathname={pathname || ''} />
             </li>
 
-            <li><Link href={"/code-reviewer"} className="px-4 py-2 hover:text-blue-600 transition-colors">Code Editor</Link></li>
+            <li className="relative flex items-center h-full">
+              <Link href={"/code-reviewer"} className={`flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 ${pathname?.startsWith('/code-reviewer') ? 'text-indigo-500 dark:text-indigo-400' : 'text-slate-700 dark:text-slate-200 hover:text-indigo-500 dark:hover:text-indigo-400'}`}>
+                <Code2 className="w-4 h-4" />
+                Code Editor
+              </Link>
+            </li>
 
-            <li>
+            <li className="relative flex items-center h-full">
               <Link
                 href={"/hackathons"}
-                className={`flex items-center gap-1.5 px-4 py-2 hover:text-yellow-500 transition-colors ${
-                  pathname?.startsWith('/hackathons') ? 'text-yellow-500 font-semibold' : ''
+                className={`flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 ${
+                  pathname?.startsWith('/hackathons') ? 'text-indigo-500 dark:text-indigo-400' : 'text-slate-700 dark:text-slate-200 hover:text-indigo-500 dark:hover:text-indigo-400'
                 }`}
               >
                 <Trophy className="w-4 h-4" />
@@ -326,14 +495,8 @@ function Navbar({ isDarkMode, setIsDarkMode }: NavbarProps) {
               <SelfAssessmentDropdown pathname={pathname || ''} />
             </li>
 
-            <li className="dropdown dropdown-hover">
-              <div tabIndex={0} role="button" className="px-4 py-2 hover:text-blue-600 transition-colors">More</div>
-              <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 dark:bg-black rounded-box w-52">
-                <li><Link href={"/technews"} className="hover:text-blue-600 transition-colors">Tech News</Link></li>
-                <li><Link href={"/learners-community"} className="hover:text-blue-600 transition-colors">learners community</Link></li>
-                <li><Link href={"/job-search"}>Job Search</Link></li>
-                <li><Link href={"/profile"} className="hover:text-blue-600 transition-colors">profile</Link></li>
-              </ul>
+            <li className="relative flex items-center h-full">
+              <MoreDropdown pathname={pathname || ''} />
             </li>
           </ul>
         </div>
