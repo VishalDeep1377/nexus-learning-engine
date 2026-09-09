@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Mic, MicOff, RotateCcw, Send, Loader2, RefreshCw, CheckCircle, ChevronRight, Sparkles, Radio } from 'lucide-react';
+import { Mic, MicOff, RotateCcw, Send, Loader2, RefreshCw, CheckCircle, ChevronRight, Sparkles, Radio, Pause, Play } from 'lucide-react';
 import toast from 'react-hot-toast';
 import type { SpeechQuestion, SpeechEvaluation } from '@/lib/agents/self-assessment/speech-agent';
 
@@ -51,9 +51,11 @@ export default function SpeechPracticePage() {
   const [evaluation, setEvaluation] = useState<SpeechEvaluation | null>(null);
   const [timer, setTimer] = useState(0);
   const [isRecording, setIsRecording] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
   const [speechSupported, setSpeechSupported] = useState(false);
   const recognitionRef = useRef<any>(null);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const finalTextRef = useRef('');
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -77,28 +79,66 @@ export default function SpeechPracticePage() {
   const startRecording = useCallback(() => {
     const SR = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
     if (!SR) { toast.error('Mic not supported. Type instead.'); setStep('typing'); return; }
+    
+    // Reset our memory when officially starting a brand new recording
+    finalTextRef.current = '';
+    setTranscript('');
+    
     const recognition = new SR();
-    recognition.continuous = true; recognition.interimResults = true; recognition.lang = 'en-US';
+    recognition.continuous = true; 
+    recognition.interimResults = true; 
+    recognition.lang = 'en-US';
+    
     recognition.onresult = (event: any) => {
-      let currentTranscript = '';
-      for (let i = 0; i < event.results.length; i++) {
-        currentTranscript += event.results[i][0].transcript;
+      let interim = '';
+      for (let i = event.resultIndex; i < event.results.length; i++) {
+        if (event.results[i].isFinal) {
+          finalTextRef.current += event.results[i][0].transcript + ' ';
+        } else {
+          interim += event.results[i][0].transcript;
+        }
       }
-      setTranscript(currentTranscript);
+      setTranscript(finalTextRef.current + interim);
     };
+    
     recognition.onerror = (event: any) => {
+      // Aborted typically triggers natively when we call .stop() for pause, so ignore it softly
+      if (event.error === 'aborted') return;
       if (event.error === 'not-allowed') { toast.error('Mic denied. Please type instead.'); setStep('typing'); }
       stopRecording();
     };
+    
     recognitionRef.current = recognition;
-    recognition.start();
-    setIsRecording(true); setStep('recording'); setTimer(0);
+    
+    try {
+      recognition.start();
+      setIsRecording(true); 
+      setIsPaused(false);
+      setStep('recording'); 
+      setTimer(0);
+      if (timerRef.current) clearInterval(timerRef.current);
+      timerRef.current = setInterval(() => setTimer((t) => t + 1), 1000);
+    } catch (err) {
+      console.error(err);
+    }
+  }, []);
+
+  const pauseRecording = useCallback(() => {
+    try { recognitionRef.current?.stop(); } catch (e) {}
+    setIsPaused(true);
+    if (timerRef.current) { clearInterval(timerRef.current); timerRef.current = null; }
+  }, []);
+
+  const resumeRecording = useCallback(() => {
+    try { recognitionRef.current?.start(); } catch (e) {}
+    setIsPaused(false);
     timerRef.current = setInterval(() => setTimer((t) => t + 1), 1000);
   }, []);
 
   const stopRecording = useCallback(() => {
-    recognitionRef.current?.stop();
+    try { recognitionRef.current?.stop(); } catch (e) {}
     setIsRecording(false);
+    setIsPaused(false);
     if (timerRef.current) { clearInterval(timerRef.current); timerRef.current = null; }
   }, []);
 
@@ -191,15 +231,22 @@ export default function SpeechPracticePage() {
               {step === 'recording' && (
                 <div className="rounded-2xl border border-pink-500/30 bg-pink-500/5 p-8 text-center space-y-5">
                   <div className="relative inline-flex items-center justify-center">
-                    <div className="absolute w-24 h-24 rounded-full bg-pink-500/20 animate-ping" style={{ animationDuration: '1.5s' }} />
-                    <div className="absolute w-20 h-20 rounded-full bg-pink-500/15 animate-ping" style={{ animationDuration: '1.5s', animationDelay: '0.3s' }} />
-                    <div className="relative w-16 h-16 rounded-full bg-gradient-to-br from-pink-600 to-rose-600 flex items-center justify-center shadow-xl shadow-pink-500/40">
-                      <Mic className="w-7 h-7 text-white" />
+                    {!isPaused && (
+                      <>
+                        <div className="absolute w-24 h-24 rounded-full bg-pink-500/20 animate-ping" style={{ animationDuration: '1.5s' }} />
+                        <div className="absolute w-20 h-20 rounded-full bg-pink-500/15 animate-ping" style={{ animationDuration: '1.5s', animationDelay: '0.3s' }} />
+                      </>
+                    )}
+                    <div className={`relative w-16 h-16 rounded-full flex items-center justify-center shadow-xl ${isPaused ? 'bg-slate-800 border border-slate-600 shadow-none' : 'bg-gradient-to-br from-pink-600 to-rose-600 shadow-pink-500/40'}`}>
+                      <Mic className={`w-7 h-7 ${isPaused ? 'text-slate-400' : 'text-white'}`} />
                     </div>
                   </div>
                   <div>
-                    <p className="text-3xl font-mono font-black text-white">{fmt(timer)}</p>
-                    <SoundWaves />
+                    <p className={`text-3xl font-mono font-black ${isPaused ? 'text-slate-500' : 'text-white'}`}>
+                      {fmt(timer)}
+                    </p>
+                    {!isPaused && <SoundWaves />}
+                    {isPaused && <p className="text-xs text-pink-400 mt-2 font-semibold uppercase tracking-widest">PAUSED</p>}
                   </div>
                   {transcript && (
                     <div className="bg-black/30 rounded-xl p-4 border border-white/5 text-left">
@@ -207,6 +254,15 @@ export default function SpeechPracticePage() {
                     </div>
                   )}
                   <div className="flex gap-3 justify-center">
+                    {isPaused ? (
+                      <button onClick={resumeRecording} className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 text-white font-bold text-sm flex items-center gap-2 shadow-lg shadow-teal-500/30">
+                        <Play className="w-4 h-4" /> Resume
+                      </button>
+                    ) : (
+                      <button onClick={pauseRecording} className="px-5 py-2.5 rounded-xl bg-slate-800 text-white font-bold text-sm flex items-center gap-2 hover:bg-slate-700 transition-colors border border-white/10">
+                        <Pause className="w-4 h-4" /> Pause
+                      </button>
+                    )}
                     <button onClick={stopRecording} className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-pink-600 to-rose-600 text-white font-bold text-sm flex items-center gap-2 shadow-lg shadow-pink-500/30">
                       <MicOff className="w-4 h-4" /> Stop
                     </button>
