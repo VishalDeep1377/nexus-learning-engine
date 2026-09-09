@@ -1,7 +1,7 @@
 {
-  "name": "Code To Career",
-  "short_name": "CodeToCareer",
-  "description": "An AI based smart learning platform with features like AI Mentor, AI code reviewer, community, and more...",
+  "name": "Code-To-Career | AI Mentorship Ecosystem",
+  "short_name": "Code-To-Career",
+  "description": "An Awwwards-Tier Learning & Mentorship Ecosystem Powered by Next-Gen Generative AI. Features real-time skill-gap analytics, dynamic curriculum generation, and a dedicated Hackathon Lab.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#111827",

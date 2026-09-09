@@ -21,13 +21,13 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: 'Code To Career',
-  description: 'An AI based smart learning platform with features like AI Mentor, AI code reviewer, community, and more...',
+  title: 'Code-To-Career | AI Mentorship Ecosystem',
+  description: 'An Awwwards-Tier Learning & Mentorship Ecosystem Powered by Next-Gen Generative AI. Features real-time skill-gap analytics, dynamic curriculum generation, and a dedicated Hackathon Lab.',
   manifest: '/site.webmanifest',
   appleWebApp: {
     capable: true,
     statusBarStyle: 'default',
-    title: 'Code To Career',
+    title: 'Code-To-Career',
   },
   icons: {
     icon: [
