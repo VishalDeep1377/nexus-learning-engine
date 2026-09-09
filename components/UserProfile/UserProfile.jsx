@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useUserStore } from '@/store/userStore';
 import {
   User, Mail, Calendar, MapPin,
-  Github, Linkedin, Info, Edit3,
+  Github, Linkedin, Info, Edit,
   Camera, CheckCircle, Loader2, Phone, Sparkles, AlertCircle, Settings, X
 } from 'lucide-react';
 import axios from 'axios';

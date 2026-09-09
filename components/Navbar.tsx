@@ -195,42 +195,57 @@ function Navbar({ isDarkMode, setIsDarkMode }: NavbarProps) {
 
           {/* Mobile menu */}
           {session ? (
-            <ul tabIndex={0} className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-64 p-2 shadow">
-              <li><Link href={"/home"}>Home</Link></li>
+            <ul tabIndex={0} className="menu menu-sm dropdown-content bg-white dark:bg-[#0f172a] rounded-2xl z-[1] mt-3 w-[270px] p-3 shadow-2xl border border-slate-200 dark:border-white/10">
+              <li><Link href={"/home"} className="font-semibold text-[15px]">Home</Link></li>
+              
               <li>
-                <Link href={"/dashboard"}>dashboard</Link>
-                <ul className="p-2">
-                  <li><Link href={"/AiMentor"}>Ai Mentor</Link></li>
-                  <li><Link href={"/code-reviewer"}>code editor</Link></li>
+                <span className="font-semibold text-[15px]">Developer Space</span>
+                <ul className="p-2 border-l-2 border-slate-200 dark:border-slate-800 ml-2 mt-1 space-y-1">
+                  <li><Link href={"/dashboard"}>Dashboard</Link></li>
+                  <li><Link href={"/profile"}>Profile & Identity</Link></li>
                 </ul>
               </li>
-              <li><Link href={"/learning-path"}>Learning paths</Link></li>
+
               <li>
-                <Link href={"/hackathons"} className="flex items-center gap-1.5">
-                  <Trophy className="w-3.5 h-3.5 text-yellow-400" />
-                  Hackathons
+                <span className="font-semibold text-[15px]">Learning</span>
+                <ul className="p-2 border-l-2 border-slate-200 dark:border-slate-800 ml-2 mt-1 space-y-1">
+                  <li><Link href={"/roadmaps"}>Saved Roadmaps</Link></li>
+                  <li><Link href={"/learning-path"}>Generate Roadmap</Link></li>
+                  <li><Link href={"/AiMentor"}>Zeno AI Mentor</Link></li>
+                  <li><Link href={"/interview"}>AI Interview Prep</Link></li>
+                  <li><Link href={"/code-reviewer"}>Code Editor</Link></li>
+                </ul>
+              </li>
+
+              <li>
+                <Link href={"/hackathons"} className="flex items-center gap-1.5 font-semibold text-[15px]">
+                  <Trophy className="w-4 h-4 text-yellow-500" />
+                  Hackathon Lab
                 </Link>
               </li>
 
               {/* Mobile Self Assessment */}
               <li>
                 <button
-                  className="flex items-center justify-between w-full"
-                  onClick={() => setMobileAssessmentOpen(!mobileAssessmentOpen)}
+                  className="flex items-center justify-between w-full font-semibold text-[15px]"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setMobileAssessmentOpen(!mobileAssessmentOpen);
+                  }}
                 >
                   <span className="flex items-center gap-1.5">
-                    <Brain className="w-3.5 h-3.5 text-indigo-500" />
+                    <Brain className="w-4 h-4 text-indigo-500" />
                     Self Assessment
                   </span>
                   <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${mobileAssessmentOpen ? 'rotate-180' : ''}`} />
                 </button>
                 {mobileAssessmentOpen && (
-                  <ul className="p-2 border-l-2 border-indigo-200 dark:border-indigo-800 ml-2 space-y-1">
+                  <ul className="p-2 border-l-2 border-indigo-200 dark:border-indigo-800 ml-2 mt-1 space-y-1">
                     {SELF_ASSESSMENT_ITEMS.map((item) => {
                       const Icon = item.icon;
                       return (
                         <li key={item.href}>
-                          <Link href={item.href} className="flex items-center gap-2 py-1.5">
+                          <Link href={item.href} className="flex items-center gap-2 py-1.5 hover:bg-slate-50 dark:hover:bg-slate-800/50 rounded-lg">
                             <Icon className={`w-3.5 h-3.5 ${item.iconColor}`} />
                             <span className="text-sm">{item.label}</span>
                           </Link>
@@ -238,22 +253,21 @@ function Navbar({ isDarkMode, setIsDarkMode }: NavbarProps) {
                       );
                     })}
                     <li>
-                      <Link href="/self-assessment/performance" className="flex items-center gap-2 py-1.5 text-indigo-600">
+                      <Link href="/self-assessment/performance" className="flex items-center gap-2 py-1.5 text-indigo-600 dark:text-indigo-400 mt-1">
                         <BarChart3 className="w-3.5 h-3.5" />
-                        <span className="text-sm font-semibold">Performance</span>
+                        <span className="text-sm font-bold">Performance Matrix</span>
                       </Link>
                     </li>
                   </ul>
                 )}
               </li>
 
-              <br />
-              <p>more...</p>
-              <ul className="p-2">
-                <li><Link href={"/technews"}>Tech News</Link></li>
-                <li><Link href={"/learners-community"}>learners community</Link></li>
-                <li><Link href={"/job-search"}>Job Search</Link></li>
-              </ul>
+              <li className="mt-4 mb-2 text-[10px] font-bold uppercase tracking-widest text-slate-400 dark:text-slate-500 pl-2 pointer-events-none">
+                Tools & Community
+              </li>
+              <li><Link href={"/technews"} className="hover:text-blue-500">Tech News</Link></li>
+              <li><Link href={"/job-search"} className="hover:text-blue-500">Job Finder</Link></li>
+              <li><Link href={"/learners-community"} className="hover:text-blue-500">Learners Community</Link></li>
             </ul>
           ) : (
             <ul tabIndex={0} className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
