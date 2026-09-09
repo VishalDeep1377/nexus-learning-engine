@@ -218,7 +218,7 @@ const LearningMethod = () => {
 
           {/* Card */}
           <div
-            className="rounded-[2.5rem] p-10"
+            className="rounded-[1.75rem] sm:rounded-[2.5rem] p-5 sm:p-10"
             style={{
               background: "linear-gradient(180deg, rgba(20,20,30,0.5) 0%, rgba(10,10,15,0.6) 100%)",
               border: "1px solid rgba(255,255,255,0.08)",
@@ -231,9 +231,9 @@ const LearningMethod = () => {
             <StepIndicator current={formStatus} total={4} />
 
             {/* Step header */}
-            <div className="text-center mb-10 lp-fade" key={`header-${formStatus}`}>
+            <div className="text-center mb-6 sm:mb-10 lp-fade" key={`header-${formStatus}`}>
               <h1 
-                className="text-4xl font-black mb-3 tracking-tight drop-shadow-xl"
+                className="text-2xl sm:text-4xl font-black mb-3 tracking-tight drop-shadow-xl"
                 style={{
                   background: "linear-gradient(to right, #ffffff, #a5b4fc, #67e8f9)",
                   WebkitBackgroundClip: "text",
