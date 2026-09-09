@@ -293,6 +293,11 @@ function Navbar({ isDarkMode, setIsDarkMode }: NavbarProps) {
       {session ? (
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1 text-base font-medium items-center">
+            <li>
+              <Link href={"/dashboard"} className={`px-4 py-2 hover:text-blue-600 transition-colors ${pathname?.startsWith('/dashboard') ? 'text-blue-500 font-semibold flex items-center gap-2' : 'flex items-center gap-2'}`}>
+                Dashboard
+              </Link>
+            </li>
             <li><Link href={"/learning-path"} className="px-4 py-2 hover:text-blue-600 transition-colors">Learning paths</Link></li>
             <li className="dropdown dropdown-hover">
               <div tabIndex={0} role="button" className="px-4 py-2 hover:text-blue-600 transition-colors">Learning</div>
