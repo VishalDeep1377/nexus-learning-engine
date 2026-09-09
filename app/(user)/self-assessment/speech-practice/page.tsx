@@ -79,14 +79,12 @@ export default function SpeechPracticePage() {
     if (!SR) { toast.error('Mic not supported. Type instead.'); setStep('typing'); return; }
     const recognition = new SR();
     recognition.continuous = true; recognition.interimResults = true; recognition.lang = 'en-US';
-    let finalTranscript = '';
     recognition.onresult = (event: any) => {
-      let interim = '';
-      for (let i = event.resultIndex; i < event.results.length; i++) {
-        if (event.results[i].isFinal) finalTranscript += event.results[i][0].transcript + ' ';
-        else interim += event.results[i][0].transcript;
+      let currentTranscript = '';
+      for (let i = 0; i < event.results.length; i++) {
+        currentTranscript += event.results[i][0].transcript;
       }
-      setTranscript(finalTranscript + interim);
+      setTranscript(currentTranscript);
     };
     recognition.onerror = (event: any) => {
       if (event.error === 'not-allowed') { toast.error('Mic denied. Please type instead.'); setStep('typing'); }
