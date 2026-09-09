@@ -387,19 +387,19 @@ flowchart TD
     
     C --> D([💡 Generate Ideas])
     D --> E[POST /api/hackathons/projects]
-    E --> F[ideaGenerator Agent\n(Gemini 3.6 Flash)]
-    F --> G[Extracts 3 Unique Project Angles]
-    G --> H[(MongoDB: HackathonProject)]
+    E --> F["ideaGenerator Agent<br/>(Gemini 3.6 Flash)"]
+    F --> G["Extracts 3 Unique Project Angles"]
+    G --> H[("(MongoDB: HackathonProject)")]
     
     H --> I([⚡ Select Idea & Analyze])
     I --> J[POST /api/hackathons/analyze]
-    J --> K[hackathonAnalyzer Agent\nEvaluates Feasibility & Tech Stack]
-    K --> L[AnalysisResult View]
+    J --> K["hackathonAnalyzer Agent<br/>Evaluates Feasibility & Tech Stack"]
+    K --> L["AnalysisResult View"]
     
     L --> M([🏗️ Generate Build Plan])
     M --> N[POST /api/hackathons/plan]
-    N --> O[buildPlanner Agent\nArchitects Folders & APIs]
-    O --> P[BuildPlan View + AgentTrace UI]
+    N --> O["buildPlanner Agent<br/>Architects Folders & APIs"]
+    O --> P["BuildPlan View + AgentTrace UI"]
     
     P --> Q([🚀 Submit & Tracking])
     
