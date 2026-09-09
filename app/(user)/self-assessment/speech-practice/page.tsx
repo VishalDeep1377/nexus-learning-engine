@@ -123,23 +123,62 @@ export default function SpeechPracticePage() {
     }
   }, []);
 
-  const pauseRecording = useCallback(() => {
+  const stopRecording = useCallback(() => {
     try { recognitionRef.current?.stop(); } catch (e) {}
+    recognitionRef.current = null;
+    setIsRecording(false);
+    setIsPaused(false);
+    if (timerRef.current) { clearInterval(timerRef.current); timerRef.current = null; }
+  }, []);
+
+  const pauseRecording = useCallback(() => {
+    try {
+      recognitionRef.current?.stop();
+      // Nullify so the old instance can't fire stale events after stop
+      recognitionRef.current = null;
+    } catch (e) {}
     setIsPaused(true);
     if (timerRef.current) { clearInterval(timerRef.current); timerRef.current = null; }
   }, []);
 
   const resumeRecording = useCallback(() => {
-    try { recognitionRef.current?.start(); } catch (e) {}
+    // Create a fresh recognition instance to avoid duplicate onresult events
+    const SR = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+    if (!SR) return;
+
+    const recognition = new SR();
+    recognition.continuous = true;
+    recognition.interimResults = true;
+    recognition.lang = 'en-US';
+
+    recognition.onresult = (event: any) => {
+      let interim = '';
+      for (let i = event.resultIndex; i < event.results.length; i++) {
+        if (event.results[i].isFinal) {
+          finalTextRef.current += event.results[i][0].transcript + ' ';
+        } else {
+          interim += event.results[i][0].transcript;
+        }
+      }
+      setTranscript(finalTextRef.current + interim);
+    };
+
+    recognition.onerror = (event: any) => {
+      if (event.error === 'aborted') return;
+      // Inline stop to avoid forward-reference to stopRecording
+      if (event.error === 'not-allowed') {
+        try { recognition.stop(); } catch (e) {}
+        recognitionRef.current = null;
+        setIsRecording(false);
+        setIsPaused(false);
+        if (timerRef.current) { clearInterval(timerRef.current); timerRef.current = null; }
+      }
+    };
+
+    recognitionRef.current = recognition;
+    try { recognition.start(); } catch (e) {}
     setIsPaused(false);
     timerRef.current = setInterval(() => setTimer((t) => t + 1), 1000);
-  }, []);
-
-  const stopRecording = useCallback(() => {
-    try { recognitionRef.current?.stop(); } catch (e) {}
-    setIsRecording(false);
-    setIsPaused(false);
-    if (timerRef.current) { clearInterval(timerRef.current); timerRef.current = null; }
   }, []);
 
   const handleSubmit = useCallback(async () => {
