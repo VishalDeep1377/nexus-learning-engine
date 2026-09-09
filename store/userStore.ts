@@ -5,7 +5,7 @@ import axios from "axios";
 
 interface IState {
   userData: Record<string, any> | null;
-  setUserData: () => void;
+  setUserData: (data?: any) => void;
   logoutUser: () => void;
   userTheme: string;
   setUserTheme: (theme: string) => void;
@@ -16,8 +16,14 @@ interface IState {
   immer<IState>((set) => ({
     userData: null,
     userTheme: "dark",
-    setUserData: async (): Promise<void> => {
+    setUserData: async (data?: any): Promise<void> => {
       try {
+        if (data) {
+          set((state) => {
+            state.userData = data;
+          });
+          return;
+        }
         const response = await axios.post('/api/user',{});
         set((state) => {
           state.userData = response.data.user;

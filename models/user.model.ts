@@ -15,8 +15,15 @@ export interface IUser {
   AiMentorChats?:mongoose.Types.ObjectId[];
   roadmaps?:mongoose.Types.ObjectId[],
   questionsAsked?:mongoose.Types.ObjectId[],
-  answersGiven?:mongoose.Types.ObjectId[],
-
+  answersGiven?:mongoose.Types.ObjectId[];
+  image?: string;
+  bio?: string;
+  githubUrl?: string;
+  linkedinUrl?: string;
+  address?: string;
+  gender?: string;
+  userName?: string;
+  phoneNumber?: string;
 }
 
 // Define the user schema
@@ -68,6 +75,14 @@ const userSchema = new mongoose.Schema<IUser>(
     type: Schema.Types.ObjectId,
     ref: 'Answer' // Answers the user has provided
   }],
+  image: { type: String },
+  bio: { type: String },
+  githubUrl: { type: String },
+  linkedinUrl: { type: String },
+  address: { type: String },
+  gender: { type: String },
+  userName: { type: String },
+  phoneNumber: { type: String },
   },
   {
     timestamps: true,

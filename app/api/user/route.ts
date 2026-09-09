@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import authOptions from "@/lib/auth";
 import { CustomSession } from "../(user)/mentor/chat/route";
-import { User } from "@/models";
+import User from "@/models/user.model";
 import { connectDb } from "@/config/db.config";
 
 
