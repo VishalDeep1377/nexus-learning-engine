@@ -292,45 +292,6 @@ flowchart TD
     style IC fill:#06b6d4,color:#fff
 ```
 
----
-
-## 🛡️ Authentication Flow
-
-```mermaid
-sequenceDiagram
-    participant U as 👤 User
-    participant FE as 🖥️ Frontend
-    participant NA as 🔐 NextAuth
-    participant DB as 🗄️ MongoDB
-    participant EX as 🌐 External OAuth
-
-    U->>FE: Clicks Login
-    FE->>NA: Initiate Auth (Credentials/Google/GitHub)
-
-    alt Credentials Login
-        NA->>DB: Find user by email
-        DB-->>NA: User document
-        NA->>NA: bcrypt.compare(password)
-        NA-->>FE: JWT Session Token
-    else OAuth (Google / GitHub)
-        NA->>EX: Redirect to OAuth Provider
-        EX-->>NA: Authorization Code
-        NA->>DB: Upsert user profile
-        DB-->>NA: User saved/found
-        NA-->>FE: JWT Session Token
-    end
-
-    FE->>FE: Store session (cookies)
-    FE-->>U: Redirect to Dashboard ✅
-
-    Note over U,EX: All subsequent API calls include JWT cookie
-    U->>FE: Access protected route
-    FE->>NA: getServerSession()
-    NA-->>FE: Session or null
-```
-
----
-
 ## 🤖 AI Features Flow
 
 ```mermaid
