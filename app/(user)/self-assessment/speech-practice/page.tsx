@@ -14,6 +14,18 @@ const SUGGESTED_QUESTIONS = [
   'Tell me about a project you are most proud of.',
 ];
 
+// Offline fallback — shown whenever the Groq API is unavailable
+const LOCAL_QUESTION_BANK: import('@/lib/agents/self-assessment/speech-agent').SpeechQuestion[] = [
+  { question: 'Tell me about yourself and your background.', category: 'general', tips: ['Structure clearly', 'Use specific examples', 'Keep it under 2 minutes'] },
+  { question: 'Describe a time you solved a difficult technical problem.', category: 'behavioral', tips: ['Use the STAR method', 'Highlight your role', 'Share the result'] },
+  { question: 'What are your greatest strengths as a developer?', category: 'general', tips: ['Be specific, not generic', 'Back each strength with evidence', 'Align with the role'] },
+  { question: 'Why should we hire you for this role?', category: 'general', tips: ['Match your skills to their needs', 'Be confident but humble', 'End with enthusiasm'] },
+  { question: 'Describe a situation where you had to work under pressure with a tight deadline.', category: 'situational', tips: ['Use STAR method', 'Show how you prioritised', 'Mention the outcome'] },
+  { question: 'How do you handle disagreements with team members?', category: 'behavioral', tips: ['Focus on communication', 'Show empathy', 'Describe a positive outcome'] },
+  { question: 'Where do you see yourself in five years?', category: 'general', tips: ['Show ambition but be realistic', 'Align with company growth', 'Keep it relevant to the role'] },
+  { question: 'Tell me about a project you are most proud of.', category: 'behavioral', tips: ['Explain your specific contribution', 'Quantify impact if possible', 'Mention what you learned'] },
+];
+
 type Step = 'prompt' | 'recording' | 'typing' | 'processing' | 'results';
 
 function ScoreBar({ label, value, color = 'bg-pink-500' }: { label: string; value: number; color?: string }) {
@@ -48,8 +60,6 @@ export default function SpeechPracticePage() {
   const [loadingQuestion, setLoadingQuestion] = useState(false);
   const [step, setStep] = useState<Step>('prompt');
   const [transcript, setTranscript] = useState('');
-  const transcriptRef = useRef('');
-  const baseTranscriptRef = useRef('');
   const [evaluation, setEvaluation] = useState<SpeechEvaluation | null>(null);
   const [timer, setTimer] = useState(0);
   const [isRecording, setIsRecording] = useState(false);
@@ -58,9 +68,63 @@ export default function SpeechPracticePage() {
   const recognitionRef = useRef<any>(null);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
-  const updateTranscript = useCallback((text: string) => {
-    transcriptRef.current = text;
-    setTranscript(text);
+  // committedRef: stable final text within CURRENT recognition session
+  const committedRef = useRef('');
+  // baseRef: text accumulated from ALL previous sessions (before latest pause/resume)
+  const baseRef = useRef('');
+
+  const buildOnResult = useCallback(() => (event: any) => {
+    let newFinals = '';
+    let interim = '';
+    // Only process from resultIndex to avoid reprocessing already-committed finals
+    for (let i = event.resultIndex; i < event.results.length; i++) {
+      const text = event.results[i][0].transcript;
+      if (event.results[i].isFinal) {
+        newFinals += text + ' ';
+      } else {
+        interim += text;
+      }
+    }
+    // Append any new finals to the committed accumulator
+    if (newFinals) {
+      committedRef.current += newFinals;
+    }
+    // Full transcript = previous sessions + committed finals + current interim
+    const full = (baseRef.current + committedRef.current + interim).trim();
+    setTranscript(full);
+  }, []);
+
+  const stopTimer = useCallback(() => {
+    if (timerRef.current) { clearInterval(timerRef.current); timerRef.current = null; }
+  }, []);
+
+  const startTimer = useCallback(() => {
+    stopTimer();
+    timerRef.current = setInterval(() => setTimer((t) => t + 1), 1000);
+  }, [stopTimer]);
+
+  const destroyRecognition = useCallback(() => {
+    try { recognitionRef.current?.stop(); } catch (_) {}
+    recognitionRef.current = null;
+  }, []);
+
+  const createRecognition = useCallback((onResult: (e: any) => void, onErrorExtra?: () => void) => {
+    const SR = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+    if (!SR) return null;
+    const r = new SR();
+    r.continuous = true;
+    r.interimResults = true;
+    r.lang = 'en-US';
+    r.onresult = onResult;
+    r.onerror = (e: any) => {
+      if (e.error === 'aborted') return;
+      if (e.error === 'not-allowed') {
+        toast.error('Mic denied. Please type instead.');
+        setStep('typing');
+      }
+      onErrorExtra?.();
+    };
+    return r;
   }, []);
 
   useEffect(() => {
@@ -74,122 +138,84 @@ export default function SpeechPracticePage() {
   const fetchQuestion = useCallback(async () => {
     setLoadingQuestion(true);
     setStep('prompt');
-    baseTranscriptRef.current = '';
-    updateTranscript('');
+    baseRef.current = '';
+    committedRef.current = '';
+    setTranscript('');
     setEvaluation(null);
     try {
-      const res = await fetch('/api/self-assessment/speech/question', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({}) });
+      const res = await fetch('/api/self-assessment/speech/question', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({}),
+      });
       const data = await res.json();
-      if (data.success) setQuestion(data.data);
-    } catch { toast.error('Failed to load question'); }
-    finally { setLoadingQuestion(false); }
-  }, [updateTranscript]);
+      if (data.success && data.data) {
+        setQuestion(data.data);
+      } else {
+        // API returned an error payload — still show a fallback from local bank
+        const fallback = LOCAL_QUESTION_BANK[Math.floor(Math.random() * LOCAL_QUESTION_BANK.length)];
+        setQuestion(fallback);
+      }
+    } catch {
+      // Network / parse error — use local fallback so user can still practice
+      const fallback = LOCAL_QUESTION_BANK[Math.floor(Math.random() * LOCAL_QUESTION_BANK.length)];
+      setQuestion(fallback);
+    } finally {
+      setLoadingQuestion(false);
+    }
+  }, []);
 
   const startRecording = useCallback(() => {
-    const SR = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
-    if (!SR) { toast.error('Mic not supported. Type instead.'); setStep('typing'); return; }
-    
-    baseTranscriptRef.current = '';
-    updateTranscript('');
-    
-    const recognition = new SR();
-    recognition.continuous = true; 
-    recognition.interimResults = true; 
-    recognition.lang = 'en-US';
-    
-    recognition.onresult = (event: any) => {
-      let final = '';
-      let interim = '';
-      for (let i = 0; i < event.results.length; i++) {
-        const text = event.results[i][0].transcript;
-        if (event.results[i].isFinal) {
-          final += text + ' ';
-        } else {
-          interim += text;
-        }
-      }
-      updateTranscript((final + interim).trim());
-    };
-    
-    recognition.onerror = (event: any) => {
-      if (event.error === 'aborted') return;
-      if (event.error === 'not-allowed') { toast.error('Mic denied. Please type instead.'); setStep('typing'); }
-      stopRecording();
-    };
-    
-    recognitionRef.current = recognition;
-    
+    // Full reset
+    baseRef.current = '';
+    committedRef.current = '';
+    setTranscript('');
+
+    const onResult = buildOnResult();
+    const r = createRecognition(onResult, stopRecording);
+    if (!r) { toast.error('Mic not supported. Type instead.'); setStep('typing'); return; }
+
+    recognitionRef.current = r;
     try {
-      recognition.start();
-      setIsRecording(true); 
+      r.start();
+      setIsRecording(true);
       setIsPaused(false);
-      setStep('recording'); 
+      setStep('recording');
       setTimer(0);
-      if (timerRef.current) clearInterval(timerRef.current);
-      timerRef.current = setInterval(() => setTimer((t) => t + 1), 1000);
-    } catch (err) {
-      console.error(err);
-    }
-  }, [updateTranscript]);
+      startTimer();
+    } catch (err) { console.error(err); }
+  }, [buildOnResult, createRecognition, startTimer]);
 
   const stopRecording = useCallback(() => {
-    try { recognitionRef.current?.stop(); } catch (e) {}
-    recognitionRef.current = null;
+    destroyRecognition();
     setIsRecording(false);
     setIsPaused(false);
-    if (timerRef.current) { clearInterval(timerRef.current); timerRef.current = null; }
-  }, []);
+    stopTimer();
+  }, [destroyRecognition, stopTimer]);
 
   const pauseRecording = useCallback(() => {
-    try {
-      recognitionRef.current?.stop();
-      recognitionRef.current = null;
-    } catch (e) {}
-    baseTranscriptRef.current = transcriptRef.current;
+    destroyRecognition();
+    // Snapshot: move everything committed into base, reset committed for next session
+    baseRef.current = (baseRef.current + committedRef.current).trim();
+    if (baseRef.current) baseRef.current += ' ';
+    committedRef.current = '';
     setIsPaused(true);
-    if (timerRef.current) { clearInterval(timerRef.current); timerRef.current = null; }
-  }, []);
+    stopTimer();
+  }, [destroyRecognition, stopTimer]);
 
   const resumeRecording = useCallback(() => {
-    const SR = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
-    if (!SR) return;
+    // committedRef already reset during pause; baseRef has all prior text
+    committedRef.current = '';
 
-    const recognition = new SR();
-    recognition.continuous = true;
-    recognition.interimResults = true;
-    recognition.lang = 'en-US';
+    const onResult = buildOnResult();
+    const r = createRecognition(onResult);
+    if (!r) return;
 
-    recognition.onresult = (event: any) => {
-      let final = '';
-      let interim = '';
-      for (let i = 0; i < event.results.length; i++) {
-        const text = event.results[i][0].transcript;
-        if (event.results[i].isFinal) {
-          final += text + ' ';
-        } else {
-          interim += text;
-        }
-      }
-      const prefix = baseTranscriptRef.current ? baseTranscriptRef.current + ' ' : '';
-      updateTranscript((prefix + final + interim).trim());
-    };
-
-    recognition.onerror = (event: any) => {
-      if (event.error === 'aborted') return;
-      if (event.error === 'not-allowed') {
-        try { recognition.stop(); } catch (e) {}
-        recognitionRef.current = null;
-        setIsRecording(false);
-        setIsPaused(false);
-        if (timerRef.current) { clearInterval(timerRef.current); timerRef.current = null; }
-      }
-    };
-
-    recognitionRef.current = recognition;
-    try { recognition.start(); } catch (e) {}
+    recognitionRef.current = r;
+    try { r.start(); } catch (e) {}
     setIsPaused(false);
-    timerRef.current = setInterval(() => setTimer((t) => t + 1), 1000);
-  }, [updateTranscript]);
+    startTimer();
+  }, [buildOnResult, createRecognition, startTimer]);
 
   const handleSubmit = useCallback(async () => {
     if (!transcript.trim() || transcript.trim().length < 20) { toast.error('Please give a longer response.'); return; }
