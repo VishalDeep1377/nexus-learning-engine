@@ -1,9 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Answer, Post, User } from "@/models";
 import { Ianswer } from "@/models/answer.model";
+import { connectDb } from "@/config/db.config";
 
 export async function POST(req: NextRequest) {
   try {
+    await connectDb();
     const { content, userId, postId } = await req.json();
 
     if (!content || !userId || !postId) {
@@ -64,6 +66,7 @@ export async function POST(req: NextRequest) {
 
 export async function GET(req: NextRequest) {
   try {
+    await connectDb();
     const url = new URL(req.url);
     const postId = url.searchParams.get('postId');
 

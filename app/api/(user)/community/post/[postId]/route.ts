@@ -1,12 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Post } from "@/models";
+import { connectDb } from "@/config/db.config";
 
 export async function GET(
   req: NextRequest,
-  { params }: { params: { postId: string } }
+  { params }: { params: Promise<{ postId: string }> }
 ) {
   try {
-    const postId = params.postId;
+    await connectDb();
+    const { postId } = await params;
 
     const post = await Post.findById(postId)
       .populate('user', 'name email')
@@ -41,10 +43,11 @@ export async function GET(
 
 export async function PATCH(
   req: NextRequest,
-  { params }: { params: { postId: string } }
+  { params }: { params: Promise<{ postId: string }> }
 ) {
   try {
-    const postId = params.postId;
+    await connectDb();
+    const { postId } = await params;
     const { title, description, tags, status } = await req.json();
 
     const post = await Post.findById(postId);
@@ -79,12 +82,14 @@ export async function PATCH(
 
 export async function DELETE(
   req: NextRequest,
-  { params }: { params: { postId: string } }
+  { params }: { params: Promise<{ postId: string }> }
 ) {
   try {
-    const postId = params.postId;
+    await connectDb();
+    const { postId } = await params;
+    const { userId } = await req.json();
 
-    const post = await Post.findByIdAndDelete(postId);
+    const post = await Post.findById(postId);
 
     if (!post) {
       return NextResponse.json(
@@ -92,6 +97,17 @@ export async function DELETE(
         { status: 404 }
       );
     }
+
+    // Ensure only the post author can delete their post
+    const authorId = post.user.toString();
+    if (authorId !== userId) {
+      return NextResponse.json(
+        { message: "Unauthorized: You can only delete your own posts" },
+        { status: 403 }
+      );
+    }
+
+    await Post.findByIdAndDelete(postId);
 
     return NextResponse.json(
       { message: "Post deleted successfully" },

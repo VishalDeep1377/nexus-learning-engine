@@ -129,8 +129,8 @@ const UserProfile = () => {
         >
           <div className="h-32 md:h-48 w-full bg-gradient-to-r from-indigo-600/40 via-purple-600/40 to-pink-600/40 relative overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#0a0b14]/90" />
-            <div className="absolute right-6 md:right-12 top-1/2 -translate-y-1/2 opacity-30 select-none hidden sm:block pointer-events-none">
-              <h1 className="text-4xl md:text-6xl lg:text-7xl font-black uppercase tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-indigo-200 to-purple-500 leading-none text-right">
+            <div className="absolute right-4 sm:right-6 md:right-12 top-1/2 -translate-y-1/2 opacity-30 select-none pointer-events-none mt-2 sm:mt-0">
+              <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-black uppercase tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-indigo-200 to-purple-500 leading-none text-right">
                 Personal<br />Profile
               </h1>
             </div>
@@ -184,6 +184,21 @@ const UserProfile = () => {
                 <p className="text-gray-400 font-medium flex items-center justify-center md:justify-start gap-2 mt-1">
                   <Mail className="w-4 h-4" /> {userData.email}
                 </p>
+                {/* XP & Level Progress Bar */}
+                <div className="mt-3 flex items-center gap-3">
+                  <span className="text-[11px] font-bold text-indigo-400 uppercase tracking-widest shrink-0">Lv {userData.level ?? 1}</span>
+                  <div className="flex-1 h-2 bg-white/10 rounded-full overflow-hidden">
+                    <div
+                      className="h-full rounded-full transition-all duration-1000 ease-out"
+                      style={{
+                        width: `${Math.min(((userData.xp ?? 0) % 500) / 5, 100)}%`,
+                        background: 'linear-gradient(90deg, #6366f1, #06b6d4)',
+                        boxShadow: '0 0 8px rgba(6,182,212,0.5)'
+                      }}
+                    />
+                  </div>
+                  <span className="text-[11px] text-gray-500 shrink-0">{userData.xp ?? 0} XP</span>
+                </div>
               </div>
 
               <div className="hidden md:flex gap-4 mb-2">
@@ -263,8 +278,46 @@ const UserProfile = () => {
                   </span>
                 </div>
               </div>
+
+              {/* Streak Card */}
+              <div className={`rounded-3xl border p-6 relative overflow-hidden backdrop-blur-xl ${(userData.streak?.current ?? 0) > 0 ? 'border-orange-500/30 bg-orange-500/5' : 'border-white/10 bg-white/5'}`}>
+                <div className="absolute -right-4 -top-4 w-24 h-24 bg-orange-500/10 rounded-full blur-2xl" />
+                <h3 className="text-sm font-bold text-gray-400 uppercase tracking-widest mb-2">Daily Streak</h3>
+                <div className="flex items-center gap-2">
+                  <span className="text-2xl">{(userData.streak?.current ?? 0) > 0 ? '🔥' : '💤'}</span>
+                  <span className={`text-xl font-black ${(userData.streak?.current ?? 0) > 0 ? 'text-orange-400' : 'text-gray-500'}`}>
+                    {userData.streak?.current ?? 0} day{(userData.streak?.current ?? 0) !== 1 ? 's' : ''}
+                  </span>
+                </div>
+                {(userData.streak?.highest ?? 0) > 0 && (
+                  <p className="text-xs text-gray-600 mt-1">Best: {userData.streak?.highest} days</p>
+                )}
+              </div>
             </div>
           </motion.div>
+
+          {/* Badges & Trophies Section */}
+          {(userData.badges?.length ?? 0) > 0 && (
+            <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}>
+              <div className="rounded-3xl border border-white/10 bg-white/5 p-6 sm:p-8 backdrop-blur-xl">
+                <h3 className="text-sm font-bold text-gray-400 uppercase tracking-widest mb-6 flex items-center gap-2">
+                  <span className="text-xl">🏆</span> Trophies &amp; Badges
+                </h3>
+                <div className="flex flex-wrap gap-3">
+                  {userData.badges?.map((badge, i) => (
+                    <div
+                      key={i}
+                      className="relative flex items-center gap-2 px-4 py-2.5 rounded-2xl border border-amber-500/30 bg-gradient-to-br from-amber-500/10 to-orange-500/10 backdrop-blur-md shadow-[0_0_20px_rgba(245,158,11,0.1)] group cursor-default select-none"
+                    >
+                      <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-amber-400/5 to-orange-400/5 opacity-0 group-hover:opacity-100 transition duration-300" />
+                      <span className="text-lg">🥇</span>
+                      <span className="text-sm font-bold text-amber-300">{badge}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          )}
         </div>
 
         {/* MODAL OVERLAY FOR EDIT PROFILE */}

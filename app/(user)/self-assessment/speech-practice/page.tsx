@@ -48,6 +48,8 @@ export default function SpeechPracticePage() {
   const [loadingQuestion, setLoadingQuestion] = useState(false);
   const [step, setStep] = useState<Step>('prompt');
   const [transcript, setTranscript] = useState('');
+  const transcriptRef = useRef('');
+  const baseTranscriptRef = useRef('');
   const [evaluation, setEvaluation] = useState<SpeechEvaluation | null>(null);
   const [timer, setTimer] = useState(0);
   const [isRecording, setIsRecording] = useState(false);
@@ -55,7 +57,11 @@ export default function SpeechPracticePage() {
   const [speechSupported, setSpeechSupported] = useState(false);
   const recognitionRef = useRef<any>(null);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
-  const finalTextRef = useRef('');
+
+  const updateTranscript = useCallback((text: string) => {
+    transcriptRef.current = text;
+    setTranscript(text);
+  }, []);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -67,22 +73,24 @@ export default function SpeechPracticePage() {
 
   const fetchQuestion = useCallback(async () => {
     setLoadingQuestion(true);
-    setStep('prompt'); setTranscript(''); setEvaluation(null);
+    setStep('prompt');
+    baseTranscriptRef.current = '';
+    updateTranscript('');
+    setEvaluation(null);
     try {
       const res = await fetch('/api/self-assessment/speech/question', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({}) });
       const data = await res.json();
       if (data.success) setQuestion(data.data);
     } catch { toast.error('Failed to load question'); }
     finally { setLoadingQuestion(false); }
-  }, []);
+  }, [updateTranscript]);
 
   const startRecording = useCallback(() => {
     const SR = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
     if (!SR) { toast.error('Mic not supported. Type instead.'); setStep('typing'); return; }
     
-    // Reset our memory when officially starting a brand new recording
-    finalTextRef.current = '';
-    setTranscript('');
+    baseTranscriptRef.current = '';
+    updateTranscript('');
     
     const recognition = new SR();
     recognition.continuous = true; 
@@ -90,19 +98,20 @@ export default function SpeechPracticePage() {
     recognition.lang = 'en-US';
     
     recognition.onresult = (event: any) => {
+      let final = '';
       let interim = '';
-      for (let i = event.resultIndex; i < event.results.length; i++) {
+      for (let i = 0; i < event.results.length; i++) {
+        const text = event.results[i][0].transcript;
         if (event.results[i].isFinal) {
-          finalTextRef.current += event.results[i][0].transcript + ' ';
+          final += text + ' ';
         } else {
-          interim += event.results[i][0].transcript;
+          interim += text;
         }
       }
-      setTranscript(finalTextRef.current + interim);
+      updateTranscript((final + interim).trim());
     };
     
     recognition.onerror = (event: any) => {
-      // Aborted typically triggers natively when we call .stop() for pause, so ignore it softly
       if (event.error === 'aborted') return;
       if (event.error === 'not-allowed') { toast.error('Mic denied. Please type instead.'); setStep('typing'); }
       stopRecording();
@@ -121,7 +130,7 @@ export default function SpeechPracticePage() {
     } catch (err) {
       console.error(err);
     }
-  }, []);
+  }, [updateTranscript]);
 
   const stopRecording = useCallback(() => {
     try { recognitionRef.current?.stop(); } catch (e) {}
@@ -134,15 +143,14 @@ export default function SpeechPracticePage() {
   const pauseRecording = useCallback(() => {
     try {
       recognitionRef.current?.stop();
-      // Nullify so the old instance can't fire stale events after stop
       recognitionRef.current = null;
     } catch (e) {}
+    baseTranscriptRef.current = transcriptRef.current;
     setIsPaused(true);
     if (timerRef.current) { clearInterval(timerRef.current); timerRef.current = null; }
   }, []);
 
   const resumeRecording = useCallback(() => {
-    // Create a fresh recognition instance to avoid duplicate onresult events
     const SR = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
     if (!SR) return;
 
@@ -152,20 +160,22 @@ export default function SpeechPracticePage() {
     recognition.lang = 'en-US';
 
     recognition.onresult = (event: any) => {
+      let final = '';
       let interim = '';
-      for (let i = event.resultIndex; i < event.results.length; i++) {
+      for (let i = 0; i < event.results.length; i++) {
+        const text = event.results[i][0].transcript;
         if (event.results[i].isFinal) {
-          finalTextRef.current += event.results[i][0].transcript + ' ';
+          final += text + ' ';
         } else {
-          interim += event.results[i][0].transcript;
+          interim += text;
         }
       }
-      setTranscript(finalTextRef.current + interim);
+      const prefix = baseTranscriptRef.current ? baseTranscriptRef.current + ' ' : '';
+      updateTranscript((prefix + final + interim).trim());
     };
 
     recognition.onerror = (event: any) => {
       if (event.error === 'aborted') return;
-      // Inline stop to avoid forward-reference to stopRecording
       if (event.error === 'not-allowed') {
         try { recognition.stop(); } catch (e) {}
         recognitionRef.current = null;
@@ -179,7 +189,7 @@ export default function SpeechPracticePage() {
     try { recognition.start(); } catch (e) {}
     setIsPaused(false);
     timerRef.current = setInterval(() => setTimer((t) => t + 1), 1000);
-  }, []);
+  }, [updateTranscript]);
 
   const handleSubmit = useCallback(async () => {
     if (!transcript.trim() || transcript.trim().length < 20) { toast.error('Please give a longer response.'); return; }

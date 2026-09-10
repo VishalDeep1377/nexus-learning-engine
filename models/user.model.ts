@@ -24,6 +24,15 @@ export interface IUser {
   gender?: string;
   userName?: string;
   phoneNumber?: string;
+  // --- Gamification ---
+  xp?: number;
+  level?: number;
+  badges?: string[];
+  streak?: {
+    current: number;
+    highest: number;
+    lastActiveDate?: Date;
+  };
 }
 
 // Define the user schema
@@ -83,6 +92,15 @@ const userSchema = new mongoose.Schema<IUser>(
   gender: { type: String },
   userName: { type: String },
   phoneNumber: { type: String },
+  // --- Gamification ---
+  xp: { type: Number, default: 0 },
+  level: { type: Number, default: 1 },
+  badges: [{ type: String }],
+  streak: {
+    current: { type: Number, default: 0 },
+    highest: { type: Number, default: 0 },
+    lastActiveDate: { type: Date },
+  },
   },
   {
     timestamps: true,

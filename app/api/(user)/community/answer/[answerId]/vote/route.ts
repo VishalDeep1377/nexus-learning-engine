@@ -1,12 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Answer, Vote, User } from "@/models";
 import { Ivote } from "@/models/vote.model";
+import { connectDb } from "@/config/db.config";
 
 export async function POST(
   req: NextRequest,
   { params }: { params: { answerId: string } }
 ) {
   try {
+    await connectDb();
     const answerId = params.answerId;
     const { userId, voteType } = await req.json();
 
@@ -46,7 +48,7 @@ export async function POST(
       if (existingVote.voteType === voteType) {
         // Remove vote from answer
         answer.votes = answer.votes.filter(
-          (voteId) => voteId.toString() !== existingVote._id.toString()
+          (voteId: unknown) => voteId!.toString() !== existingVote._id.toString()
         );
         await answer.save();
 

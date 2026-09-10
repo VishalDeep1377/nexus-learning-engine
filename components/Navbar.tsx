@@ -6,7 +6,7 @@ import { useRouter, usePathname } from 'next/navigation';
 import { useUserStore } from '@/store/userStore';
 import Link from 'next/link';
 import { IoHome } from "react-icons/io5";
-import { Trophy, Code2, Mic, Brain, ClipboardCheck, ChevronDown, ArrowRight, BarChart3, Bot, MessagesSquare, Newspaper, Users, Briefcase, UserCircle, LayoutGrid, BookOpen } from 'lucide-react';
+import { Trophy, Code2, Mic, Brain, ClipboardCheck, ChevronDown, ArrowRight, BarChart3, Bot, MessagesSquare, Newspaper, Users, Briefcase, UserCircle, LayoutGrid, BookOpen, GraduationCap, MoreHorizontal } from 'lucide-react';
 import Image from 'next/image';
 
 interface NavbarProps {
@@ -85,11 +85,10 @@ function SelfAssessmentDropdown({ pathname }: { pathname: string }) {
     >
       {/* Trigger */}
       <button
-        className={`flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 ${
-          isSelfAssessmentActive
+        className={`flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 ${isSelfAssessmentActive
             ? 'text-indigo-500 dark:text-indigo-400'
             : 'text-slate-700 dark:text-slate-200 hover:text-indigo-500 dark:hover:text-indigo-400'
-        }`}
+          }`}
       >
         <Brain className="w-4 h-4" />
         Self Assessment
@@ -100,9 +99,8 @@ function SelfAssessmentDropdown({ pathname }: { pathname: string }) {
 
       {/* Premium dropdown panel */}
       <div
-        className={`absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[340px] transition-all duration-200 origin-top ${
-          open ? 'opacity-100 scale-100 pointer-events-auto' : 'opacity-0 scale-95 pointer-events-none'
-        }`}
+        className={`absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[340px] transition-all duration-200 origin-top ${open ? 'opacity-100 scale-100 pointer-events-auto' : 'opacity-0 scale-95 pointer-events-none'
+          }`}
         style={{ zIndex: 9999 }}
       >
         {/* Panel */}
@@ -123,19 +121,17 @@ function SelfAssessmentDropdown({ pathname }: { pathname: string }) {
                   key={item.href}
                   href={item.href}
                   onClick={() => setOpen(false)}
-                  className={`flex items-center gap-3 px-3 py-2.5 rounded-xl border transition-all duration-150 group ${
-                    isActive
+                  className={`flex items-center gap-3 px-3 py-2.5 rounded-xl border transition-all duration-150 group ${isActive
                       ? 'bg-indigo-50 dark:bg-indigo-950/40 border-indigo-200/60 dark:border-indigo-700/40'
                       : `border-transparent hover:bg-slate-50 dark:hover:bg-white/5 ${item.hoverBorder} hover:shadow-sm ${item.hoverGlow}`
-                  }`}
+                    }`}
                 >
                   <span className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 ${item.iconBg}`}>
                     <Icon className={`w-4 h-4 ${item.iconColor}`} />
                   </span>
                   <div className="flex-1 min-w-0">
-                    <p className={`text-sm font-semibold leading-none mb-0.5 ${
-                      isActive ? 'text-indigo-600 dark:text-indigo-400' : 'text-slate-800 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400'
-                    } transition-colors`}>
+                    <p className={`text-sm font-semibold leading-none mb-0.5 ${isActive ? 'text-indigo-600 dark:text-indigo-400' : 'text-slate-800 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400'
+                      } transition-colors`}>
                       {item.label}
                     </p>
                     <p className="text-xs text-slate-500 dark:text-slate-400 leading-none">{item.desc}</p>
@@ -205,6 +201,7 @@ function LearningDropdown({ pathname }: { pathname: string }) {
   return (
     <div ref={ref} className="relative flex items-center h-full" onMouseEnter={() => setOpen(true)} onMouseLeave={() => setOpen(false)}>
       <button className={`flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 ${isActive ? 'text-indigo-500 dark:text-indigo-400' : 'text-slate-700 dark:text-slate-200 hover:text-indigo-500 dark:hover:text-indigo-400'}`}>
+        <GraduationCap className="w-4 h-4" />
         Learning
         <ChevronDown className={`w-3.5 h-3.5 opacity-60 transition-transform duration-200 ${open ? 'rotate-180' : ''}`} />
       </button>
@@ -296,6 +293,7 @@ function MoreDropdown({ pathname }: { pathname: string }) {
   return (
     <div ref={ref} className="relative flex items-center h-full" onMouseEnter={() => setOpen(true)} onMouseLeave={() => setOpen(false)}>
       <button className={`flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 ${isActive ? 'text-indigo-500 dark:text-indigo-400' : 'text-slate-700 dark:text-slate-200 hover:text-indigo-500 dark:hover:text-indigo-400'}`}>
+        <MoreHorizontal className="w-4 h-4" />
         More
         <ChevronDown className={`w-3.5 h-3.5 opacity-60 transition-transform duration-200 ${open ? 'rotate-180' : ''}`} />
       </button>
@@ -304,7 +302,7 @@ function MoreDropdown({ pathname }: { pathname: string }) {
         <div className="relative overflow-hidden rounded-2xl border border-slate-200/80 dark:border-white/10 bg-white/80 dark:bg-slate-900/90 backdrop-blur-xl shadow-2xl shadow-black/20 dark:shadow-black/60">
           <div className="h-0.5 w-full bg-gradient-to-r from-emerald-500 via-cyan-500 to-blue-500" />
           <div className="p-3 space-y-1">
-             <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400 dark:text-slate-500 px-2 pb-1">Platform Tools</p>
+            <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400 dark:text-slate-500 px-2 pb-1">Platform Tools</p>
             {MORE_ITEMS.map((item) => {
               const Icon = item.icon;
               const isItemActive = pathname?.startsWith(item.href);
@@ -342,7 +340,7 @@ function Navbar({ isDarkMode, setIsDarkMode }: NavbarProps) {
   useEffect(() => {
     try {
       setUserData();
-    } catch (error) {}
+    } catch (error) { }
   }, []);
 
   return (
@@ -359,7 +357,7 @@ function Navbar({ isDarkMode, setIsDarkMode }: NavbarProps) {
           {session ? (
             <ul tabIndex={0} className="menu menu-sm dropdown-content bg-white dark:bg-[#0f172a] rounded-2xl z-[1] mt-3 w-[270px] p-3 shadow-2xl border border-slate-200 dark:border-white/10">
               <li><Link href={"/home"} className="font-semibold text-[15px]">Home</Link></li>
-              
+
               <li>
                 <span className="font-semibold text-[15px]">Developer Space</span>
                 <ul className="p-2 border-l-2 border-slate-200 dark:border-slate-800 ml-2 mt-1 space-y-1">
@@ -481,9 +479,8 @@ function Navbar({ isDarkMode, setIsDarkMode }: NavbarProps) {
             <li className="relative flex items-center h-full">
               <Link
                 href={"/hackathons"}
-                className={`flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 ${
-                  pathname?.startsWith('/hackathons') ? 'text-indigo-500 dark:text-indigo-400' : 'text-slate-700 dark:text-slate-200 hover:text-indigo-500 dark:hover:text-indigo-400'
-                }`}
+                className={`flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 ${pathname?.startsWith('/hackathons') ? 'text-indigo-500 dark:text-indigo-400' : 'text-slate-700 dark:text-slate-200 hover:text-indigo-500 dark:hover:text-indigo-400'
+                  }`}
               >
                 <Trophy className="w-4 h-4" />
                 Hackathons

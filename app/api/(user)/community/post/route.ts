@@ -1,12 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Post, User } from "@/models";
 import { IPost } from "@/models/post.model";
+import { connectDb } from "@/config/db.config";
 
 export async function POST(req: NextRequest) {
     const reqBody = await req.json();
     const { title, description, userId, tags } = reqBody;
     
     try {
+        await connectDb();
         const newPost = await Post.create<IPost>({
             user: userId,
             title: title,
@@ -33,6 +35,7 @@ export async function POST(req: NextRequest) {
 
 export async function GET(req: NextRequest) {
     try {
+        await connectDb();
         // Fetch all posts with populated user data and sort by newest first
         const allPosts = await Post.find()
             .populate('user', 'name email')

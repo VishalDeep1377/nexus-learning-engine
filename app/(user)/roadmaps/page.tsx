@@ -88,7 +88,24 @@ function Roadmaps() {
         throw new Error("Failed to update progress");
       }
 
-      toast.success(!isCompleted ? "Step marked as completed!" : "Step marked as incomplete");
+      // ── Gamification toasts ──────────────────────────────────────────────────
+      const gam = response.data.gamification;
+      if (gam && !isCompleted) {
+        // XP toast
+        toast.success(`+50 XP earned! Total: ${gam.xp} XP (Lvl ${gam.level})`, { icon: '⚡' });
+        // Streak toast (only show when streak increments — i.e., it's > 1)
+        if (gam.streak > 1) {
+          setTimeout(() => toast(`🔥 ${gam.streak} Day Streak! Keep it up!`, { icon: '🔥' }), 600);
+        }
+        // Badge toast
+        if (gam.newBadge) {
+          setTimeout(() => toast.success(`🏆 Badge Unlocked: "${gam.newBadge}"!`, { duration: 5000 }), 1200);
+        }
+        // Refresh user store so navbar/profile updates live
+        setUserData();
+      } else {
+        toast.success(!isCompleted ? "Step marked as completed!" : "Step marked as incomplete");
+      }
     } catch (error) {
       console.error("Error updating roadmap progress:", error);
       toast.error("Failed to update progress");
@@ -96,6 +113,7 @@ function Roadmaps() {
       getAllRoadmaps();
     }
   };
+
 
   const handleDeleteRoadmap = async (roadmapId: string) => {
     if (!window.confirm("Are you sure you want to permanently delete this roadmap?")) return;
@@ -202,6 +220,33 @@ function Roadmaps() {
           )}
         </div>
 
+        {/* Gamification Stats Summary Bar (Mobile & Desktop) */}
+        {userData && (
+          <div className="mb-6 sm:mb-8 grid grid-cols-3 gap-2 sm:gap-4 p-3 sm:p-4 rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-xl">
+            <div className="flex items-center gap-2 p-2 sm:p-3 rounded-xl border border-indigo-500/30 bg-indigo-500/10">
+              <span className="text-base sm:text-xl">⚡</span>
+              <div className="min-w-0">
+                <p className="text-[9px] sm:text-[11px] uppercase font-extrabold text-indigo-300 tracking-wider truncate">Total XP</p>
+                <p className="text-xs sm:text-base font-black text-white truncate">{userData.xp ?? 0} <span className="text-[10px] sm:text-xs font-semibold text-indigo-400">Lv{userData.level ?? 1}</span></p>
+              </div>
+            </div>
+            <div className="flex items-center gap-2 p-2 sm:p-3 rounded-xl border border-orange-500/30 bg-orange-500/10">
+              <span className="text-base sm:text-xl">🔥</span>
+              <div className="min-w-0">
+                <p className="text-[9px] sm:text-[11px] uppercase font-extrabold text-orange-300 tracking-wider truncate">Streak</p>
+                <p className="text-xs sm:text-base font-black text-orange-400 truncate">{userData.streak?.current ?? 0}d</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-2 p-2 sm:p-3 rounded-xl border border-amber-500/30 bg-amber-500/10">
+              <span className="text-base sm:text-xl">🏆</span>
+              <div className="min-w-0">
+                <p className="text-[9px] sm:text-[11px] uppercase font-extrabold text-amber-300 tracking-wider truncate">Badges</p>
+                <p className="text-xs sm:text-base font-black text-amber-300 truncate">{userData.badges?.length ?? 0}</p>
+              </div>
+            </div>
+          </div>
+        )}
+
         {roadmaps.length === 0 ? (
           <div className="text-center py-16 sm:py-20 px-4 bg-white/5 rounded-3xl border border-white/10 backdrop-blur-md">
              <div className="text-6xl mb-4 text-gray-600">🗺️</div>
@@ -283,6 +328,39 @@ function Roadmaps() {
                     </>
                   )}
                 </div>
+
+                {/* 50% Perk Unlock Panel */}
+                {(() => {
+                  const pct = Math.round(calculateCompletionPercentage(roadmap));
+                  if (pct >= 50 && pct < 100) {
+                    return (
+                      <div className="mb-6 sm:mb-8 relative overflow-hidden rounded-2xl border border-amber-500/30 bg-gradient-to-br from-amber-500/5 to-orange-500/5 p-4 sm:p-5 backdrop-blur-md shadow-[0_0_30px_rgba(245,158,11,0.08)]">
+                        <div className="absolute -right-6 -top-6 w-28 h-28 bg-amber-500/10 rounded-full blur-2xl" />
+                        <div className="absolute -left-4 -bottom-4 w-20 h-20 bg-orange-500/10 rounded-full blur-xl" />
+                        <div className="relative flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4">
+                          <div className="flex items-center justify-center w-11 h-11 shrink-0 rounded-xl bg-gradient-to-br from-amber-400 to-orange-500 shadow-lg shadow-amber-500/30">
+                            <span className="text-xl">🔓</span>
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <p className="text-[13px] font-black text-amber-400 uppercase tracking-widest mb-0.5">Perk Unlocked — Halfway There!</p>
+                            <p className="text-[12px] sm:text-[13px] text-gray-300 leading-snug">
+                              You've crossed 50%! Launch a custom <span className="font-bold text-amber-300">{roadmap.title}</span> Hackathon project powered by Zeno AI.
+                            </p>
+                          </div>
+                          <button
+                            onClick={() => router.push(`/hackathons?topic=${encodeURIComponent(roadmap.title || '')}`)}
+                            className="shrink-0 flex items-center gap-1.5 px-4 py-2 rounded-xl text-[12px] font-bold text-white transition-all duration-200 hover:scale-105 hover:brightness-110"
+                            style={{ background: "linear-gradient(135deg, #f59e0b, #ef4444)", boxShadow: "0 6px 20px rgba(245,158,11,0.35)" }}
+                          >
+                            Launch Project
+                            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"><path d="M13 7l5 5m0 0l-5 5m5-5H6" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                          </button>
+                        </div>
+                      </div>
+                    );
+                  }
+                  return null;
+                })()}
 
                 <div className="grid md:grid-cols-3 gap-6 sm:gap-8 w-full min-w-0">
                   <div className="md:col-span-2 w-full min-w-0">

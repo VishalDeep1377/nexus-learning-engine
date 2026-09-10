@@ -1,12 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Answer, Post } from "@/models";
+import { connectDb } from "@/config/db.config";
 
 export async function POST(
   req: NextRequest,
-  { params }: { params: { answerId: string } }
+  { params }: { params: Promise<{ answerId: string }> }
 ) {
   try {
-    const answerId = params.answerId;
+    await connectDb();
+    const { answerId } = await params;
     const { userId } = await req.json();
 
     if (!userId) {

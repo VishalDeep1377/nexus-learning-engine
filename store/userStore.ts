@@ -29,8 +29,15 @@ interface IState {
           state.userData = response.data.user;
           console.log("user fetched from the db and stored in store",state.userData);
         });
-      } catch (error) {
-        console.error("Failed to fetch user data", error);
+      } catch (error: any) {
+        if (error?.response?.status === 404 || error?.response?.status === 401 || error?.response?.status === 403) {
+          set((state) => {
+            state.userData = null;
+          });
+          console.warn("User session is inactive or user not found.");
+        } else {
+          console.log("Failed to fetch user data: ", error?.message || "Unknown error");
+        }
       }
     },
     logoutUser: () => {
