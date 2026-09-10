@@ -68,29 +68,18 @@ export default function SpeechPracticePage() {
   const recognitionRef = useRef<any>(null);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
-  // committedRef: stable final text within CURRENT recognition session
-  const committedRef = useRef('');
-  // baseRef: text accumulated from ALL previous sessions (before latest pause/resume)
+  // sessionTextRef: text from the CURRENT active recognition session
+  const sessionTextRef = useRef('');
+  // baseRef: text accumulated from ALL previous sessions (before latest pause)
   const baseRef = useRef('');
 
   const buildOnResult = useCallback(() => (event: any) => {
-    let newFinals = '';
-    let interim = '';
-    // Only process from resultIndex to avoid reprocessing already-committed finals
-    for (let i = event.resultIndex; i < event.results.length; i++) {
-      const text = event.results[i][0].transcript;
-      if (event.results[i].isFinal) {
-        newFinals += text + ' ';
-      } else {
-        interim += text;
-      }
+    let currentSession = '';
+    for (let i = 0; i < event.results.length; i++) {
+      currentSession += event.results[i][0].transcript + ' ';
     }
-    // Append any new finals to the committed accumulator
-    if (newFinals) {
-      committedRef.current += newFinals;
-    }
-    // Full transcript = previous sessions + committed finals + current interim
-    const full = (baseRef.current + committedRef.current + interim).trim();
+    sessionTextRef.current = currentSession;
+    const full = (baseRef.current + ' ' + currentSession).replace(/\s+/g, ' ').trim();
     setTranscript(full);
   }, []);
 
@@ -139,7 +128,7 @@ export default function SpeechPracticePage() {
     setLoadingQuestion(true);
     setStep('prompt');
     baseRef.current = '';
-    committedRef.current = '';
+    sessionTextRef.current = '';
     setTranscript('');
     setEvaluation(null);
     try {
@@ -152,12 +141,12 @@ export default function SpeechPracticePage() {
       if (data.success && data.data) {
         setQuestion(data.data);
       } else {
-        // API returned an error payload — still show a fallback from local bank
+        // API returned an error payload — fallback to local question bank
         const fallback = LOCAL_QUESTION_BANK[Math.floor(Math.random() * LOCAL_QUESTION_BANK.length)];
         setQuestion(fallback);
       }
     } catch {
-      // Network / parse error — use local fallback so user can still practice
+      // Network / parse error — fallback to local question bank
       const fallback = LOCAL_QUESTION_BANK[Math.floor(Math.random() * LOCAL_QUESTION_BANK.length)];
       setQuestion(fallback);
     } finally {
@@ -168,7 +157,7 @@ export default function SpeechPracticePage() {
   const startRecording = useCallback(() => {
     // Full reset
     baseRef.current = '';
-    committedRef.current = '';
+    sessionTextRef.current = '';
     setTranscript('');
 
     const onResult = buildOnResult();
@@ -195,17 +184,15 @@ export default function SpeechPracticePage() {
 
   const pauseRecording = useCallback(() => {
     destroyRecognition();
-    // Snapshot: move everything committed into base, reset committed for next session
-    baseRef.current = (baseRef.current + committedRef.current).trim();
-    if (baseRef.current) baseRef.current += ' ';
-    committedRef.current = '';
+    // Save current transcript snapshot to baseRef
+    baseRef.current = (baseRef.current + ' ' + sessionTextRef.current).replace(/\s+/g, ' ').trim();
+    sessionTextRef.current = '';
     setIsPaused(true);
     stopTimer();
   }, [destroyRecognition, stopTimer]);
 
   const resumeRecording = useCallback(() => {
-    // committedRef already reset during pause; baseRef has all prior text
-    committedRef.current = '';
+    sessionTextRef.current = '';
 
     const onResult = buildOnResult();
     const r = createRecognition(onResult);
