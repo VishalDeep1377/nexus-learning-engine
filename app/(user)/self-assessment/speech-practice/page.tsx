@@ -65,22 +65,17 @@ export default function SpeechPracticePage() {
   const [isRecording, setIsRecording] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
   const [speechSupported, setSpeechSupported] = useState(false);
+
   const recognitionRef = useRef<any>(null);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const transcriptRef = useRef('');
+  const baseTextRef = useRef('');
+  const isRecordingRef = useRef(false);
+  const isPausedRef = useRef(false);
 
-  // sessionTextRef: text from the CURRENT active recognition session
-  const sessionTextRef = useRef('');
-  // baseRef: text accumulated from ALL previous sessions (before latest pause)
-  const baseRef = useRef('');
-
-  const buildOnResult = useCallback(() => (event: any) => {
-    let currentSession = '';
-    for (let i = 0; i < event.results.length; i++) {
-      currentSession += event.results[i][0].transcript + ' ';
-    }
-    sessionTextRef.current = currentSession;
-    const full = (baseRef.current + ' ' + currentSession).replace(/\s+/g, ' ').trim();
-    setTranscript(full);
+  const updateTranscript = useCallback((val: string) => {
+    transcriptRef.current = val;
+    setTranscript(val);
   }, []);
 
   const stopTimer = useCallback(() => {
@@ -97,25 +92,6 @@ export default function SpeechPracticePage() {
     recognitionRef.current = null;
   }, []);
 
-  const createRecognition = useCallback((onResult: (e: any) => void, onErrorExtra?: () => void) => {
-    const SR = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
-    if (!SR) return null;
-    const r = new SR();
-    r.continuous = true;
-    r.interimResults = true;
-    r.lang = 'en-US';
-    r.onresult = onResult;
-    r.onerror = (e: any) => {
-      if (e.error === 'aborted') return;
-      if (e.error === 'not-allowed') {
-        toast.error('Mic denied. Please type instead.');
-        setStep('typing');
-      }
-      onErrorExtra?.();
-    };
-    return r;
-  }, []);
-
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const SR = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
@@ -127,9 +103,8 @@ export default function SpeechPracticePage() {
   const fetchQuestion = useCallback(async () => {
     setLoadingQuestion(true);
     setStep('prompt');
-    baseRef.current = '';
-    sessionTextRef.current = '';
-    setTranscript('');
+    baseTextRef.current = '';
+    updateTranscript('');
     setEvaluation(null);
     try {
       const res = await fetch('/api/self-assessment/speech/question', {
@@ -141,80 +116,120 @@ export default function SpeechPracticePage() {
       if (data.success && data.data) {
         setQuestion(data.data);
       } else {
-        // API returned an error payload — fallback to local question bank
         const fallback = LOCAL_QUESTION_BANK[Math.floor(Math.random() * LOCAL_QUESTION_BANK.length)];
         setQuestion(fallback);
       }
     } catch {
-      // Network / parse error — fallback to local question bank
       const fallback = LOCAL_QUESTION_BANK[Math.floor(Math.random() * LOCAL_QUESTION_BANK.length)];
       setQuestion(fallback);
     } finally {
       setLoadingQuestion(false);
     }
-  }, []);
-
-  const startRecording = useCallback(() => {
-    // Full reset
-    baseRef.current = '';
-    sessionTextRef.current = '';
-    setTranscript('');
-
-    const onResult = buildOnResult();
-    const r = createRecognition(onResult, stopRecording);
-    if (!r) { toast.error('Mic not supported. Type instead.'); setStep('typing'); return; }
-
-    recognitionRef.current = r;
-    try {
-      r.start();
-      setIsRecording(true);
-      setIsPaused(false);
-      setStep('recording');
-      setTimer(0);
-      startTimer();
-    } catch (err) { console.error(err); }
-  }, [buildOnResult, createRecognition, startTimer]);
+  }, [updateTranscript]);
 
   const stopRecording = useCallback(() => {
+    isRecordingRef.current = false;
+    isPausedRef.current = false;
     destroyRecognition();
     setIsRecording(false);
     setIsPaused(false);
     stopTimer();
   }, [destroyRecognition, stopTimer]);
 
+  const startRecognitionLoop = useCallback(() => {
+    const SR = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+    if (!SR || !isRecordingRef.current || isPausedRef.current) return;
+
+    try {
+      const recognition = new SR();
+      recognition.lang = 'en-US';
+      recognition.interimResults = true;
+      recognition.continuous = false;
+
+      recognition.onresult = (e: any) => {
+        const segment = Array.from(e.results).map((r: any) => r[0].transcript).join('');
+        const combined = (baseTextRef.current + ' ' + segment).trim();
+        updateTranscript(combined);
+      };
+
+      recognition.onend = () => {
+        if (transcriptRef.current) {
+          baseTextRef.current = transcriptRef.current;
+        }
+        if (isRecordingRef.current && !isPausedRef.current) {
+          startRecognitionLoop();
+        }
+      };
+
+      recognition.onerror = (e: any) => {
+        if (e.error === 'no-speech' && isRecordingRef.current && !isPausedRef.current) {
+          startRecognitionLoop();
+          return;
+        }
+        if (e.error === 'not-allowed') {
+          toast.error('Mic denied. Please type instead.');
+          setStep('typing');
+          stopRecording();
+        }
+      };
+
+      recognitionRef.current = recognition;
+      recognition.start();
+    } catch (err) {
+      console.error(err);
+    }
+  }, [updateTranscript, stopRecording]);
+
+  const startRecording = useCallback(() => {
+    baseTextRef.current = '';
+    updateTranscript('');
+    isRecordingRef.current = true;
+    isPausedRef.current = false;
+    setIsRecording(true);
+    setIsPaused(false);
+    setStep('recording');
+    setTimer(0);
+    startTimer();
+    startRecognitionLoop();
+  }, [updateTranscript, startTimer, startRecognitionLoop]);
+
   const pauseRecording = useCallback(() => {
+    isPausedRef.current = true;
     destroyRecognition();
-    // Save current transcript snapshot to baseRef
-    baseRef.current = (baseRef.current + ' ' + sessionTextRef.current).replace(/\s+/g, ' ').trim();
-    sessionTextRef.current = '';
+    if (transcriptRef.current) {
+      baseTextRef.current = transcriptRef.current;
+    }
     setIsPaused(true);
     stopTimer();
   }, [destroyRecognition, stopTimer]);
 
   const resumeRecording = useCallback(() => {
-    sessionTextRef.current = '';
-
-    const onResult = buildOnResult();
-    const r = createRecognition(onResult);
-    if (!r) return;
-
-    recognitionRef.current = r;
-    try { r.start(); } catch (e) {}
+    isPausedRef.current = false;
+    if (transcriptRef.current) {
+      baseTextRef.current = transcriptRef.current;
+    }
     setIsPaused(false);
     startTimer();
-  }, [buildOnResult, createRecognition, startTimer]);
+    startRecognitionLoop();
+  }, [startTimer, startRecognitionLoop]);
 
   const handleSubmit = useCallback(async () => {
-    if (!transcript.trim() || transcript.trim().length < 20) { toast.error('Please give a longer response.'); return; }
-    stopRecording(); setStep('processing');
+    if (!transcript.trim() || transcript.trim().length < 5) {
+      toast.error('Please provide a longer response before evaluating.');
+      return;
+    }
+    stopRecording();
+    setStep('processing');
     try {
       const res = await fetch('/api/self-assessment/speech/evaluate', {
-        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ question: question?.question, transcript, category: question?.category }),
       });
       const data = await res.json();
       if (!data.success) throw new Error(data.error);
-      setEvaluation(data.data); setStep('results');
+      setEvaluation(data.data);
+      setStep('results');
     } catch (err: unknown) {
       toast.error(err instanceof Error ? err.message : 'Evaluation failed');
       setStep(speechSupported ? 'recording' : 'typing');
@@ -328,11 +343,9 @@ export default function SpeechPracticePage() {
                     <button onClick={stopRecording} className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-pink-600 to-rose-600 text-white font-bold text-sm flex items-center gap-2 shadow-lg shadow-pink-500/30">
                       <MicOff className="w-4 h-4" /> Stop
                     </button>
-                    {transcript.trim().length >= 20 && (
-                      <button onClick={handleSubmit} className="px-5 py-2.5 rounded-xl border border-white/15 text-white font-bold text-sm flex items-center gap-2 hover:bg-white/5 transition-colors">
-                        <Send className="w-4 h-4" /> Evaluate
-                      </button>
-                    )}
+                    <button onClick={handleSubmit} className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-pink-600 to-rose-600 text-white font-bold text-sm flex items-center gap-2 shadow-lg shadow-pink-500/30 hover:from-pink-500 hover:to-rose-500 transition-all">
+                      <Send className="w-4 h-4" /> Evaluate
+                    </button>
                   </div>
                 </div>
               )}
