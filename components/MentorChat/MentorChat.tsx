@@ -60,10 +60,6 @@ export default function MentorChat() {
 
   useEffect(() => { fetchAllChats(); }, []);
 
-  useEffect(() => {
-    chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [activeChat?.messages, isSending]);
-
   // Auto-resize textarea
   useEffect(() => {
     if (textareaRef.current) {
