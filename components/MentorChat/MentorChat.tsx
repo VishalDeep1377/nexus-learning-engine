@@ -371,7 +371,7 @@ export default function MentorChat() {
           </div>
 
           {/* Messages area */}
-          <div className="flex-1 overflow-y-auto scrollbar-thin px-4 py-4 relative bg-transparent">
+          <div className="flex-1 overflow-y-auto scrollbar-thin px-4 py-4 relative bg-transparent" style={{ overflowAnchor: 'none' }}>
             {/* Empty state */}
             {!activeChat && (
               <div className="flex flex-col items-center justify-center h-full gap-6 max-w-xl mx-auto text-center">
@@ -444,7 +444,7 @@ export default function MentorChat() {
                   return (
                     <div
                       key={index}
-                      className={`flex ${isUser ? 'justify-end' : 'justify-start'} items-end gap-2.5 mb-4 msg-animate`}
+                      className={`flex ${isUser ? 'justify-end' : 'justify-start'} items-end gap-2.5 mb-4 ${message.isStreaming ? '' : 'msg-animate'}`}
                     >
                       {/* AI Avatar */}
                       {!isUser && (

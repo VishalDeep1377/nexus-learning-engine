@@ -10,9 +10,7 @@ function MentorChatContainer() {
     setMessage('');
   }
 
-  useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
-  }, [message])
+
 
   return (
     <div className='bg-white dark:bg-gray-800 w-full max-w-4xl mx-2 md:mx-auto h-[calc(100vh-80px)] overflow-hidden rounded-lg shadow-lg flex flex-col'>
