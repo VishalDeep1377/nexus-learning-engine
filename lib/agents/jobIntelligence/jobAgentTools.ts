@@ -7,6 +7,7 @@
 
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { generateStructured } from "@/lib/ai/groq";
+// @ts-ignore
 import LinkedIn from "linkedin-jobs-api";
 import { buildLearnerContext } from "@/lib/buildLearnerContext";
 import { connectDb } from "@/config/db.config";

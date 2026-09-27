@@ -107,7 +107,7 @@ async function runJobAgentTestSuite() {
     console.log("\n--- Test 3: get_learner_context Tool Execution ---");
     const context = await tool_get_learner_context(userId);
     if (context && context.summary) {
-      console.log(`  ✅ Test 3 PASS: Learner context retrieved successfully (Target Goal: ${context.summary.careerGoal}).`);
+      console.log(`  ✅ Test 3 PASS: Learner context retrieved successfully (Target Role: ${context.summary.targetRole}).`);
       passCount++;
     } else {
       console.error("  ❌ Test 3 FAIL: Failed to retrieve learner context.");
