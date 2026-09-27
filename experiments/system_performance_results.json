@@ -1,0 +1,42 @@
+{
+  "skillGap": {
+    "matrix": {
+      "TP": 15,
+      "FP": 0,
+      "TN": 15,
+      "FN": 0
+    },
+    "metrics": {
+      "accuracy": 100,
+      "precision": 100,
+      "recall": 100,
+      "f1": 100
+    }
+  },
+  "jobMatch": {
+    "matrix": {
+      "TP": 16,
+      "FP": 1,
+      "TN": 8,
+      "FN": 0
+    },
+    "metrics": {
+      "accuracy": 96,
+      "precision": 94.12,
+      "recall": 100,
+      "f1": 96.97,
+      "avgMatchAccuracyPct": 100
+    }
+  },
+  "roadmapRelevance": {
+    "relevanceScorePct": 91.2,
+    "topicAlignmentPct": 94.5,
+    "sequenceLogicPct": 88
+  },
+  "overall": {
+    "accuracy": 98,
+    "precision": 97.06,
+    "recall": 100,
+    "f1": 98.49
+  }
+}
