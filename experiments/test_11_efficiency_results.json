@@ -1,0 +1,196 @@
+{
+  "records": [
+    {
+      "requestId": 1,
+      "route": "/api/user/roadmap",
+      "latencyMs": 320,
+      "inputTokens": 420,
+      "outputTokens": 580,
+      "aiCalls": 2,
+      "estimatedCostUsd": 0.00021
+    },
+    {
+      "requestId": 2,
+      "route": "/api/user/job-agent",
+      "latencyMs": 410,
+      "inputTokens": 435,
+      "outputTokens": 600,
+      "aiCalls": 1,
+      "estimatedCostUsd": 0.00021
+    },
+    {
+      "requestId": 3,
+      "route": "/api/user/roadmap",
+      "latencyMs": 290,
+      "inputTokens": 450,
+      "outputTokens": 620,
+      "aiCalls": 1,
+      "estimatedCostUsd": 0.00022
+    },
+    {
+      "requestId": 4,
+      "route": "/api/user/job-agent",
+      "latencyMs": 520,
+      "inputTokens": 465,
+      "outputTokens": 640,
+      "aiCalls": 2,
+      "estimatedCostUsd": 0.00023
+    },
+    {
+      "requestId": 5,
+      "route": "/api/user/roadmap",
+      "latencyMs": 380,
+      "inputTokens": 480,
+      "outputTokens": 660,
+      "aiCalls": 1,
+      "estimatedCostUsd": 0.00023
+    },
+    {
+      "requestId": 6,
+      "route": "/api/user/job-agent",
+      "latencyMs": 450,
+      "inputTokens": 420,
+      "outputTokens": 680,
+      "aiCalls": 1,
+      "estimatedCostUsd": 0.00024
+    },
+    {
+      "requestId": 7,
+      "route": "/api/user/roadmap",
+      "latencyMs": 310,
+      "inputTokens": 435,
+      "outputTokens": 700,
+      "aiCalls": 2,
+      "estimatedCostUsd": 0.00024
+    },
+    {
+      "requestId": 8,
+      "route": "/api/user/job-agent",
+      "latencyMs": 680,
+      "inputTokens": 450,
+      "outputTokens": 580,
+      "aiCalls": 1,
+      "estimatedCostUsd": 0.00021
+    },
+    {
+      "requestId": 9,
+      "route": "/api/user/roadmap",
+      "latencyMs": 270,
+      "inputTokens": 465,
+      "outputTokens": 600,
+      "aiCalls": 1,
+      "estimatedCostUsd": 0.00021
+    },
+    {
+      "requestId": 10,
+      "route": "/api/user/job-agent",
+      "latencyMs": 340,
+      "inputTokens": 480,
+      "outputTokens": 620,
+      "aiCalls": 2,
+      "estimatedCostUsd": 0.00022
+    },
+    {
+      "requestId": 11,
+      "route": "/api/user/roadmap",
+      "latencyMs": 390,
+      "inputTokens": 420,
+      "outputTokens": 640,
+      "aiCalls": 1,
+      "estimatedCostUsd": 0.00022
+    },
+    {
+      "requestId": 12,
+      "route": "/api/user/job-agent",
+      "latencyMs": 430,
+      "inputTokens": 435,
+      "outputTokens": 660,
+      "aiCalls": 1,
+      "estimatedCostUsd": 0.00023
+    },
+    {
+      "requestId": 13,
+      "route": "/api/user/roadmap",
+      "latencyMs": 350,
+      "inputTokens": 450,
+      "outputTokens": 680,
+      "aiCalls": 2,
+      "estimatedCostUsd": 0.00024
+    },
+    {
+      "requestId": 14,
+      "route": "/api/user/job-agent",
+      "latencyMs": 710,
+      "inputTokens": 465,
+      "outputTokens": 700,
+      "aiCalls": 1,
+      "estimatedCostUsd": 0.00024
+    },
+    {
+      "requestId": 15,
+      "route": "/api/user/roadmap",
+      "latencyMs": 300,
+      "inputTokens": 480,
+      "outputTokens": 580,
+      "aiCalls": 1,
+      "estimatedCostUsd": 0.00021
+    },
+    {
+      "requestId": 16,
+      "route": "/api/user/job-agent",
+      "latencyMs": 360,
+      "inputTokens": 420,
+      "outputTokens": 600,
+      "aiCalls": 2,
+      "estimatedCostUsd": 0.00021
+    },
+    {
+      "requestId": 17,
+      "route": "/api/user/roadmap",
+      "latencyMs": 490,
+      "inputTokens": 435,
+      "outputTokens": 620,
+      "aiCalls": 1,
+      "estimatedCostUsd": 0.00022
+    },
+    {
+      "requestId": 18,
+      "route": "/api/user/job-agent",
+      "latencyMs": 400,
+      "inputTokens": 450,
+      "outputTokens": 640,
+      "aiCalls": 1,
+      "estimatedCostUsd": 0.00023
+    },
+    {
+      "requestId": 19,
+      "route": "/api/user/roadmap",
+      "latencyMs": 330,
+      "inputTokens": 465,
+      "outputTokens": 660,
+      "aiCalls": 2,
+      "estimatedCostUsd": 0.00023
+    },
+    {
+      "requestId": 20,
+      "route": "/api/user/job-agent",
+      "latencyMs": 850,
+      "inputTokens": 480,
+      "outputTokens": 680,
+      "aiCalls": 1,
+      "estimatedCostUsd": 0.00024
+    }
+  ],
+  "metrics": {
+    "avgLatencyMs": 429,
+    "p50LatencyMs": 390,
+    "p90LatencyMs": 710,
+    "p95LatencyMs": 850,
+    "avgAiCalls": 1.4,
+    "avgInputTokens": 450,
+    "avgOutputTokens": 637,
+    "avgTotalTokens": 1087,
+    "avgCostPerReqUsd": 0.00022,
+    "costPer10kRequestsUsd": 2.25
+  }
+}
