@@ -1,0 +1,37 @@
+[
+  {
+    "testId": "rel-1",
+    "failureMode": "MCP Server Offline / Connection Timeout",
+    "simulatedFault": "MCP HTTP endpoint unreachable (http://localhost:9999)",
+    "systemFallbackBehavior": "Direct MongoDB context builder fallback executed seamlessly",
+    "passed": true
+  },
+  {
+    "testId": "rel-2",
+    "failureMode": "Primary AI API Failure",
+    "simulatedFault": "Simulated 500 error / Timeout on primary AI model",
+    "systemFallbackBehavior": "Sequential failover triggered (Groq -> OpenRouter -> Gemini)",
+    "passed": true
+  },
+  {
+    "testId": "rel-3",
+    "failureMode": "Rate Limit Exceeded (HTTP 429)",
+    "simulatedFault": "Groq on_demand rate limit exceeded (HTTP 429)",
+    "systemFallbackBehavior": "Automatically catches 429 status and switches to free backup tier",
+    "passed": true
+  },
+  {
+    "testId": "rel-4",
+    "failureMode": "External LinkedIn Jobs API Failure",
+    "simulatedFault": "Empty query or external scraper network block",
+    "systemFallbackBehavior": "Returned safe empty job array with guidance sample note",
+    "passed": true
+  },
+  {
+    "testId": "rel-5",
+    "failureMode": "Database Connection Failure",
+    "simulatedFault": "MongoDB URI connection drop or network partition",
+    "systemFallbackBehavior": "Fallback memory state initialized, preventing app crash",
+    "passed": true
+  }
+]
