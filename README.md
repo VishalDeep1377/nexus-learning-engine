@@ -1,37 +1,35 @@
 <div align="center">
 
-<!-- Animated Banner -->
-<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,12,20&height=200&section=header&text=Code%20To%20Career&fontSize=60&fontColor=ffffff&animation=twinkling&fontAlignY=35&desc=Your%20AI-Powered%20Career%20Accelerator&descAlignY=55&descColor=a5b4fc" width="100%"/>
+# Nexus Learning Engine
 
-<!-- Badges Row 1 -->
+### AI-Native Adaptive Learning, Project Building & Career Intelligence Platform
+
+<p align="center">
+  A unified, data-grounded intelligence engine bridging the gap between learner assessment, personalized skill acquisition, rapid project execution, and real-time tech job market demand.
+</p>
+
+<!-- Technology Badges -->
 <p>
-  <img src="https://img.shields.io/badge/Next.js-16-black?style=for-the-badge&logo=next.js&logoColor=white" />
+  <img src="https://img.shields.io/badge/Next.js-16.2-black?style=for-the-badge&logo=next.js&logoColor=white" />
+  <img src="https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react&logoColor=black" />
   <img src="https://img.shields.io/badge/TypeScript-5-3178C6?style=for-the-badge&logo=typescript&logoColor=white" />
   <img src="https://img.shields.io/badge/MongoDB-Atlas-47A248?style=for-the-badge&logo=mongodb&logoColor=white" />
-  <img src="https://img.shields.io/badge/Tailwind_CSS-3-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white" />
-</p>
-
-<!-- Badges Row 2 -->
-<p>
-  <img src="https://img.shields.io/badge/Google_Gemini-AI-4285F4?style=for-the-badge&logo=google&logoColor=white" />
+  <img src="https://img.shields.io/badge/Google_Gemini-2.5_Flash-4285F4?style=for-the-badge&logo=google&logoColor=white" />
+  <img src="https://img.shields.io/badge/Groq_API-Llama_3.3-FF6C37?style=for-the-badge&logo=groq&logoColor=white" />
+  <img src="https://img.shields.io/badge/OpenRouter-API-6366F1?style=for-the-badge&logo=openai&logoColor=white" />
   <img src="https://img.shields.io/badge/NextAuth.js-v4-purple?style=for-the-badge&logo=auth0&logoColor=white" />
-  <img src="https://img.shields.io/badge/Framer_Motion-12-FF0080?style=for-the-badge&logo=framer&logoColor=white" />
-  <img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/Tailwind_CSS-3.4-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white" />
+  <img src="https://img.shields.io/badge/MCP-Context_Layer-000000?style=for-the-badge&logo=fastapi&logoColor=white" />
 </p>
 
-<!-- Status Badges -->
+<!-- Verification & Build Badges -->
 <p>
-  <img src="https://img.shields.io/badge/Status-Active-brightgreen?style=flat-square" />
-  <img src="https://img.shields.io/badge/PRs-Welcome-blue?style=flat-square" />
-  <img src="https://img.shields.io/badge/Node-%3E%3D18-339933?style=flat-square&logo=node.js" />
-  <img src="https://img.shields.io/badge/Deployed_on-Vercel-black?style=flat-square&logo=vercel" />
+  <img src="https://img.shields.io/badge/Build-Passing-brightgreen?style=flat-square&logo=github" />
+  <img src="https://img.shields.io/badge/Agent_Tests-15%2F15_Passed-success?style=flat-square" />
+  <img src="https://img.shields.io/badge/MCP_Fallback-Verified-blue?style=flat-square" />
+  <img src="https://img.shields.io/badge/Node-%3E%3D18.x-339933?style=flat-square&logo=node.js" />
+  <img src="https://img.shields.io/badge/License-MIT-green?style=flat-square" />
 </p>
-
-<br/>
-
-> **🚀 Code-To-Career** is an all-in-one AI-powered platform that bridges the gap between learning to code and landing your dream tech job — featuring job-market-aware smart roadmaps, a context-aware AI mentor, AI interview prep, live tech news, job search, and much more.
-
-<br/>
 
 </div>
 
@@ -39,521 +37,599 @@
 
 ## 📋 Table of Contents
 
-- [✨ Features](#-features)
-- [🆕 What's New](#-whats-new)
-- [🏗️ Architecture](#️-architecture)
-- [🔄 Application Flow](#-application-flow)
+- [💡 What is Nexus?](#-what-is-nexus)
+- [🎯 Why Nexus?](#-why-nexus)
+- [🔄 Core Intelligence Loop](#-core-intelligence-loop)
+- [🏗️ 1 → Overall Architecture](#1--overall-architecture)
+- [🗺️ 2 → Adaptive Roadmap](#2--adaptive-roadmap)
+- [🧪 3 → Hackathon Multi-Agent System](#3--hackathon-multi-agent-system)
+- [💼 4 → Job Intelligence Agent](#4--job-intelligence-agent)
+- [🔌 5 → MCP + Context Architecture](#5--mcp--context-architecture)
+- [🧠 Learner Context Model](#-learner-context-model)
+- [🤖 AI Agent Architecture](#-ai-agent-architecture)
+- [🔄 Continuous Learning Intelligence Loop](#-continuous-learning-intelligence-loop)
+- [🔐 Security & Reliability](#-security--reliability)
+- [⚙️ Engineering Principles](#-engineering-principles)
+- [🛠️ Technology Stack](#️-technology-stack)
+- [📊 Verified Implementation](#-verified-implementation)
 - [🗂️ Project Structure](#️-project-structure)
-- [🔌 API Reference](#-api-reference)
-- [⚙️ Environment Setup](#️-environment-setup)
+- [🎬 End-to-End Demo](#-end-to-end-demo)
 - [🚀 Getting Started](#-getting-started)
-- [🛡️ Authentication Flow](#️-authentication-flow)
-- [🤖 AI Features Flow](#-ai-features-flow)
-- [📰 News System Flow](#-news-system-flow)
-- [🤝 Contributing](#-contributing)
+- [🔑 Environment Variables](#-environment-variables)
+- [🔮 Future Roadmap](#-future-roadmap)
+- [📜 License](#-license)
 
 ---
 
-## ✨ Features
+## 💡 What is Nexus?
 
-<div align="center">
-
-| 🎯 Feature | 📝 Description | 🔧 Tech Used |
-|-----------|---------------|-------------|
-| 🗺️ **AI Roadmaps** | Job-market-aware personalized learning paths — searches real LinkedIn jobs for your skill first, then generates a roadmap aligned with what employers actually want | Google Gemini, LinkedIn Jobs API, MongoDB |
-| 🤖 **AI Mentor** | Context-aware real-time chat — reads your actual roadmaps from DB and gives personalized advice, not generic responses | Gemini Flash, MongoDB, Zustand |
-| 🎤 **Interview Prep** | AI-generated MCQ mock interviews for your roadmap skills — setup → quiz → score + full answer review | Gemini AI, Next.js |
-| 🔍 **Code Reviewer** | AI-powered code review with suggestions | Gemini AI, PrismJS |
-| 📰 **Tech News** | Live tech news with dark UI & search | NewsAPI, MongoDB, Cron |
-| 💼 **Job Search** | Browse and filter real-time tech job listings | LinkedIn Jobs API |
-| 🧑‍🤝‍🧑 **Community** | Dev community Q&A with voting | MongoDB, Next.js |
-| 📚 **Learning Paths** | Curated structured learning paths | Next.js, MongoDB |
-| 🏢 **Hackathon Lab** | Agentic workspace from problem architectural design to build plans | Gemini AI, Next.js |
-| 📈 **Telemetry Analytics**| Real-time 'Skill Gap' tracking across coding, speech, aptitude, and quizzes automatically mapped to the Mentor | MongoDB Aggregations |
-| 💎 **Developer Identity** | Premium single-page profile dashboard syncing global states instantly | Zustand, Mongoose |
-| 🔐 **Multi Auth** | Google, GitHub, and Email/Password login | NextAuth.js |
-| 📱 **PWA** | Installable Progressive Web App | next-pwa |
-| 🎨 **Dark Mode** | Beautiful dark/light mode toggle | Tailwind CSS |
-
-</div>
-
----
-
-## 🏆 Hackathon Judging Criteria
-
-This project is built specifically to address the core judging metrics:
-
-### 1. Technical Quality (25%)
-- **Clean MCP Server Implementation:** We built a standalone MCP Server (`mcp-servers/mentor-context`) using Express that securely exposes user roadmap contexts via the `resource://` protocol. This allows AI agents to fetch student data cleanly without polluting the main API architecture.
-- **Error Handling & Resilience:** Core features (like Gemini API calls) implement exponential backoff for `429 Too Many Requests`. The Mentor AI falls back gracefully to a standard prompt if the DB fetch fails.
-- **Security:** Fully authenticated using NextAuth with Google, GitHub, and secure Email/Password. All AI context injection is scoped strictly to the authenticated `userId`.
-
-### 2. Innovation & Creativity (25%)
-- **Novel Use of MCP Primitives:** Instead of treating the AI Mentor as a generic chat, we expose the student's *actual database state* (their roadmaps, completed steps, and inferred weak areas) as an **MCP Resource**. The Mentor agent reads this resource before every reply, creating a hyper-personalized conversation.
-- **Two-Agent Roadmap Pipeline:** Roadmap generation doesn't just rely on Gemini's latent knowledge. It first invokes an agent to search the **LinkedIn Jobs API** in real-time for the user's skill, fetching actual employer requirements, and uses *that* data to ground the AI's roadmap generation.
-
-### 3. Real-World Impact (20%)
-- **Solving the "Tutorial Hell" Problem:** Junior developers often learn skills that employers don't actually ask for. By grounding our AI roadmaps in live LinkedIn job data, we ensure students learn exactly what the market demands.
-- **Scalable Mentorship:** Access to senior developers is expensive. Our Context-Aware AI Mentor and AI Interview prep system democratize access to high-quality, personalized feedback.
-
-### 4. Completeness (10%)
-- **End-to-End Functionality:** From user authentication, generating job-grounded roadmaps, testing skills with AI-generated MCQs, to seeking help from an AI Mentor—the entire user journey is functional, styled, and deployed.
-- **External Data Integrations:** The platform integrates with the **LinkedIn Jobs API** for market research and the **NewsAPI** for live tech updates.
-
----
-
-## 🆕 What's New
-
-### 🤖 Smarter AI Roadmap Agent
-The roadmap generation is now a **two-step AI agent**:
-1. **Step 1 — Job Search:** Automatically searches LinkedIn Jobs for the skill you're learning (e.g., "Python") to fetch what real employers currently need
-2. **Step 2 — Contextual Generation:** Passes those real job requirements to Gemini, so your roadmap is grounded in the actual job market — not just general knowledge
+**Nexus Learning Engine** (Code-To-Career) is an engineering-grade, context-grounded adaptive learning and career intelligence platform. Rather than serving static video playlists or generic AI prompts, Nexus operates as a **closed-loop state engine** that continuously synthesizes learner performance across multimodal assessments, constructs a living skill profile, generates market-aligned roadmaps, facilitates rapid project prototyping, and delivers bounded-autonomous job market matching.
 
 ```
-Old: User preferences → Gemini → Generic roadmap
-New: User preferences → LinkedIn Jobs search → Gemini + job context → Market-aligned roadmap
+Learner State ──► Assessment ──► Skill Intelligence ──► Personalized Learning ──► Practice ──► Projects ──► Job Market ──► Adaptation
 ```
 
-### 🎤 AI Interview Prep Section (replaces Test)
-A fully AI-driven mock interview system at `/interview`:
-- **Skill auto-detection:** Skill options are pulled from *your own roadmaps* — if you have a Python roadmap, you get a Python interview button automatically
-- **3 difficulty levels:** Beginner 🌱, Intermediate ⚡, Advanced 🔥
-- **10 AI-generated MCQs** per session, with explanations shown after each answer
-- **Results dashboard:** Score circle, rating message, full per-question review with correct answers highlighted
-- **Fallback:** If no roadmaps exist, shows a curated list of popular skills
-
-### 🧠 Context-Aware AI Mentor
-The AI Mentor now **reads your roadmap from the database** before every response:
-- Knows your target roles, full roadmap steps, and foundational weak areas
-- Gives specific, personalized advice — references your actual progress
-- **Seamless:** Zero UI change — just noticeably smarter responses
-- **Safe fallback:** If context fetch fails for any reason, mentor continues normally
-
-### 🔌 Mentor-Context MCP Server
-A standalone HTTP server (`mcp-servers/mentor-context/`) built as a separate resource endpoint:
-- Exposes `resource://mentor/user_context/{userId}`
-- Queries MongoDB for roadmap data, infers weak areas from step content
-- Graceful empty-object fallback for brand-new users
-
-### 🧪 The Hackathon Lab Agent Workspace
-A dedicated, real-time environment designed to accelerate competition hacking:
-- **Ideation Generator:** Passes hackathon descriptions into AI agents to surface unique project angles.
-- **Architectural Planner:** Automatically converts ideas into highly specific technological stacks, database schemas, and folder structures.
-- **Component Tracing:** Multi-step pipeline traces executed visibly through an `AgentTrace` UI overlay.
-
-### 📈 Global Telemetry "Skill Gap" Engine
-Massive upgrade to how the platform evaluates the developer:
-- Evaluates **four major pillars**: Coding, Speech, Aptitude, and Quizzes.
-- Dynamically parses attempting histories to find precise `recentWeakTopics` and `recentWeakAreas`.
-- Unifies into an internal `AssessmentAnalysis` mathematical matrix which forces Zeno (The AI Mentor) to shift its difficulty and recommendations on the fly!
-
-### 💎 Premium Developer Dashboard Identity
-Upgraded the user profile system to mirror Awwwards-tier SaaS designs:
-- Smooth glassmorphism unified scrolling layout replacing clunky tab interfaces.
-- Global `Zustand` optimistic-state merging — edit your data and immediately see changes render visually before the DB formally syncs avoiding latency blocking.
+The system tightly unifies **deterministic code** (math matching, skill normalization, database aggregations, and constraint checks) with **probabilistic AI reasoning** (multimodal evaluation, semantic goal breakdown, agent tool execution), ensuring high-fidelity personalization without hallucinated curriculum paths.
 
 ---
 
-## 🏗️ Architecture
+## 🎯 Why Nexus?
+
+Traditional EdTech platforms treat learning, assessment, project building, and job searching as isolated, disconnected silos. Generic LLM wrappers fail because they generate hallucinated roadmaps ungrounded by what a developer actually knows or what employers actually require.
+
+Nexus eliminates this disconnect by grounding every AI interaction in a unified **Learner Context Layer**.
 
 ```mermaid
-graph TB
-    subgraph Client["🖥️ Client Layer (Next.js 16 App Router)"]
-        UI["React Components\n(Tailwind + Framer Motion)"]
-        Store["Zustand Store\n(Global State)"]
-        Auth_Client["NextAuth.js Client\n(Session Management)"]
-    end
+graph TD
+    A["ASSESS"] --> B["ANALYZE"]
+    B --> C["PERSONALIZE"]
+    C --> D["LEARN"]
+    D --> E["PRACTICE"]
+    E --> F["BUILD"]
+    F --> G["APPLY"]
+    G --> H["MEASURE"]
+    H --> I["ADAPT"]
+    I --> A
+```
 
-    subgraph API["⚡ API Layer (Next.js Route Handlers)"]
-        AuthAPI["🔐 /api/auth\n(Signup, Login, OAuth)"]
-        NewsAPI["📰 /api/news\n(CRUD + Search + Pagination)"]
-        RoadmapAPI["🗺️ /api/roadmap\n(Agent: Jobs→AI Generation)"]
-        MentorAPI["🤖 /api/mentor\n(Context-Aware AI Chat)"]
-        ReviewAPI["🔍 /api/code-reviewer\n(AI Review)"]
-        JobsAPI["💼 /api/jobs\n(Job Search)"]
-        CommunityAPI["🧑‍🤝‍🧑 /api/community\n(Posts & Votes)"]
-        InterviewAPI["🎤 /api/interview\n(AI MCQ Generation)"]
-    end
+### Key Architectural Differences
 
-    subgraph AI["🧠 AI Layer"]
-        Gemini["Google Gemini API\n(gemini-flash-lite-latest)"]
-    end
+| Capability | Generic LLM Wrappers | Nexus Learning Engine |
+| :--- | :--- | :--- |
+| **Context Source** | Single static user prompt | Multi-source aggregate (MongoDB + Assessments + Skill Gaps + Market Signals) |
+| **Roadmap Generation** | Generic prompt completion | Grounded prompt synthesized from assessment evidence & live LinkedIn market signals |
+| **Computation Model** | AI guesses skill match & scores | Code computes exact match percentages; AI handles semantic reasoning |
+| **Job Search** | Keyword lookup or links | Bounded-Autonomous Agent with 8 execution tools & skill alias normalization |
+| **Context Pipeline** | Injected raw prompt text | Model Context Protocol (MCP) server layer with direct DB fallback |
+| **Safety & Control** | Unbounded mutation | Human-in-the-loop confirmation for write operations (`save_job`, roadmap saves) |
 
-    subgraph Data["🗄️ Data Layer"]
-        MongoDB["MongoDB Atlas\n(Mongoose ODM)"]
-        NewsDB["News Collection"]
-        UserDB["User Collection"]
-        RoadmapDB["Roadmap Collection"]
-        ChatDB["Chat/Message Collections"]
-    end
+---
 
-    subgraph External["🌐 External APIs"]
-        NewsAPI_Ext["NewsAPI.org\n(Tech Headlines)"]
-        LinkedIn["LinkedIn Jobs API\n(Roadmap grounding + Job Search)"]
-        GoogleOAuth["Google OAuth"]
-        GitHubOAuth["GitHub OAuth"]
-    end
+## 🔄 Core Intelligence Loop
 
-    UI --> Store
-    UI --> Auth_Client
-    UI --> API
-
-    AuthAPI --> MongoDB
-    NewsAPI --> MongoDB
-    RoadmapAPI --> LinkedIn
-    RoadmapAPI --> Gemini
-    RoadmapAPI --> MongoDB
-    MentorAPI --> MongoDB
-    MentorAPI --> Gemini
-    ReviewAPI --> Gemini
-    JobsAPI --> LinkedIn
-    CommunityAPI --> MongoDB
-    InterviewAPI --> Gemini
-
-    MongoDB --- NewsDB
-    MongoDB --- UserDB
-    MongoDB --- RoadmapDB
-    MongoDB --- ChatDB
-
-    NewsAPI --> NewsAPI_Ext
-    AuthAPI --> GoogleOAuth
-    AuthAPI --> GitHubOAuth
-
-    style Client fill:#1e1b4b,stroke:#6366f1,color:#fff
-    style API fill:#1a1a2e,stroke:#8b5cf6,color:#fff
-    style AI fill:#0f172a,stroke:#06b6d4,color:#fff
-    style Data fill:#0c1a0c,stroke:#22c55e,color:#fff
-    style External fill:#1a0f0f,stroke:#f59e0b,color:#fff
+```
+[ Multimodal Assessments (Coding, Quiz, Aptitude, Speech) ]
+                           │
+                           ▼
+              [ MongoDB Aggregation Engine ]
+                           │
+                           ▼
+          [ Skill Gap Profile (Strong / Weak / Missing) ]
+                           │
+                           ▼
+         [ MCP / Direct Context Compilation Layer ]
+                           │
+                           ▼
+       [ Job Market Signals (LinkedIn Live API) ]
+                           │
+                           ▼
+      [ Contextual AI Reasoning (Roadmap & Agents) ]
+                           │
+                           ▼
+          [ Adaptive Personalization & Practice ]
 ```
 
 ---
 
-## 🔄 Application Flow
+## 1 → Overall Architecture
+
+Nexus is structured into distinct, isolated architectural tiers to guarantee modularity, fault tolerance, and observable agent tool calls.
 
 ```mermaid
-flowchart TD
-    A([👤 User Visits App]) --> B{Authenticated?}
+graph TD
+    subgraph EXPERIENCE["EXPERIENCE LAYER (Next.js 16 + React 19)"]
+        UI_LEARN["Learning & Roadmaps"]
+        UI_PRACTICE["Practice Arena (Coding/Quiz/Speech)"]
+        UI_HACKATHON["Hackathon Workspace"]
+        UI_JOBS["Job Intelligence Portal"]
+        UI_MENTOR["Zeno AI Mentor"]
+    end
 
-    B -->|No| C[🔐 Login / Signup Page]
-    C --> D{Auth Method}
-    D -->|📧 Email & Password| E[Credentials Provider]
-    D -->|🔵 Google| F[Google OAuth]
-    D -->|⚫ GitHub| G[GitHub OAuth]
-    E & F & G --> H[✅ Session Created\nNextAuth.js]
+    subgraph APPLICATION["APPLICATION / API LAYER (Next.js Server Routes)"]
+        API_AUTH["/api/auth (NextAuth.js)"]
+        API_ROADMAP["/api/roadmap"]
+        API_AGENT["/api/jobs/agent"]
+        API_HACKATHON["/api/hackathons/*"]
+        API_ASSESS["/api/self-assessment/*"]
+    end
 
-    B -->|Yes| I[🏠 Dashboard / Home]
-    H --> I
+    subgraph INTELLIGENCE["INTELLIGENCE LAYER (Agents & AI Providers)"]
+        AGENT_JOB["Bounded Job Intelligence Agent"]
+        AGENT_HACK["Hackathon Multi-Agent Suite"]
+        AGENT_EVAL["Assessment Analysis Agents"]
+        AGENT_ROADMAP["Roadmap Generation Agent"]
+        GROQ_CLIENT["Groq API (Llama 3.3 / GPT-OSS)"]
+        GEMINI_CLIENT["Google Gemini API (Flash 2.5)"]
+        OPENROUTER_CLIENT["OpenRouter API (Gemma / Nemotron)"]
+    end
 
-    I --> J{Choose Feature}
+    subgraph CONTEXT["CONTEXT LAYER (MCP Protocol Inspired)"]
+        MCP_SERVER["MCP Context Server (HTTP REST /3001)"]
+        DIRECT_BUILDER["Direct DB Context Builder (Fallback)"]
+    end
 
-    J -->|🗺️ Roadmap| K[Fill Skills Form]
-    K --> K1[🔍 Agent searches LinkedIn Jobs\nfor your skill]
-    K1 --> L[Gemini AI generates roadmap\ngrounded in real job market]
-    L --> M[Roadmap Saved to MongoDB]
-    M --> N[📊 Interactive Roadmap View\nwith step completion]
+    subgraph DATA["DATA LAYER & EXTERNAL SERVICES"]
+        MONGO["MongoDB Atlas Database"]
+        LINKEDIN_API["LinkedIn Jobs API"]
+        NEWS_API["NewsAPI Provider"]
+    end
 
-    J -->|🤖 AI Mentor| O[Start Chat Session]
-    O --> O1[Mentor reads your roadmap\nfrom DB — gets full context]
-    O1 --> P[Personalized message sent\nto Gemini with your roadmap]
-    P --> Q[Specific, personalized\nAI Response]
-    Q --> O
-
-    J -->|🎤 Interview| IA[Pick skill from YOUR roadmaps\nauto-populated]
-    IA --> IB[Choose difficulty level]
-    IB --> IC[Gemini generates 10 MCQs]
-    IC --> ID[Answer questions with\nexplanations after each]
-    ID --> IE[Score + Full Answer Review]
-
-    J -->|🔍 Code Review| R[Paste Code + Language]
-    R --> S[Gemini Analyzes Code]
-    S --> T[Feedback with Highlights]
-
-    J -->|📰 Tech News| U[Fetch from MongoDB]
-    U --> V{News Available?}
-    V -->|No| W[Load Demo Data / Call NewsAPI]
-    V -->|Yes| X[Display Glassmorphism Cards]
-    W --> X
-
-    J -->|💼 Jobs| Y[Search Jobs by Keyword]
-    Y --> Z[LinkedIn Jobs API]
-    Z --> AA[Filtered Job Listings]
-
-    J -->|🧑‍🤝‍🧑 Community| AB[Browse Posts / Ask Question]
-    AB --> AC[Vote & Answer System]
-
-    style A fill:#6366f1,color:#fff
-    style H fill:#22c55e,color:#fff
-    style I fill:#8b5cf6,color:#fff
-    style L fill:#06b6d4,color:#fff
-    style P fill:#06b6d4,color:#fff
-    style S fill:#06b6d4,color:#fff
-    style K1 fill:#f59e0b,color:#000
-    style O1 fill:#f59e0b,color:#000
-    style IC fill:#06b6d4,color:#fff
+    UI_LEARN & UI_PRACTICE & UI_HACKATHON & UI_JOBS & UI_MENTOR --> APPLICATION
+    APPLICATION --> INTELLIGENCE
+    INTELLIGENCE --> CONTEXT
+    INTELLIGENCE --> GROQ_CLIENT & GEMINI_CLIENT & OPENROUTER_CLIENT
+    CONTEXT --> MONGO
+    AGENT_JOB --> LINKEDIN_API
 ```
 
-## 🤖 AI Features Flow
+### Architecture Principles
+
+1. **AI Reasons, Tools Retrieve**: LLMs evaluate complex semantics and synthesize responses; tools pull structured state from databases and external APIs.
+2. **Deterministic Code Computes**: Math scoring, skill normalization, set intersections, and percentage rankings are strictly executed by TypeScript functions—never left to LLM probability.
+3. **MongoDB Persists**: All state mutations (user profiles, quiz attempts, coding progress, active roadmaps, saved jobs) are explicitly validated and committed to MongoDB.
+4. **Context Layer Supplies Grounding**: Agents access state via the Model Context Protocol (MCP) server tier or native direct context compilation.
+5. **Humans Control Consequential Actions**: State-changing operations (such as saving jobs to profile or triggering roadmap regeneration) require explicit user confirmation.
+
+---
+
+## 2 → Adaptive Roadmap
+
+The Adaptive Roadmap pipeline generates personalized, employer-aligned learning paths by fusing the learner's skill state with real-time job market requirements.
 
 ```mermaid
-flowchart LR
-    subgraph Input["📥 User Input"]
-        R1["Skill + Experience\n+ Learning Style"]
-        R2["Code Snippet\n+ Language"]
-        R3["Chat Message"]
-        R4["Skill + Difficulty\n(Interview)"]
+sequenceDiagram
+    autonumber
+    actor Learner
+    participant UI as Next.js Learning UI
+    participant API as /api/roadmap
+    participant Market as LinkedIn Jobs API
+    participant MCP as MCP / Direct Context Layer
+    participant Gemini as Gemini AI Agent
+    participant DB as MongoDB Atlas
+
+    Learner->>UI: Submit Career Goal & Target Skill
+    UI->>API: POST /api/roadmap {skill, experience, goal}
+    API->>Market: Fetch live job postings for target skill
+    Market-->>API: Return market skill frequency & job context
+    API->>MCP: Request Learner Context (userId)
+    alt MCP Server Online
+        MCP-->>API: Return aggregated MCP context object
+    else MCP Server Unavailable
+        API->>MCP: Trigger Direct DB Context Builder fallback
+        MCP-->>API: Return compiled context object
     end
+    API->>Gemini: Pass Grounded Prompt (Profile + Skill Gap + Market Signals)
+    Gemini-->>API: Return structured JSON Roadmap Blueprint
+    API->>DB: Save Roadmap Document to User Record
+    DB-->>UI: Return saved roadmap with step progress tracking
+    UI-->>Learner: Display interactive milestone roadmap UI
+```
 
-    subgraph Processing["⚙️ Processing"]
-        P0["🔍 LinkedIn Jobs Search\n(for skill keyword)"]
-        P1["geminiRoadmapPrompt()\nBuilds prompt WITH job context"]
-        P2["Code Review Prompt\nBuilds analysis prompt"]
-        P3["Mentor reads roadmaps from DB\n→ geminiMentorPrompt() + contextPrefix"]
-        P4["geminiInterviewPrompt()\nGenerates N MCQs with explanations"]
-    end
+### Learner Context Passed to the Model
 
-    subgraph Gemini["🧠 Google Gemini AI"]
-        G["gemini-flash-lite-latest\nModel"]
-    end
+```json
+{
+  "learnerId": "650f123456789abcdef01234",
+  "careerGoal": "Full Stack Engineer",
+  "experienceLevel": "Intermediate",
+  "skillGap": {
+    "strengths": ["JavaScript", "React.js", "HTML5"],
+    "weakAreas": ["MongoDB Query Optimization", "SQL Joins"],
+    "missingSkills": ["Docker", "Kubernetes", "Redis"]
+  },
+  "marketSignals": {
+    "targetRole": "Full Stack Engineer",
+    "topDemandedSkills": ["TypeScript", "Docker", "Node.js", "GraphQL"],
+    "sampleCount": 15
+  }
+}
+```
 
-    subgraph Output["📤 Output"]
-        O1["JSON Roadmap:\n{steps[], resources[]}"]
-        O2["Code Feedback:\n{issues, suggestions}"]
-        O3["Personalized AI Response\nMarkdown formatted"]
-        O4["MCQ Questions:\n{question, options[], correctIndex, explanation}"]
-    end
+### Grounded Generation vs. Generic LLMs
 
-    subgraph Storage["💾 MongoDB"]
-        S1["Roadmap Collection"]
-        S2["Chat + Message Collections"]
-    end
+```
+Generic LLM Approach:
+User Input ("Learn React") ──► Generic Prompt ──► LLM ──► Generic static roadmap (Includes skills user already knows)
 
-    R1 --> P0 --> P1 --> G --> O1 --> S1
-    R2 --> P2 --> G --> O2
-    R3 --> P3 --> G --> O3 --> S2
-    R4 --> P4 --> G --> O4
-
-    style Gemini fill:#0f172a,stroke:#06b6d4,color:#fff
-    style Storage fill:#0c1a0c,stroke:#22c55e,color:#fff
-    style P0 fill:#f59e0b,stroke:#d97706,color:#000
+Nexus Grounded Approach:
+User Input ("Learn React")
+  + Assessment Evidence
+  + Skill Gap Analysis (Strengths vs Weaknesses)
+  + Live Job Market Frequencies
+  ──► MCP Context Layer ──► Gemini AI ──► Adaptive Roadmap (Suppresses known strengths, prioritizes weak/missing skills)
 ```
 
 ---
 
-## 🧪 Hackathon Lab Agent Flow
+## 3 → Hackathon Multi-Agent System
+
+The Hackathon Multi-Agent workspace assists solo developers and teams through rapid prototyping events by enforcing a structured sequence: ideation, architecture design, and milestone breakdown.
 
 ```mermaid
-flowchart TD
-    A([👤 User Selects Hackathon]) --> B[GET /api/hackathons/explore]
-    B --> C[View Detailed Requirements]
-    
-    C --> D([💡 Generate Ideas])
-    D --> E[POST /api/hackathons/projects]
-    E --> F["ideaGenerator Agent<br/>(Gemini 3.6 Flash)"]
-    F --> G["Extracts 3 Unique Project Angles"]
-    G --> H[("(MongoDB: HackathonProject)")]
-    
-    H --> I([⚡ Select Idea & Analyze])
-    I --> J[POST /api/hackathons/analyze]
-    J --> K["hackathonAnalyzer Agent<br/>Evaluates Feasibility & Tech Stack"]
-    K --> L["AnalysisResult View"]
-    
-    L --> M([🏗️ Generate Build Plan])
-    M --> N[POST /api/hackathons/plan]
-    N --> O["buildPlanner Agent<br/>Architects Folders & APIs"]
-    O --> P["BuildPlan View + AgentTrace UI"]
-    
-    P --> Q([🚀 Submit & Tracking])
-    
-    style A fill:#6366f1,color:#fff
-    style D fill:#8b5cf6,color:#fff
-    style I fill:#8b5cf6,color:#fff
-    style M fill:#8b5cf6,color:#fff
-    style F fill:#0f172a,stroke:#06b6d4,color:#fff
-    style K fill:#0f172a,stroke:#06b6d4,color:#fff
-    style O fill:#0f172a,stroke:#06b6d4,color:#fff
-    style H fill:#0c1a0c,stroke:#22c55e,color:#fff
+graph TD
+    subgraph INPUT["EVENT INPUT"]
+        PROBLEM["Problem Statement & Rules"]
+        CONSTRAINTS["Technology & Time Constraints"]
+        CRITERIA["Judging Criteria"]
+    end
+
+    subgraph AGENTS["MULTI-AGENT EXECUTION PIPELINE"]
+        ANALYZER["1. Hackathon Analyzer Agent"]
+        IDEATOR["2. Idea Generator Agent"]
+        PLANNER["3. Build Planner Agent"]
+    end
+
+    subgraph HUMAN["HUMAN IN THE LOOP"]
+        SELECTION["Human Idea Selection & Customization"]
+    end
+
+    subgraph OUTPUT["EXECUTION OUTPUT"]
+        ARCH["System Architecture Blueprint"]
+        TASKS["Step-by-Step Task Breakdown"]
+        STACK["Tech Stack Recommendation"]
+        BUILD["Production Build Phase"]
+    end
+
+    PROBLEM & CONSTRAINTS & CRITERIA --> ANALYZER
+    ANALYZER --> IDEATOR
+    IDEATOR --> SELECTION
+    SELECTION --> PLANNER
+    PLANNER --> ARCH & TASKS & STACK
+    ARCH & TASKS & STACK --> BUILD
 ```
+
+### Agent Roles in the Hackathon Suite
+
+1. **Hackathon Analyzer Agent** (`lib/agents/hackathon/hackathonAnalyzer.ts`): Parses event briefs, extracts core constraints, identifies key judging criteria, and highlights technical risks.
+2. **Idea Generator Agent** (`lib/agents/hackathon/ideaGenerator.ts`): Produces candidate project concepts aligned with hackathon themes and constraints.
+3. **Human Idea Selection**: The developer evaluates generated concepts and selects/customizes the winning idea.
+4. **Build Planner Agent** (`lib/agents/hackathon/buildPlanner.ts`): Transforms the chosen concept into a structured implementation plan complete with architectural layers, database schema drafts, API route requirements, and milestone checklists.
+
+> [!NOTE]
+> Hackathon Project Generation is cleanly decoupled from Hackathon Discovery/Search, ensuring dedicated processing for project synthesis.
 
 ---
 
-## 📰 News System Flow
+## 4 → Job Intelligence Agent
+
+The **Job Intelligence Agent** is a bounded-autonomous agent that autonomously formulates query strategies, retrieves learner context, searches live job listings, analyzes job descriptions, calculates deterministic skill matches, identifies critical skill gaps, and ranks opportunities.
 
 ```mermaid
-flowchart TD
-    A([🕐 Cron Job Every 4h\nOR Manual Trigger]) --> B[GET /api/news/latest]
-    B --> C[fetchAndStoreNews]
-    C --> D{NEWS_URL\nconfigured?}
-    D -->|No| E[⚠️ Skip — Log Warning]
-    D -->|Yes| F[axios.get NewsAPI.org]
-    F --> G[Filter Invalid Articles\n title !== Removed]
-    G --> H[News.deleteMany all]
-    H --> I[News.insertMany formatted]
-    I --> J[(MongoDB News Collection)]
+graph TD
+    START["User Query / Job Request"] --> AGENT["Job Intelligence Agent Loop"]
+    
+    subgraph LOOP["AGENT REASONING LOOP (MAX 8 ITERATIONS)"]
+        REASON["Gemini Reasoning & Intent Analysis"]
+        TOOL_SEL["Tool Selection"]
+        EXEC["Tool Execution"]
+        OBSERVE["Observation & State Update"]
+        
+        REASON --> TOOL_SEL
+        TOOL_SEL --> EXEC
+        EXEC --> OBSERVE
+        OBSERVE --> REASON
+    end
 
-    K([👤 User Visits /technews]) --> L[GET /api/news?page=1&limit=11]
-    L --> J
-    J --> M[Return Paginated JSON\n+ Total Count]
-    M --> N[🎨 Dark Glassmorphism UI]
+    START --> LOOP
 
-    O([🔍 User Searches]) --> P[GET /api/news?q=keyword]
-    P --> J
+    subgraph TOOLS["AVAILABLE AGENT TOOLS"]
+        T1["get_learner_context"]
+        T2["search_jobs"]
+        T3["analyze_job_requirements"]
+        T4["calculate_skill_match"]
+        T5["identify_skill_gaps"]
+        T6["get_job_market_signals"]
+        T7["rank_job_matches"]
+        T8["save_job"]
+    end
 
-    Q([⚡ Demo Data Button]) --> R[POST /api/news/seed]
-    R --> J
-
-    style J fill:#0c1a0c,stroke:#22c55e,color:#fff
-    style N fill:#1e1b4b,stroke:#6366f1,color:#fff
+    EXEC --> TOOLS
+    LOOP --> STOP["Final Grounded Job Intelligence Output"]
 ```
+
+### Agent Tool Reference Table
+
+| Tool Name | Purpose | Execution Mechanism |
+| :--- | :--- | :--- |
+| `get_learner_context` | Retrieve grounded learner profile, active roadmaps, and assessment skill gaps | MCP Server / MongoDB Direct Builder |
+| `search_jobs` | Query live job postings from LinkedIn API with experience & location filters | External LinkedIn API |
+| `analyze_job_requirements` | Extract required skills, tools, and responsibilities from unstructured text | AI Reasoning |
+| `calculate_skill_match` | Compute exact skill overlap percentage using alias normalization | Deterministic Code |
+| `identify_skill_gaps` | Categorize skills into `STRONG`, `PARTIAL`, and `CRITICAL` gap severities | Deterministic Code |
+| `get_job_market_signals` | Compute keyword occurrence frequencies across analyzed job listings | Deterministic Code |
+| `rank_job_matches` | Sort opportunities using normalized composite match scoring | Deterministic Code |
+| `save_job` | Persist selected job opportunity to user profile (Requires `confirm: true`) | Controlled MongoDB Write |
+
+### Deterministic Computation vs. AI Reasoning
+
+To eliminate financial calculation errors and inaccurate rankings, Nexus cleanly divides responsibility:
+
+- **AI Reasoning**: Semantic goal interpretation, unstructured job requirement extraction, unstructured role summary.
+- **Deterministic Code**: Skill alias normalization (`React.js` = `React`, `NodeJS` = `Node.js`), percentage calculations, set operations, frequency counts, score sorting.
+
+### Untrusted Data Handling & Bounded Autonomy
+
+- **Prompt Injection Defense**: External job descriptions are wrapped in strict data delimiters and treated exclusively as untrusted data inputs.
+- **Iteration Bounds**: Hard-coded upper limit of `MAX_AGENT_ITERATIONS = 8` prevents infinite execution loops.
+- **Write Safety**: The `save_job` tool strictly rejects requests unless `confirm: true` is explicitly provided by the user.
+
+---
+
+## 5 → MCP + Context Architecture
+
+The Model Context Protocol (MCP) server layer standardizes context retrieval across AI agents, decoupling data fetching from LLM reasoning.
+
+```mermaid
+graph TD
+    subgraph CLIENTS["AI AGENTS & ENGINE"]
+        AGENT_JOB["Job Intelligence Agent"]
+        AGENT_ROADMAP["Roadmap Agent"]
+        AGENT_MENTOR["Zeno AI Mentor"]
+    end
+
+    subgraph CONTEXT_LAYER["MODEL CONTEXT PROTOCOL LAYER"]
+        MCP_REQ["Context Request Header (x-mcp-secret)"]
+        MCP_SERVER["MCP Context Server (mcp-servers/mentor-context)"]
+        DIRECT_FALLBACK["Direct MongoDB Context Builder"]
+    end
+
+    subgraph DATA_SOURCES["GROUNDED DATA SOURCES"]
+        DB_USER["User Profiles"]
+        DB_ASSESS["Assessment Scores"]
+        DB_ROADMAP["Active Roadmaps"]
+        DB_JOBS["Saved Job Market Data"]
+    end
+
+    CLIENTS --> MCP_REQ
+    MCP_REQ --> MCP_SERVER
+    MCP_SERVER -- "If HTTP 200 OK" --> DATA_SOURCES
+    MCP_SERVER -- "If Server Offline / Error" --> DIRECT_FALLBACK
+    DIRECT_FALLBACK --> DATA_SOURCES
+    DATA_SOURCES --> COMPILED["Sanitized Learner Context Object"]
+    COMPILED --> CLIENTS
+```
+
+### Architecture Specifications
+
+- **Protocol Design**: Server-side HTTP REST context endpoint inspired by MCP principles, running as an isolated service in `mcp-servers/mentor-context`.
+- **Context Provenance**: Provides structured data aggregation (skills, weak areas, active roadmaps, quiz history) with zero authentication tokens or private user secrets exposed to the AI model.
+- **Graceful Fallback**: If the MCP HTTP server is offline or unreachable, system tools automatically fall back to native in-memory MongoDB compilation (`buildLearnerContext`), ensuring 100% uptime for production deployments on serverless hosts like Vercel.
+
+---
+
+## 🧠 Learner Context Model
+
+The system compiles a unified graph representation of the learner's state:
+
+```mermaid
+graph TD
+    LEARNER["Learner Identity"]
+    
+    subgraph PROFILE["PROFILE DATA"]
+        EXP["Experience Level"]
+        CUR_SKILLS["Declared Skills"]
+        BIO["Developer Bio"]
+    end
+
+    subgraph LEARNING["LEARNING STATE"]
+        ACTIVE_RM["Active Roadmaps"]
+        COMPLETED_STEPS["Completed Milestones"]
+        PROGRESS["Overall Progress %"]
+    end
+
+    subgraph PERFORMANCE["PERFORMANCE TELEMETRY"]
+        CODING["Coding Arena Submissions"]
+        QUIZ["Quiz Scoring Breakdown"]
+        APTITUDE["Aptitude Test Scores"]
+        SPEECH["Speech Interview Analysis"]
+    end
+
+    subgraph SKILL_INTEL["SKILL INTELLIGENCE"]
+        STRENGTHS["Confirmed Strengths"]
+        WEAK["Identified Weak Areas"]
+        MISSING["Target Missing Skills"]
+    end
+
+    subgraph MARKET["MARKET SIGNALS"]
+        TARGET_ROLE["Target Job Role"]
+        DEMAND_SKILLS["Market Skill Frequencies"]
+    end
+
+    LEARNER --> PROFILE & LEARNING & PERFORMANCE & SKILL_INTEL & MARKET
+```
+
+> [!IMPORTANT]
+> Sensitive credentials (password hashes, NextAuth JWT secrets, API keys) are strictly filtered out during context sanitization and never enter AI prompts.
+
+---
+
+## 🤖 AI Agent Architecture
+
+| Agent Name | Role | Primary Intelligence Mechanism | File Path |
+| :--- | :--- | :--- | :--- |
+| **Job Intelligence Agent** | Bounded-autonomous job discovery & gap analysis | Multi-tool ReAct loop + deterministic matching | `lib/agents/jobIntelligence/jobIntelligenceAgent.ts` |
+| **Hackathon Analyzer Agent** | Hackathon brief & constraint parsing | Structuring & risk evaluation | `lib/agents/hackathon/hackathonAnalyzer.ts` |
+| **Idea Generator Agent** | Rapid project concept synthesis | Contextual creative synthesis | `lib/agents/hackathon/ideaGenerator.ts` |
+| **Build Planner Agent** | Technical architecture & milestone generation | Sequential task breakdown & blueprint generation | `lib/agents/hackathon/buildPlanner.ts` |
+| **Roadmap Generation Agent** | Employer-aligned curriculum synthesis | Grounded prompt generation + market signals | `app/api/roadmap/route.ts` |
+| **Zeno AI Mentor** | Real-time pair programming & career coaching | Context-aware prompt injection | `app/api/mentor/route.ts` |
+| **Assessment Analysis Agent** | Evaluation & skill gap identification | Multimodal scoring & telemetry aggregation | `lib/agents/self-assessment/assessment-analysis-agent.ts` |
+| **Coding Assessment Agent** | Automated code evaluation & critique | AST analysis & test case verification | `lib/agents/self-assessment/coding-agent.ts` |
+| **Speech Assessment Agent** | Verbal interview clarity & transcript scoring | Audio/text natural language evaluation | `lib/agents/self-assessment/speech-agent.ts` |
+| **Aptitude & Quiz Agents** | Technical question generation & validation | Domain-specific item generation | `lib/agents/self-assessment/aptitude-agent.ts` |
+
+> [!NOTE]
+> Application features such as **Tech News** and **Learners Community** operate as standard web modules with MongoDB persistence and are not classified as autonomous agents.
+
+---
+
+## 🔄 Continuous Learning Intelligence Loop
+
+```
+1. ASSESS ────────► Learner completes Coding, Quiz, Aptitude, or Speech tests
+2. MEASURE ───────► Mongoose aggregations update score telemetry in MongoDB
+3. ANALYZE ───────► Assessment agents categorize strong, weak, and missing skills
+4. IDENTIFY GAPS ─► Skill Gap Profile updates automatically
+5. LEARN ─────────► Learner requests grounded Adaptive Roadmap (User-Initiated)
+6. PRACTICE ──────► Learner solves targeted practice problems in weak areas
+7. BUILD ─────────► Learner constructs rapid prototypes in Hackathon Lab
+8. APPLY ─────────► Job Intelligence Agent matches learner to market roles
+9. MARKET SIGNALS ► Live LinkedIn job trends identify emerging skill requirements
+10. ADAPT ────────► Learner initiates roadmap update aligned with target role
+```
+
+*Note: Roadmap updates are explicitly user-initiated to maintain learner control over active study schedules.*
+
+---
+
+## 🔐 Security & Reliability
+
+- **Server-Side Authentication**: Protected routes and API endpoints enforce NextAuth session validation (`getServerSession`).
+- **Context Privacy**: Learner context sanitization (`sanitizeLearnerContext`) strips all credentials before sending context to AI models.
+- **MCP Protected Endpoints**: MCP context server requires `x-mcp-secret` header verification.
+- **Untrusted Input Protection**: External job description texts are delimited and treated as untrusted data inputs.
+- **Bounded Iteration Constraints**: Agent loops enforce hard stop conditions (`MAX_AGENT_ITERATIONS = 8`).
+- **Confirmation Guards**: Consequential state mutations require explicit `confirm: true` payload validation.
+- **High-Availability Fallbacks**: If primary Groq API models hit rate limits, system automatically falls back to OpenRouter API and Google Gemini API.
+
+---
+
+## ⚙️ Engineering Principles
+
+1. **01 — Context Before Generation**: AI generation is never performed on ungrounded prompts.
+2. **02 — AI for Reasoning, Code for Computation**: AI interprets semantics; deterministic code calculates scores and ranks data.
+3. **03 — Bounded Autonomy**: Autonomous agents operate within explicit tool sets and iteration limits.
+4. **04 — Human-in-the-Loop**: State-altering operations require user confirmation.
+5. **05 — Graceful Degradation**: System services gracefully fall back when optional context servers are unreachable.
+6. **06 — Modular Intelligence**: Agents are isolated into single-responsibility TS modules.
+7. **07 — Observable Execution**: Tool calls and agent iterations log structured telemetry for debugging.
+
+---
+
+## 🛠️ Technology Stack
+
+| Layer | Technologies Used |
+| :--- | :--- |
+| **Frontend Framework** | Next.js 16.2 (Turbopack), React 19, TypeScript 5 |
+| **Styling & Animation** | Vanilla CSS Design System, Tailwind CSS 3.4, Framer Motion 12, DaisyUI |
+| **State Management** | Zustand (Global client state), React Hooks |
+| **Backend & APIs** | Next.js App Router (Node.js runtime), FastAPI / Node HTTP (MCP Context Server) |
+| **Database & ORM** | MongoDB Atlas, Mongoose 8 ORM |
+| **Authentication** | NextAuth.js v4 (Google OAuth, GitHub OAuth, Credentials provider) |
+| **AI Providers** | Google Gemini (Gemini 2.5 Flash), Groq API (Llama 3.3 / GPT-OSS), OpenRouter API |
+| **External Integration** | LinkedIn Jobs API (Real-time job discovery), NewsAPI |
+| **Testing & Tooling** | TSX runner, Mongoose test integration suite, ESLint |
+
+---
+
+## 📊 Verified Implementation
+
+### Job Intelligence Agent Suite
+- **15 / 15 Integration Tests Passed** (`scripts/test_job_intelligence_agent.ts`)
+  - Authenticated user execution
+  - Unauthenticated access guard
+  - Context tool execution
+  - LinkedIn search integration
+  - Requirement extraction
+  - Skill alias normalization (`React.js` = `React`, `NodeJS` = `Node.js`)
+  - Skill gap categorization (`STRONG`, `PARTIAL`, `CRITICAL`)
+  - Multi-tool sequential execution
+  - Max iteration bound enforcement (≤ 8)
+  - API failure resilience
+  - Offline MCP fallback safety
+  - Empty job result handling
+  - Prompt injection resistance
+  - Active roadmap non-mutation guarantee
+  - Save job user confirmation guard
+
+### Baseline vs. MCP Controlled Research Experiment
+- **Controlled Benchmark** (`experiments/baseline_vs_mcp_report.md`): Evaluated across 5 controlled learner profiles comparing standard baseline prompts vs. MCP-grounded prompts using `gemini-flash-lite-latest`.
+  - **Overall Rule-Based Evaluation Score**: **`4.56` / `5.00`** (MCP Context) vs. **`3.71` / `5.00`** (Baseline) — representing an overall **`+22.9%`** automated rule-based evaluation increase.
+  - **Weak Skills Addressed**: 16/20 targeted (MCP) vs. 3/20 targeted (Baseline).
+  - **Redundant Steps**: 0 redundant modules generated in MCP context due to strength suppression rules.
+
+*Note: Reported scores reflect automated rule-based evaluation checks; formal human expert evaluation remains an ongoing validation milestone.*
 
 ---
 
 ## 🗂️ Project Structure
 
 ```
-code-to-carrer/
-│
-├── 📁 app/
-│   ├── 📁 (user)/                  # Protected user pages
-│   │   ├── 🏠 home/               # Dashboard
-│   │   ├── 🗺️ roadmaps/           # AI Roadmap view (step completion)
-│   │   ├── 🤖 AiMentor/           # Context-aware AI Chat Mentor
-│   │   ├── 🎤 interview/          # AI Interview Prep (NEW)
-│   │   ├── 🔍 code-reviewer/      # AI Code Reviewer
-│   │   ├── 📰 technews/           # Tech News (dark UI)
-│   │   ├── 💼 jobs/               # Job Search
-│   │   ├── 🧑‍🤝‍🧑 learners-community/ # Dev Community
-│   │   ├── 📚 learning-path/      # Learning path form (roadmap generator)
-│   │   └── 👤 profile/            # User Profile
-│   │
-│   ├── 📁 api/
-│   │   ├── 🔐 auth/               # NextAuth handlers
-│   │   ├── 📁 (user)/
-│   │   │   ├── 📰 news/           # GET (search+paginate)
-│   │   │   │   ├── latest/        # Trigger news fetch
-│   │   │   │   └── seed/          # Load demo data
-│   │   │   ├── 🗺️ roadmap/        # POST — Agent: job search → AI generation (UPGRADED)
-│   │   │   ├── 🗺️ roadmaps/       # GET/PATCH user roadmaps + step completion
-│   │   │   ├── 🤖 mentor/         # POST — Context-aware AI mentor chat (UPGRADED)
-│   │   │   ├── 🎤 interview/      # POST — AI interview question generation (NEW)
-│   │   │   ├── 🔍 code-reviewer/  # AI code review
-│   │   │   └── 🧑‍🤝‍🧑 community/    # Posts & votes
-│   │   ├── 💼 jobs/               # Job listings (LinkedIn Jobs API)
-│   │   └── 👤 user/               # User profile
-│   │
-│   ├── 🎨 globals.css
-│   └── 📐 layout.tsx
-│
-├── 📁 components/
-│   ├── 🎤 Interview/
-│   │   └── InterviewComponent.tsx # Full MCQ interview UI (NEW)
-│   ├── 📁 LearningMethod/         # Roadmap creation form
-│   ├── 📁 JobSearch/              # Job search UI
-│   └── ...other components
-│
-├── 📁 mcp-servers/                # Standalone MCP resource servers (NEW)
-│   └── mentor-context/
-│       ├── index.ts               # Express HTTP server on :3001
-│       ├── resources/
-│       │   └── userContext.ts     # Queries DB → student context JSON
-│       └── test.ts                # One-shot test script
-│
-├── 📁 models/                     # Mongoose schemas
-│   ├── user.model.ts
-│   ├── news.model.ts
-│   ├── roadmap.model.ts           # + completedSteps[] per user
-│   ├── chat.model.ts
-│   └── ...
-│
-├── 📁 lib/                        # Utility functions & prompts
-│   ├── geminiRoadmapPrompt.ts     # Updated: accepts relatedJobs[] context (UPGRADED)
-│   ├── geminiMentorPrompt.ts      # Updated: accepts contextPrefix param (UPGRADED)
-│   ├── geminiInterviewPrompt.ts   # NEW: MCQ interview question prompt
-│   ├── FetchAndStoreNews.tsx      # News cron fetcher
-│   └── auth.js                   # NextAuth config
-│
-├── 📁 config/
-│   └── db.config.ts               # MongoDB connection (cached)
-├── 📁 store/                      # Zustand stores
-├── 📁 types/                      # TypeScript types
-├── .env.local                     # 🔒 NEVER commit this
-├── .gitignore
-└── next.config.ts
+nexus-learning-engine/
+├── app/                              # Next.js App Router Pages & API Endpoints
+│   ├── api/                          # Serverless REST & Agent API Routes
+│   │   ├── auth/                     # NextAuth Authentication Handlers
+│   │   ├── hackathons/               # Hackathon Multi-Agent Endpoints
+│   │   ├── jobs/                     # Job Search & Bounded Agent Routes
+│   │   ├── mentor/                   # Zeno AI Mentor Endpoint
+│   │   ├── roadmap/                  # Adaptive Roadmap Generation Route
+│   │   └── self-assessment/          # Multimodal Assessment Evaluation Routes
+│   ├── dashboard/                    # Learner Identity & Progress Portal
+│   ├── hackathons/                   # Hackathon Agent Workspace UI
+│   ├── job-search/                   # Job Intelligence Portal UI
+│   ├── learning-path/                # Adaptive Roadmap View & Checklist
+│   └── self-assessment/              # Coding, Quiz, Aptitude & Speech Labs
+├── components/                       # Modular UI Components & Design System
+├── config/                           # Application & Database Configuration
+├── experiments/                      # Controlled Research Benchmark Reports
+│   ├── baseline_vs_mcp_report.md     # Research evaluation findings
+│   └── baseline_vs_mcp_results.json  # Raw evaluation dataset
+├── lib/                              # Core Architecture & Agent Engines
+│   ├── agents/                       # Isolated AI Agent Modules
+│   │   ├── hackathon/                # Analyzer, Ideator & Build Planner
+│   │   ├── jobIntelligence/          # Bounded Agent, Tools & Normalizer
+│   │   └── self-assessment/          # Coding, Speech, Quiz & Aptitude Agents
+│   ├── ai/                           # Provider Clients (Gemini, Groq, OpenRouter)
+│   ├── buildLearnerContext.ts        # Direct MongoDB Learner Context Builder
+│   └── dbConnect.ts                  # Database Connection Singleton
+├── mcp-servers/                      # Model Context Protocol Tier
+│   └── mentor-context/               # HTTP REST MCP Learner Context Service
+├── models/                           # Mongoose Database Schemas
+│   ├── user.model.ts                 # User Profile & Telemetry Schema
+│   ├── roadmap.model.ts              # Adaptive Roadmap Schema
+│   ├── codingAttempt.model.ts        # Coding Submission Analytics Schema
+│   └── quizAttempt.model.ts          # Quiz Performance Telemetry Schema
+├── scripts/                          # Automated Integration Test Suites
+│   ├── experiment_baseline_vs_mcp.ts # Benchmark Runner Script
+│   └── test_job_intelligence_agent.ts# 15-Point Agent Integration Suite
+└── public/                           # Static Web Assets & Progressive Web App Manifest
 ```
 
 ---
 
-## 🔌 API Reference
+## 🎬 End-to-End Demo
 
-### 🔐 Auth Routes
-
-| Method | Endpoint | Description | Auth Required |
-|--------|----------|-------------|:---:|
-| `POST` | `/api/auth/signup` | Register new user | ❌ |
-| `POST` | `/api/auth/login` | Email/password login | ❌ |
-| `GET` | `/api/auth/[...nextauth]` | OAuth callbacks | ❌ |
-
-### 📰 News Routes
-
-| Method | Endpoint | Query Params | Description |
-|--------|----------|-------------|-------------|
-| `GET` | `/api/news` | `?q=&page=&limit=&source=` | Fetch paginated news |
-| `GET` | `/api/news/latest` | — | Trigger fetch from NewsAPI |
-| `GET` | `/api/news/seed` | `?force=true` | Load demo articles |
-| `POST` | `/api/news/seed` | — | Force reseed demo data |
-
-### 🗺️ Roadmap Routes
-
-| Method | Endpoint | Body | Description |
-|--------|----------|------|-------------|
-| `POST` | `/api/roadmap` | `{skill, experience, learningPreference, expectedOutcome}` | **Agent:** searches LinkedIn jobs for skill → generates market-aligned roadmap |
-| `GET` | `/api/roadmaps` | — | Get user's saved roadmaps (populated) |
-| `PATCH` | `/api/roadmaps` | `{roadmapId, stepIndex, completed}` | Toggle step completion |
-
-### 🤖 AI Routes
-
-| Method | Endpoint | Body | Description |
-|--------|----------|------|-------------|
-| `POST` | `/api/mentor` | `{chatId, message}` | **Context-aware** AI mentor — reads user's roadmaps from DB before responding |
-| `POST` | `/api/code-reviewer` | `{code, language}` | AI code review |
-| `POST` | `/api/interview` | `{skill, difficulty, count?}` | Generate AI MCQ interview questions for a skill |
-
----
-
-## ⚙️ Environment Setup
-
-Create a `.env.local` file in the root directory:
-
-```env
-# ── Database ──────────────────────────────────
-MONGODB_URI=mongodb+srv://<user>:<password>@cluster.mongodb.net/?appName=Cluster0
-
-# ── App ───────────────────────────────────────
-NEXT_PUBLIC_API_URL=http://localhost:3000/api
-JWT_SECRET=your_super_secret_jwt_key_here
-NEXTAUTH_SECRET=your_nextauth_secret_here
-NEXTAUTH_URL=http://localhost:3000
-
-# ── Google Gemini AI ──────────────────────────
-# Free at: https://aistudio.google.com
-GEMINI_API_KEY=your_gemini_api_key_here
-
-# ── Google OAuth ──────────────────────────────
-# Get from: https://console.cloud.google.com
-GOOGLE_CLIENT_ID=your_google_client_id
-GOOGLE_CLIENT_SECRET=your_google_client_secret
-
-# ── GitHub OAuth ──────────────────────────────
-# Get from: https://github.com/settings/developers
-GITHUB_ID=your_github_client_id
-GITHUB_SECRET=your_github_client_secret
-
-# ── News API ──────────────────────────────────
-# Free key from: https://newsapi.org/register
-NEWS_URL=https://newsapi.org/v2/top-headlines?category=technology&language=en&pageSize=30&apiKey=YOUR_KEY
 ```
-
-> [!IMPORTANT]
-> Never commit `.env.local` to Git. It is already in `.gitignore`.
+1. LEARNER SIGNUP ──────► User authenticates via Google OAuth or Email
+2. INITIAL ASSESSMENT ──► Learner completes a coding challenge & quiz in Python
+3. TELEMETRY SYNTH ─────► System records score & identifies weak area: "SQL Joins"
+4. ADAPTIVE ROADMAP ────► Learner requests Full Stack roadmap. Engine queries LinkedIn API,
+                           suppresses known Python basics, and inserts targeted SQL module
+5. PROJECT BUILD ───────► Learner enters Hackathon Lab, gets AI architecture blueprint
+6. JOB INTELLIGENCE ────► Learner launches Job Intelligence Agent. Agent finds roles,
+                           calculates 85% match, highlights missing "Docker" skill,
+                           and prompts user before saving job to profile
+```
 
 ---
 
@@ -561,94 +637,88 @@ NEWS_URL=https://newsapi.org/v2/top-headlines?category=technology&language=en&pa
 
 ### Prerequisites
 
-- **Node.js** `>= 18.x`
-- **npm** or **yarn**
-- **MongoDB Atlas** account (free tier works)
-- **Google Gemini** API key (free at [aistudio.google.com](https://aistudio.google.com))
+- **Node.js**: `>= 18.18.0`
+- **npm**: `>= 9.x`
+- **MongoDB Atlas**: Active MongoDB connection URI
+- **Google Gemini API Key**: Free key from [Google AI Studio](https://aistudio.google.com)
 
-### Installation
+### Installation Steps
 
-```bash
-# 1. Clone the repository
-git clone https://github.com/yourusername/code-to-carrer.git
-cd code-to-carrer
+1. **Clone Repository & Install Dependencies**:
+   ```bash
+   git clone https://github.com/VishalDeep1377/nexus-learning-engine.git
+   cd nexus-learning-engine
+   npm install
+   ```
 
-# 2. Install dependencies
-npm install
+2. **Set Up Environment Variables**:
+   Create a `.env.local` file in the project root (see template below).
 
-# 3. Set up environment variables
-cp .env.example .env.local
-# Then edit .env.local with your actual values
+3. **Start Development Server**:
+   ```bash
+   npm run dev
+   ```
+   Open `http://localhost:3000` in your browser.
 
-# 4. Start the development server
-npm run dev
-```
+4. **Run Integration Test Suite**:
+   ```bash
+   npx tsx scripts/test_job_intelligence_agent.ts
+   ```
 
-Open [http://localhost:3000](http://localhost:3000) in your browser. 🎉
+---
 
-### Load Demo News Data
+## 🔑 Environment Variables
 
-Once the app is running, seed the news collection with demo articles:
+Create a `.env.local` file in the root directory:
 
-```bash
-# Using PowerShell
-Invoke-WebRequest -Uri "http://localhost:3000/api/news/seed" -Method POST
+```env
+# ── Database ──────────────────────────────────────────
+MONGODB_URI=mongodb+srv://<username>:<password>@cluster.mongodb.net/codetocareer
 
-# Or simply click the ⚡ "Demo Data" button on the /technews page
-```
+# ── Next.js Application ───────────────────────────────
+NEXT_PUBLIC_API_URL=http://localhost:3000/api
+JWT_SECRET=your_jwt_secret_key_here
+NEXTAUTH_SECRET=your_nextauth_secret_key_here
+NEXTAUTH_URL=http://localhost:3000
 
-### Optional: Run the Mentor-Context MCP Server
+# ── Primary AI Provider (Google Gemini) ───────────────
+GEMINI_API_KEY=your_google_gemini_api_key
 
-The AI Mentor reads context directly from the database (no extra server needed). The standalone MCP server in `mcp-servers/mentor-context/` is provided for integration with external MCP clients:
+# ── Secondary & Tertiary AI Providers (Optional) ──────
+GROQ_API_KEY=your_groq_api_key
+OPENROUTER_API_KEY=your_openrouter_api_key
 
-```bash
-# Install its dependencies (first time only)
-cd mcp-servers/mentor-context
-npm install
+# ── Authentication Providers ──────────────────────────
+GOOGLE_CLIENT_ID=your_google_client_id
+GOOGLE_CLIENT_SECRET=your_google_client_secret
+GITHUB_ID=your_github_client_id
+GITHUB_SECRET=your_github_client_secret
 
-# Start the resource server on port 3001
-npm start
-# → [mentor-context] Ready. Resource: resource://mentor/user_context/{userId}
+# ── External News API ─────────────────────────────────
+NEWS_URL=https://newsapi.org/v2/top-headlines?category=technology&language=en&pageSize=30&apiKey=your_news_api_key
 
-# Run the one-shot test (replace userId in test.ts first)
-npm test
+# ── MCP Context Server Configuration ─────────────────
+MCP_SERVER_URL=http://localhost:3001
+MCP_SERVER_SECRET=your_mcp_server_secret_key
 ```
 
 ---
 
-## 🤝 Contributing
+## 🔮 Future Roadmap
 
-Contributions are welcome! Here's how to get started:
-
-```mermaid
-gitGraph
-   commit id: "Fork repo"
-   branch feature/your-feature
-   checkout feature/your-feature
-   commit id: "Make changes"
-   commit id: "Add tests"
-   commit id: "Update docs"
-   checkout main
-   merge feature/your-feature id: "Pull Request ✅"
-```
-
-1. **Fork** the repository
-2. **Create** your feature branch: `git checkout -b feature/amazing-feature`
-3. **Commit** your changes: `git commit -m 'feat: add amazing feature'`
-4. **Push** to the branch: `git push origin feature/amazing-feature`
-5. **Open** a Pull Request
+- [ ] **Formal MCP Protocol Transport**: Upgrade HTTP REST context server to formal MCP JSON-RPC stdio / SSE transport.
+- [ ] **Human Expert Benchmark**: Conduct double-blind human career coach evaluation of baseline vs. MCP roadmaps.
+- [ ] **Automated GitHub Project Sync**: Automatically extract repository structure from learner's GitHub to auto-populate project telemetry.
+- [ ] **Multi-Modal Mock Interviews**: Integrate real-time WebRTC audio processing with instant transcript scoring.
 
 ---
 
-<div align="center">
+## 📜 License
 
-### 🌟 Star this repo if you found it helpful!
+Distributed under the MIT License. See `LICENSE` for details.
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,12,20&height=120&section=footer" width="100%"/>
+---
 
-**Built with ❤️ using Next.js, MongoDB & Google Gemini AI**
-
-[![Made with Next.js](https://img.shields.io/badge/Made%20with-Next.js-black?style=for-the-badge&logo=next.js)](https://nextjs.org)
-[![Powered by Gemini](https://img.shields.io/badge/Powered%20by-Google%20Gemini-4285F4?style=for-the-badge&logo=google)](https://ai.google.dev)
-
-</div>
+<p align="center">
+  <b>Nexus Learning Engine</b> • Bridging Learner Intelligence & Tech Career Success
+</p>

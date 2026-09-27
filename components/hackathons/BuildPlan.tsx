@@ -272,29 +272,28 @@ export default function BuildPlan({ tasks, totalDays, overview, onStatusChange }
                 initial={{ opacity: 0, x: -10 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.3, delay: i * 0.05 }}
-                className={`rounded-lg border p-3.5 transition-all duration-200 ${
+                onClick={() => {
+                  if (!onStatusChange) return;
+                  const next: TaskStatus = task.status === 'COMPLETED' ? 'TODO' : 'COMPLETED';
+                  onStatusChange(task.id, next);
+                }}
+                className={`rounded-lg border p-3.5 transition-all duration-200 cursor-pointer ${
                   task.status === 'COMPLETED'
-                    ? 'bg-green-600/5 border-green-700/20 opacity-70'
+                    ? 'bg-green-600/5 border-green-700/20 opacity-70 hover:opacity-100'
                     : task.status === 'IN_PROGRESS'
-                    ? 'bg-blue-600/10 border-blue-500/30'
+                    ? 'bg-blue-600/10 border-blue-500/30 hover:border-blue-400/50'
                     : task.status === 'BLOCKED'
-                    ? 'bg-red-600/10 border-red-500/30'
-                    : 'bg-slate-800/40 border-slate-700/40'
+                    ? 'bg-red-600/10 border-red-500/30 hover:border-red-400/50'
+                    : 'bg-slate-800/40 border-slate-700/40 hover:border-slate-600/60'
                 }`}
               >
                 <div className="flex items-start gap-3">
-                  <button
-                    onClick={() => {
-                      if (!onStatusChange) return;
-                      // Toggle directly from TODO/IN_PROGRESS to COMPLETED in one click
-                      const next: TaskStatus = task.status === 'COMPLETED' ? 'TODO' : 'COMPLETED';
-                      onStatusChange(task.id, next);
-                    }}
+                  <div
                     className="mt-0.5 shrink-0 hover:scale-110 transition-transform"
                     aria-label={`Toggle task: ${task.title}`}
                   >
                     {statusIcon[task.status]}
-                  </button>
+                  </div>
 
                   <div className="flex-1 min-w-0">
                     <div className="flex items-start justify-between gap-2">

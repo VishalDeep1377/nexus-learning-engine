@@ -1,0 +1,466 @@
+[
+  {
+    "caseId": "case-1",
+    "caseName": "Beginner Data Science Learner",
+    "baselineRoadmap": {
+      "roadmap": [
+        "Step 1: Master Python programming fundamentals focusing on data structures, loops, functions, and object-oriented programming.",
+        "Step 2: Learn essential SQL for data extraction and manipulation by practicing joins, aggregations, and subqueries.",
+        "Step 3: Build foundational knowledge in descriptive and inferential statistics, including probability, hypothesis testing, and distributions.",
+        "Step 4: Learn NumPy and Pandas for data manipulation, cleaning, and exploratory data analysis (EDA).",
+        "Step 5: Master data visualization libraries like Matplotlib and Seaborn to uncover patterns and present insights.",
+        "Step 6: Complete a practical EDA project analyzing a real healthcare dataset inspired by Insight Health.",
+        "Step 7: Learn the fundamentals of Supervised Machine Learning using Scikit-Learn (Linear Regression, Logistic Regression, Decision Trees).",
+        "Step 8: Explore Unsupervised Machine Learning techniques like K-Means clustering and Principal Component Analysis (PCA).",
+        "Step 9: Understand model evaluation metrics (Precision, Recall, ROC-AUC, F1-Score) and cross-validation techniques.",
+        "Step 10: Learn basic Git and GitHub for version control and building a professional portfolio.",
+        "Step 11: Complete an end-to-end predictive modeling project suitable for Analytics Co, from data ingestion to model tuning.",
+        "Step 12: Practice technical interview questions covering SQL, Python algorithms, and basic machine learning concepts."
+      ],
+      "resources": [
+        "https://www.kaggle.com",
+        "https://scikit-learn.org/stable/tutorial/index.html",
+        "https://pandas.pydata.org/docs/getting_started/index.html",
+        "https://www.datacamp.com",
+        "https://github.com",
+        "https://www.coursera.org",
+        "https://towardsdatascience.com"
+      ],
+      "rawText": "{\n  \"roadmap\": [\n    \"Step 1: Master Python programming fundamentals focusing on data structures, loops, functions, and object-oriented programming.\",\n    \"Step 2: Learn essential SQL for data extraction and manipulation by practicing joins, aggregations, and subqueries.\",\n    \"Step 3: Build foundational knowledge in descriptive and inferential statistics, including probability, hypothesis testing, and distributions.\",\n    \"Step 4: Learn NumPy and Pandas for data manipulation, cleaning, and exploratory data analysis (EDA).\",\n    \"Step 5: Master data visualization libraries like Matplotlib and Seaborn to uncover patterns and present insights.\",\n    \"Step 6: Complete a practical EDA project analyzing a real healthcare dataset inspired by Insight Health.\",\n    \"Step 7: Learn the fundamentals of Supervised Machine Learning using Scikit-Learn (Linear Regression, Logistic Regression, Decision Trees).\",\n    \"Step 8: Explore Unsupervised Machine Learning techniques like K-Means clustering and Principal Component Analysis (PCA).\",\n    \"Step 9: Understand model evaluation metrics (Precision, Recall, ROC-AUC, F1-Score) and cross-validation techniques.\",\n    \"Step 10: Learn basic Git and GitHub for version control and building a professional portfolio.\",\n    \"Step 11: Complete an end-to-end predictive modeling project suitable for Analytics Co, from data ingestion to model tuning.\",\n    \"Step 12: Practice technical interview questions covering SQL, Python algorithms, and basic machine learning concepts.\"\n  ],\n  \"resources\": [\n    \"https://www.kaggle.com\",\n    \"https://scikit-learn.org/stable/tutorial/index.html\",\n    \"https://pandas.pydata.org/docs/getting_started/index.html\",\n    \"https://www.datacamp.com\",\n    \"https://github.com\",\n    \"https://www.coursera.org\",\n    \"https://towardsdatascience.com\"\n  ]\n}"
+    },
+    "mcpRoadmap": {
+      "roadmap": [
+        "Step 1: Master SQL Fundamentals and Basic Queries (SELECT, WHERE, GROUP BY) to bridge assessment gaps.",
+        "Step 2: Learn Advanced Database Joins (INNER, LEFT, RIGHT, FULL OUTER) using real relational datasets.",
+        "Step 3: Complete a hands-on project querying a mock business database with complex multi-table joins.",
+        "Step 4: Master the Pandas library for data manipulation, cleaning, and exploratory data analysis (EDA).",
+        "Step 5: Learn Feature Engineering techniques to transform raw variables into predictive model inputs.",
+        "Step 6: Build a practical Pandas and Feature Engineering project using a real-world dataset from Kaggle.",
+        "Step 7: Study core Machine Learning Algorithms (Linear Regression, Logistic Regression, Decision Trees).",
+        "Step 8: Learn about Overfitting, Underfitting, regularization techniques, and cross-validation strategies.",
+        "Step 9: Implement supervised learning models using Scikit-learn for end-to-end predictive modeling.",
+        "Step 10: Build a complete end-to-end Machine Learning project applying SQL data extraction, Pandas engineering, and Scikit-learn modeling to become job-ready."
+      ],
+      "resources": [
+        "https://www.w3schools.com/sql/",
+        "https://pandas.pydata.org/docs/getting_started/index.html",
+        "https://scikit-learn.org/stable/tutorial/basic/tutorial.html",
+        "https://www.kaggle.com/learn/intro-to-sql",
+        "https://www.kaggle.com/learn/pandas",
+        "https://www.kaggle.com/learn/intro-to-machine-learning"
+      ],
+      "rawText": "{\n  \"roadmap\": [\n    \"Step 1: Master SQL Fundamentals and Basic Queries (SELECT, WHERE, GROUP BY) to bridge assessment gaps.\",\n    \"Step 2: Learn Advanced Database Joins (INNER, LEFT, RIGHT, FULL OUTER) using real relational datasets.\",\n    \"Step 3: Complete a hands-on project querying a mock business database with complex multi-table joins.\",\n    \"Step 4: Master the Pandas library for data manipulation, cleaning, and exploratory data analysis (EDA).\",\n    \"Step 5: Learn Feature Engineering techniques to transform raw variables into predictive model inputs.\",\n    \"Step 6: Build a practical Pandas and Feature Engineering project using a real-world dataset from Kaggle.\",\n    \"Step 7: Study core Machine Learning Algorithms (Linear Regression, Logistic Regression, Decision Trees).\",\n    \"Step 8: Learn about Overfitting, Underfitting, regularization techniques, and cross-validation strategies.\",\n    \"Step 9: Implement supervised learning models using Scikit-learn for end-to-end predictive modeling.\",\n    \"Step 10: Build a complete end-to-end Machine Learning project applying SQL data extraction, Pandas engineering, and Scikit-learn modeling to become job-ready.\"\n  ],\n  \"resources\": [\n    \"https://www.w3schools.com/sql/\",\n    \"https://pandas.pydata.org/docs/getting_started/index.html\",\n    \"https://scikit-learn.org/stable/tutorial/basic/tutorial.html\",\n    \"https://www.kaggle.com/learn/intro-to-sql\",\n    \"https://www.kaggle.com/learn/pandas\",\n    \"https://www.kaggle.com/learn/intro-to-machine-learning\"\n  ]\n}"
+    },
+    "blindAssignment": {
+      "roadmapA": "mcp",
+      "roadmapB": "baseline"
+    },
+    "baselineScores": {
+      "personalization": 2.5,
+      "skillGapAlignment": 1,
+      "jobMarketAlignment": 5,
+      "learningSequence": 4.5,
+      "practicalApplicability": 4.5,
+      "resourceRelevance": 4.8,
+      "careerGoalAlignment": 3.5
+    },
+    "mcpScores": {
+      "personalization": 5,
+      "skillGapAlignment": 4,
+      "jobMarketAlignment": 4.4,
+      "learningSequence": 4.5,
+      "practicalApplicability": 4.5,
+      "resourceRelevance": 4.8,
+      "careerGoalAlignment": 4.5
+    },
+    "baselineMetrics": {
+      "weakSkillsTotal": 4,
+      "weakSkillsAddressed": 0,
+      "marketSkillsTotal": 5,
+      "marketSkillsAddressed": 5,
+      "unnecessaryStrongRepetition": 0,
+      "careerRequirementsTotal": 1,
+      "careerRequirementsAddressed": 0
+    },
+    "mcpMetrics": {
+      "weakSkillsTotal": 4,
+      "weakSkillsAddressed": 3,
+      "marketSkillsTotal": 5,
+      "marketSkillsAddressed": 4,
+      "unnecessaryStrongRepetition": 0,
+      "careerRequirementsTotal": 1,
+      "careerRequirementsAddressed": 1
+    }
+  },
+  {
+    "caseId": "case-2",
+    "caseName": "Intermediate Data Science Learner",
+    "baselineRoadmap": {
+      "roadmap": [
+        "Step 1: Master advanced MLOps architectures and CI/CD pipelines for machine learning workflows.",
+        "Step 2: Implement model tracking and experiment management using MLflow or Weights & Biases.",
+        "Step 3: Containerize machine learning models using Docker for consistent deployment across environments.",
+        "Step 4: Orchestrate complex data pipelines and model training workflows using Apache Airflow or Kubeflow.",
+        "Step 5: Deploy machine learning models as scalable REST and gRPC APIs using FastAPI.",
+        "Step 6: Implement model serving at scale using Triton Inference Server or TorchServe.",
+        "Step 7: Set up robust model monitoring for data drift, concept drift, and performance degradation using Evidently AI.",
+        "Step 8: Implement feature stores like Feast to manage, store, and serve features consistently for training and inference.",
+        "Step 9: Master infrastructure as code (IaC) using Terraform to provision cloud ML infrastructure on AWS or GCP.",
+        "Step 10: Build automated retraining pipelines triggered by performance degradation or data drift detection.",
+        "Step 11: Implement security, governance, and model validation best practices in production AI systems.",
+        "Step 12: Design and execute a capstone project integrating end-to-end data ingestion, training, deployment, and monitoring."
+      ],
+      "resources": [
+        "https://mlflow.org/docs/latest/index.html",
+        "https://airflow.apache.org/docs/",
+        "https://fastapi.tiangolo.com/",
+        "https://www.evidentlyai.com/",
+        "https://feast.dev/",
+        "https://www.terraform.io/intro",
+        "https://hollischau.com/mlops-zoomcamp"
+      ],
+      "rawText": "{\n  \"roadmap\": [\n    \"Step 1: Master advanced MLOps architectures and CI/CD pipelines for machine learning workflows.\",\n    \"Step 2: Implement model tracking and experiment management using MLflow or Weights & Biases.\",\n    \"Step 3: Containerize machine learning models using Docker for consistent deployment across environments.\",\n    \"Step 4: Orchestrate complex data pipelines and model training workflows using Apache Airflow or Kubeflow.\",\n    \"Step 5: Deploy machine learning models as scalable REST and gRPC APIs using FastAPI.\",\n    \"Step 6: Implement model serving at scale using Triton Inference Server or TorchServe.\",\n    \"Step 7: Set up robust model monitoring for data drift, concept drift, and performance degradation using Evidently AI.\",\n    \"Step 8: Implement feature stores like Feast to manage, store, and serve features consistently for training and inference.\",\n    \"Step 9: Master infrastructure as code (IaC) using Terraform to provision cloud ML infrastructure on AWS or GCP.\",\n    \"Step 10: Build automated retraining pipelines triggered by performance degradation or data drift detection.\",\n    \"Step 11: Implement security, governance, and model validation best practices in production AI systems.\",\n    \"Step 12: Design and execute a capstone project integrating end-to-end data ingestion, training, deployment, and monitoring.\"\n  ],\n  \"resources\": [\n    \"https://mlflow.org/docs/latest/index.html\",\n    \"https://airflow.apache.org/docs/\",\n    \"https://fastapi.tiangolo.com/\",\n    \"https://www.evidentlyai.com/\",\n    \"https://feast.dev/\",\n    \"https://www.terraform.io/intro\",\n    \"https://hollischau.com/mlops-zoomcamp\"\n  ]\n}"
+    },
+    "mcpRoadmap": {
+      "roadmap": [
+        "Step 1: Master PyTorch Tensors and Autograd mechanics for deep learning foundations.",
+        "Step 2: Design and implement Deep Learning Architectures (CNNs/MLPs) using PyTorch.",
+        "Step 3: Integrate PyTorch models with your active 'Predictive Churn API' project.",
+        "Step 4: Build high-performance inference endpoints using FastAPI for model serving.",
+        "Step 5: Containerize the FastAPI and PyTorch churn prediction application using Docker.",
+        "Step 6: Implement robust Model Deployment strategies for cloud environments.",
+        "Step 7: Learn MLOps Pipeline principles for automating machine learning workflows.",
+        "Step 8: Set up CI/CD pipelines for ML models using GitHub Actions.",
+        "Step 9: Monitor model performance, drift, and logging in production.",
+        "Step 10: Finalize end-to-end Senior AI/Data Scientist portfolio project combining MLOps and Deep Learning."
+      ],
+      "resources": [
+        "https://pytorch.org/tutorials/",
+        "https://fastapi.tiangolo.com/",
+        "https://docs.docker.com/get-started/",
+        "https://fullstackdeeplearning.com/",
+        "https://madewithml.com/",
+        "https://huggingface.co/docs/transformers/index"
+      ],
+      "rawText": "{\n  \"roadmap\": [\n    \"Step 1: Master PyTorch Tensors and Autograd mechanics for deep learning foundations.\",\n    \"Step 2: Design and implement Deep Learning Architectures (CNNs/MLPs) using PyTorch.\",\n    \"Step 3: Integrate PyTorch models with your active 'Predictive Churn API' project.\",\n    \"Step 4: Build high-performance inference endpoints using FastAPI for model serving.\",\n    \"Step 5: Containerize the FastAPI and PyTorch churn prediction application using Docker.\",\n    \"Step 6: Implement robust Model Deployment strategies for cloud environments.\",\n    \"Step 7: Learn MLOps Pipeline principles for automating machine learning workflows.\",\n    \"Step 8: Set up CI/CD pipelines for ML models using GitHub Actions.\",\n    \"Step 9: Monitor model performance, drift, and logging in production.\",\n    \"Step 10: Finalize end-to-end Senior AI/Data Scientist portfolio project combining MLOps and Deep Learning.\"\n  ],\n  \"resources\": [\n    \"https://pytorch.org/tutorials/\",\n    \"https://fastapi.tiangolo.com/\",\n    \"https://docs.docker.com/get-started/\",\n    \"https://fullstackdeeplearning.com/\",\n    \"https://madewithml.com/\",\n    \"https://huggingface.co/docs/transformers/index\"\n  ]\n}"
+    },
+    "blindAssignment": {
+      "roadmapA": "mcp",
+      "roadmapB": "baseline"
+    },
+    "baselineScores": {
+      "personalization": 2.5,
+      "skillGapAlignment": 1,
+      "jobMarketAlignment": 4.3,
+      "learningSequence": 4.5,
+      "practicalApplicability": 4.5,
+      "resourceRelevance": 4.8,
+      "careerGoalAlignment": 3.5
+    },
+    "mcpScores": {
+      "personalization": 5,
+      "skillGapAlignment": 4,
+      "jobMarketAlignment": 4.3,
+      "learningSequence": 4.5,
+      "practicalApplicability": 4.5,
+      "resourceRelevance": 4.8,
+      "careerGoalAlignment": 3.5
+    },
+    "baselineMetrics": {
+      "weakSkillsTotal": 4,
+      "weakSkillsAddressed": 0,
+      "marketSkillsTotal": 4,
+      "marketSkillsAddressed": 3,
+      "unnecessaryStrongRepetition": 0,
+      "careerRequirementsTotal": 1,
+      "careerRequirementsAddressed": 0
+    },
+    "mcpMetrics": {
+      "weakSkillsTotal": 4,
+      "weakSkillsAddressed": 3,
+      "marketSkillsTotal": 4,
+      "marketSkillsAddressed": 3,
+      "unnecessaryStrongRepetition": 0,
+      "careerRequirementsTotal": 1,
+      "careerRequirementsAddressed": 0
+    }
+  },
+  {
+    "caseId": "case-3",
+    "caseName": "Strong Python but Weak SQL Learner",
+    "baselineRoadmap": {
+      "roadmap": [
+        "Step 1: Master advanced PostgreSQL execution plans and understand how to interpret EXPLAIN ANALYZE outputs for query bottlenecks.",
+        "Step 2: Learn indexing strategies including B-Trees, BRIN, GIN, and partial indexes to optimize heavy read workloads.",
+        "Step 3: Implement table partitioning and sharding techniques for managing multi-terabyte datasets efficiently.",
+        "Step 4: Study database locking mechanisms, transaction isolation levels, and how to resolve concurrency and deadlock issues.",
+        "Step 5: Design and optimize high-throughput batch and streaming data pipelines using Apache Spark and Delta Lake.",
+        "Step 6: Practice tuning shuffle operations, memory management, and garbage collection in distributed data processing frameworks.",
+        "Step 7: Implement robust data ingestion patterns using Apache Kafka for real-time streaming architectures.",
+        "Step 8: Build dimensional models (Star and Snowflake schemas) optimized for analytical query performance in cloud data warehouses.",
+        "Step 9: Master cloud-specific data warehousing features like Snowflake clustering keys or BigQuery partitioning and clustering.",
+        "Step 10: Set up comprehensive monitoring, logging, and alerting for data pipelines using Prometheus, Grafana, and Apache Airflow.",
+        "Step 11: Participate in mock technical interviews focusing on system design, database tuning, and pipeline failure recovery scenarios."
+      ],
+      "resources": [
+        "https://www.postgresql.org/docs/current/performance-tips.html",
+        "https://use-the-index-luke.com/",
+        "https://spark.apache.org/docs/latest/tuning.html",
+        "https://kafka.apache.org/documentation/",
+        "https://airflow.apache.org/docs/",
+        "https://www.udacity.com/course/data-engineer-nanodegree--nd027"
+      ],
+      "rawText": "{\n  \"roadmap\": [\n    \"Step 1: Master advanced PostgreSQL execution plans and understand how to interpret EXPLAIN ANALYZE outputs for query bottlenecks.\",\n    \"Step 2: Learn indexing strategies including B-Trees, BRIN, GIN, and partial indexes to optimize heavy read workloads.\",\n    \"Step 3: Implement table partitioning and sharding techniques for managing multi-terabyte datasets efficiently.\",\n    \"Step 4: Study database locking mechanisms, transaction isolation levels, and how to resolve concurrency and deadlock issues.\",\n    \"Step 5: Design and optimize high-throughput batch and streaming data pipelines using Apache Spark and Delta Lake.\",\n    \"Step 6: Practice tuning shuffle operations, memory management, and garbage collection in distributed data processing frameworks.\",\n    \"Step 7: Implement robust data ingestion patterns using Apache Kafka for real-time streaming architectures.\",\n    \"Step 8: Build dimensional models (Star and Snowflake schemas) optimized for analytical query performance in cloud data warehouses.\",\n    \"Step 9: Master cloud-specific data warehousing features like Snowflake clustering keys or BigQuery partitioning and clustering.\",\n    \"Step 10: Set up comprehensive monitoring, logging, and alerting for data pipelines using Prometheus, Grafana, and Apache Airflow.\",\n    \"Step 11: Participate in mock technical interviews focusing on system design, database tuning, and pipeline failure recovery scenarios.\"\n  ],\n  \"resources\": [\n    \"https://www.postgresql.org/docs/current/performance-tips.html\",\n    \"https://use-the-index-luke.com/\",\n    \"https://spark.apache.org/docs/latest/tuning.html\",\n    \"https://kafka.apache.org/documentation/\",\n    \"https://airflow.apache.org/docs/\",\n    \"https://www.udacity.com/course/data-engineer-nanodegree--nd027\"\n  ]\n}"
+    },
+    "mcpRoadmap": {
+      "roadmap": [
+        "Step 1: Master Relational Database Normalization and schema design principles to bridge foundational quiz gaps.",
+        "Step 2: Deep dive into Complex SQL Joins (INNER, LEFT, RIGHT, FULL OUTER, CROSS) with hands-on practice on multi-table schemas.",
+        "Step 3: Learn advanced SQL Aggregation and Window Functions (ROW_NUMBER(), RANK(), DENSE_RANK(), LAG(), LEAD()) for analytical queries.",
+        "Step 4: Set up and configure PostgreSQL for local development, focusing on execution plans (EXPLAIN and EXPLAIN ANALYZE).",
+        "Step 5: Practice hands-on Indexing & Query Optimization techniques, including B-Trees, Hash indexes, and composite indexes.",
+        "Step 6: Build data ingestion scripts in Python using Pandas and SQLAlchemy to load data into PostgreSQL databases.",
+        "Step 7: Integrate your existing FastAPI and Python skills to build a lightweight API-driven data validation and monitoring pipeline.",
+        "Step 8: Learn dbt (data build tool) fundamentals for modular SQL transformations and building reliable data models.",
+        "Step 9: Introduction to Apache Spark architecture, dataframes, and distributed computing concepts for large-scale data processing.",
+        "Step 10: Build an end-to-end data pipeline project extracting data via Python, transforming it with PostgreSQL and dbt, and optimizing slow queries.",
+        "Step 11: Conduct mock technical database interviews focusing on live SQL query tuning, schema design, and data pipeline troubleshooting."
+      ],
+      "resources": [
+        "https://www.postgresql.org/docs/current/tutorial-sql.html",
+        "https://www.db-fiddle.com/",
+        "https://www.getdbt.com/analytics-engineering/transformation-101",
+        "https://spark.apache.org/docs/latest/sql-getting-started.html",
+        "https://use-the-index-luke.com/",
+        "https://www.udacity.com/course/data-engineer-nanodegree--nd027"
+      ],
+      "rawText": "{\n  \"roadmap\": [\n    \"Step 1: Master Relational Database Normalization and schema design principles to bridge foundational quiz gaps.\",\n    \"Step 2: Deep dive into Complex SQL Joins (INNER, LEFT, RIGHT, FULL OUTER, CROSS) with hands-on practice on multi-table schemas.\",\n    \"Step 3: Learn advanced SQL Aggregation and Window Functions (ROW_NUMBER(), RANK(), DENSE_RANK(), LAG(), LEAD()) for analytical queries.\",\n    \"Step 4: Set up and configure PostgreSQL for local development, focusing on execution plans (EXPLAIN and EXPLAIN ANALYZE).\",\n    \"Step 5: Practice hands-on Indexing & Query Optimization techniques, including B-Trees, Hash indexes, and composite indexes.\",\n    \"Step 6: Build data ingestion scripts in Python using Pandas and SQLAlchemy to load data into PostgreSQL databases.\",\n    \"Step 7: Integrate your existing FastAPI and Python skills to build a lightweight API-driven data validation and monitoring pipeline.\",\n    \"Step 8: Learn dbt (data build tool) fundamentals for modular SQL transformations and building reliable data models.\",\n    \"Step 9: Introduction to Apache Spark architecture, dataframes, and distributed computing concepts for large-scale data processing.\",\n    \"Step 10: Build an end-to-end data pipeline project extracting data via Python, transforming it with PostgreSQL and dbt, and optimizing slow queries.\",\n    \"Step 11: Conduct mock technical database interviews focusing on live SQL query tuning, schema design, and data pipeline troubleshooting.\"\n  ],\n  \"resources\": [\n    \"https://www.postgresql.org/docs/current/tutorial-sql.html\",\n    \"https://www.db-fiddle.com/\",\n    \"https://www.getdbt.com/analytics-engineering/transformation-101\",\n    \"https://spark.apache.org/docs/latest/sql-getting-started.html\",\n    \"https://use-the-index-luke.com/\",\n    \"https://www.udacity.com/course/data-engineer-nanodegree--nd027\"\n  ]\n}"
+    },
+    "blindAssignment": {
+      "roadmapA": "mcp",
+      "roadmapB": "baseline"
+    },
+    "baselineScores": {
+      "personalization": 2.5,
+      "skillGapAlignment": 1,
+      "jobMarketAlignment": 3.5,
+      "learningSequence": 4.5,
+      "practicalApplicability": 4.5,
+      "resourceRelevance": 4.8,
+      "careerGoalAlignment": 4.5
+    },
+    "mcpScores": {
+      "personalization": 5,
+      "skillGapAlignment": 5,
+      "jobMarketAlignment": 4.3,
+      "learningSequence": 4.5,
+      "practicalApplicability": 4.5,
+      "resourceRelevance": 4.8,
+      "careerGoalAlignment": 4.5
+    },
+    "baselineMetrics": {
+      "weakSkillsTotal": 4,
+      "weakSkillsAddressed": 0,
+      "marketSkillsTotal": 4,
+      "marketSkillsAddressed": 2,
+      "unnecessaryStrongRepetition": 0,
+      "careerRequirementsTotal": 1,
+      "careerRequirementsAddressed": 1
+    },
+    "mcpMetrics": {
+      "weakSkillsTotal": 4,
+      "weakSkillsAddressed": 4,
+      "marketSkillsTotal": 4,
+      "marketSkillsAddressed": 3,
+      "unnecessaryStrongRepetition": 0,
+      "careerRequirementsTotal": 1,
+      "careerRequirementsAddressed": 1
+    }
+  },
+  {
+    "caseId": "case-4",
+    "caseName": "Strong Programming but Weak ML Learner",
+    "baselineRoadmap": {
+      "roadmap": [
+        "Step 1: Master multivariate calculus, matrix decompositions (SVD, Eigenvalue), and convex optimization techniques essential for training custom neural networks.",
+        "Step 2: Study probability distributions, maximum likelihood estimation (MLE), Bayesian inference, and Markov chains for probabilistic modeling.",
+        "Step 3: Implement foundational machine learning algorithms from scratch using pure NumPy, including linear regression, logistic regression, and support vector machines.",
+        "Step 4: Build a modular multi-layer perceptron (MLP) framework from scratch, implementing forward propagation, backpropagation, and custom activation functions.",
+        "Step 5: Design and code convolutional neural network (CNN) layers—such as convolution, pooling, and padding—from first principles.",
+        "Step 6: Study sequential data modeling by building Recurrent Neural Networks (RNNs), LSTMs, and GRUs from scratch to understand gradient flow and temporal dependencies.",
+        "Step 7: Deep dive into the Transformer architecture, implementing multi-head self-attention, positional encodings, and layer normalization entirely from scratch.",
+        "Step 8: Explore advanced optimization algorithms beyond SGD, such as Adam, RMSprop, and learning rate scheduling techniques, implementing them manually.",
+        "Step 9: Investigate generative modeling by building Variational Autoencoders (VAEs) and Generative Adversarial Networks (GANs) with custom loss functions.",
+        "Step 10: Study model compression, quantization, and pruning techniques to optimize custom architectures for deployment in production environments.",
+        "Step 11: Implement distributed training paradigms, data parallelism, and gradient accumulation strategies for scaling model training across multiple GPUs."
+      ],
+      "resources": [
+        "https://www.deeplearning.ai/",
+        "https://cs231n.stanford.edu/",
+        "https://web.stanford.edu/class/cs224n/",
+        "https://www.fast.ai/",
+        "https://github.com/karpathy/nn-zero-to-hero",
+        "https://d2l.ai/",
+        "https://www.jmlr.org/"
+      ],
+      "rawText": "{\n  \"roadmap\": [\n    \"Step 1: Master multivariate calculus, matrix decompositions (SVD, Eigenvalue), and convex optimization techniques essential for training custom neural networks.\",\n    \"Step 2: Study probability distributions, maximum likelihood estimation (MLE), Bayesian inference, and Markov chains for probabilistic modeling.\",\n    \"Step 3: Implement foundational machine learning algorithms from scratch using pure NumPy, including linear regression, logistic regression, and support vector machines.\",\n    \"Step 4: Build a modular multi-layer perceptron (MLP) framework from scratch, implementing forward propagation, backpropagation, and custom activation functions.\",\n    \"Step 5: Design and code convolutional neural network (CNN) layers—such as convolution, pooling, and padding—from first principles.\",\n    \"Step 6: Study sequential data modeling by building Recurrent Neural Networks (RNNs), LSTMs, and GRUs from scratch to understand gradient flow and temporal dependencies.\",\n    \"Step 7: Deep dive into the Transformer architecture, implementing multi-head self-attention, positional encodings, and layer normalization entirely from scratch.\",\n    \"Step 8: Explore advanced optimization algorithms beyond SGD, such as Adam, RMSprop, and learning rate scheduling techniques, implementing them manually.\",\n    \"Step 9: Investigate generative modeling by building Variational Autoencoders (VAEs) and Generative Adversarial Networks (GANs) with custom loss functions.\",\n    \"Step 10: Study model compression, quantization, and pruning techniques to optimize custom architectures for deployment in production environments.\",\n    \"Step 11: Implement distributed training paradigms, data parallelism, and gradient accumulation strategies for scaling model training across multiple GPUs.\"\n  ],\n  \"resources\": [\n    \"https://www.deeplearning.ai/\",\n    \"https://cs231n.stanford.edu/\",\n    \"https://web.stanford.edu/class/cs224n/\",\n    \"https://www.fast.ai/\",\n    \"https://github.com/karpathy/nn-zero-to-hero\",\n    \"https://d2l.ai/\",\n    \"https://www.jmlr.org/\"\n  ]\n}"
+    },
+    "mcpRoadmap": {
+      "roadmap": [
+        "Step 1: Master the mathematical foundations of gradient descent optimization, convex optimization, and partial derivatives.",
+        "Step 2: Derive and implement backpropagation math from scratch using multivariable calculus and matrix operations.",
+        "Step 3: Study advanced loss functions, cross-entropy, mean squared error, and regularization techniques to prevent overfitting.",
+        "Step 4: Architect and implement dense feedforward neural networks completely from scratch in C++, leveraging strong memory management and concurrency skills.",
+        "Step 5: Dive deep into Convolutional Neural Networks (CNNs), spatial convolutions, pooling layers, and receptive field mathematics.",
+        "Step 6: Transition to modern deep learning frameworks by learning PyTorch internals, tensor operations, and automatic differentiation (Autograd).",
+        "Step 7: Re-implement custom neural network layers and modules within the PyTorch framework.",
+        "Step 8: Study Transformer architecture foundations, self-attention mechanisms, and multi-head attention mathematics.",
+        "Step 9: Explore CUDA programming fundamentals and GPU acceleration strategies for deep learning workloads.",
+        "Step 10: Capstone Project - Build, train, and optimize a custom transformer-based model from scratch using PyTorch and custom C++/CUDA extensions."
+      ],
+      "resources": [
+        "https://cs23n.stanford.edu/",
+        "https://pytorch.org/tutorials/",
+        "https://d2l.ai/",
+        "https://github.com/karpathy/nn-zero-to-hero",
+        "https://www.deeplearningbook.org/",
+        "https://docs.nvidia.com/cuda/"
+      ],
+      "rawText": "{\n  \"roadmap\": [\n    \"Step 1: Master the mathematical foundations of gradient descent optimization, convex optimization, and partial derivatives.\",\n    \"Step 2: Derive and implement backpropagation math from scratch using multivariable calculus and matrix operations.\",\n    \"Step 3: Study advanced loss functions, cross-entropy, mean squared error, and regularization techniques to prevent overfitting.\",\n    \"Step 4: Architect and implement dense feedforward neural networks completely from scratch in C++, leveraging strong memory management and concurrency skills.\",\n    \"Step 5: Dive deep into Convolutional Neural Networks (CNNs), spatial convolutions, pooling layers, and receptive field mathematics.\",\n    \"Step 6: Transition to modern deep learning frameworks by learning PyTorch internals, tensor operations, and automatic differentiation (Autograd).\",\n    \"Step 7: Re-implement custom neural network layers and modules within the PyTorch framework.\",\n    \"Step 8: Study Transformer architecture foundations, self-attention mechanisms, and multi-head attention mathematics.\",\n    \"Step 9: Explore CUDA programming fundamentals and GPU acceleration strategies for deep learning workloads.\",\n    \"Step 10: Capstone Project - Build, train, and optimize a custom transformer-based model from scratch using PyTorch and custom C++/CUDA extensions.\"\n  ],\n  \"resources\": [\n    \"https://cs23n.stanford.edu/\",\n    \"https://pytorch.org/tutorials/\",\n    \"https://d2l.ai/\",\n    \"https://github.com/karpathy/nn-zero-to-hero\",\n    \"https://www.deeplearningbook.org/\",\n    \"https://docs.nvidia.com/cuda/\"\n  ]\n}"
+    },
+    "blindAssignment": {
+      "roadmapA": "baseline",
+      "roadmapB": "mcp"
+    },
+    "baselineScores": {
+      "personalization": 2.5,
+      "skillGapAlignment": 2,
+      "jobMarketAlignment": 2.8,
+      "learningSequence": 4.5,
+      "practicalApplicability": 4.5,
+      "resourceRelevance": 4.8,
+      "careerGoalAlignment": 4.5
+    },
+    "mcpScores": {
+      "personalization": 5,
+      "skillGapAlignment": 4,
+      "jobMarketAlignment": 5,
+      "learningSequence": 4.5,
+      "practicalApplicability": 4.5,
+      "resourceRelevance": 4.8,
+      "careerGoalAlignment": 4.5
+    },
+    "baselineMetrics": {
+      "weakSkillsTotal": 4,
+      "weakSkillsAddressed": 1,
+      "marketSkillsTotal": 4,
+      "marketSkillsAddressed": 1,
+      "unnecessaryStrongRepetition": 0,
+      "careerRequirementsTotal": 1,
+      "careerRequirementsAddressed": 1
+    },
+    "mcpMetrics": {
+      "weakSkillsTotal": 4,
+      "weakSkillsAddressed": 3,
+      "marketSkillsTotal": 4,
+      "marketSkillsAddressed": 4,
+      "unnecessaryStrongRepetition": 0,
+      "careerRequirementsTotal": 1,
+      "careerRequirementsAddressed": 1
+    }
+  },
+  {
+    "caseId": "case-5",
+    "caseName": "Learner with Completed Learning History",
+    "baselineRoadmap": {
+      "roadmap": [
+        "Step 1: Master advanced Node.js asynchronous patterns, clustering, and memory management for enterprise-scale backends.",
+        "Step 2: Build scalable RESTful and GraphQL APIs using Express.js or NestJS with strict input validation and security best practices.",
+        "Step 3: Implement robust data persistence layers with PostgreSQL, Prisma ORM, and Redis for high-throughput caching.",
+        "Step 4: Design and implement microservices architecture principles, including service discovery, API gateways, and inter-service communication.",
+        "Step 5: Master advanced Next.js 14+ concepts including App Router, Server Actions, Server Components, and Edge rendering.",
+        "Step 6: Implement comprehensive state management, performance optimization, and SEO strategies within Next.js frontends.",
+        "Step 7: Containerize backend and frontend services using multi-stage Dockerfiles optimized for production builds.",
+        "Step 8: Orchestrate multi-container environments locally and in the cloud using Docker Compose and Docker Swarm/Kubernetes basics.",
+        "Step 9: Implement robust CI/CD pipelines using GitHub Actions to automate testing, building, and deployment processes.",
+        "Step 10: Configure enterprise-grade logging, monitoring, and tracing using Prometheus, Grafana, and OpenTelemetry.",
+        "Step 11: Architect a comprehensive cloud deployment strategy on AWS or GCP utilizing managed databases, load balancers, and container registries.",
+        "Step 12: Implement zero-downtime deployment strategies, canary releases, and automated rollbacks for production microservices.",
+        "Step 13: Build and deploy the final capstone enterprise microservices application integrating all learned stack components."
+      ],
+      "resources": [
+        "https://nodejs.org/en/docs/guides",
+        "https://nextjs.org/docs",
+        "https://www.prisma.io/docs",
+        "https://docs.docker.com/get-started/",
+        "https://nestjs.com/",
+        "https://github.com/features/actions",
+        "https://prometheus.io/docs/introduction/overview/"
+      ],
+      "rawText": "{\n  \"roadmap\": [\n    \"Step 1: Master advanced Node.js asynchronous patterns, clustering, and memory management for enterprise-scale backends.\",\n    \"Step 2: Build scalable RESTful and GraphQL APIs using Express.js or NestJS with strict input validation and security best practices.\",\n    \"Step 3: Implement robust data persistence layers with PostgreSQL, Prisma ORM, and Redis for high-throughput caching.\",\n    \"Step 4: Design and implement microservices architecture principles, including service discovery, API gateways, and inter-service communication.\",\n    \"Step 5: Master advanced Next.js 14+ concepts including App Router, Server Actions, Server Components, and Edge rendering.\",\n    \"Step 6: Implement comprehensive state management, performance optimization, and SEO strategies within Next.js frontends.\",\n    \"Step 7: Containerize backend and frontend services using multi-stage Dockerfiles optimized for production builds.\",\n    \"Step 8: Orchestrate multi-container environments locally and in the cloud using Docker Compose and Docker Swarm/Kubernetes basics.\",\n    \"Step 9: Implement robust CI/CD pipelines using GitHub Actions to automate testing, building, and deployment processes.\",\n    \"Step 10: Configure enterprise-grade logging, monitoring, and tracing using Prometheus, Grafana, and OpenTelemetry.\",\n    \"Step 11: Architect a comprehensive cloud deployment strategy on AWS or GCP utilizing managed databases, load balancers, and container registries.\",\n    \"Step 12: Implement zero-downtime deployment strategies, canary releases, and automated rollbacks for production microservices.\",\n    \"Step 13: Build and deploy the final capstone enterprise microservices application integrating all learned stack components.\"\n  ],\n  \"resources\": [\n    \"https://nodejs.org/en/docs/guides\",\n    \"https://nextjs.org/docs\",\n    \"https://www.prisma.io/docs\",\n    \"https://docs.docker.com/get-started/\",\n    \"https://nestjs.com/\",\n    \"https://github.com/features/actions\",\n    \"https://prometheus.io/docs/introduction/overview/\"\n  ]\n}"
+    },
+    "mcpRoadmap": {
+      "roadmap": [
+        "Step 1: Master WebSockets and real-time bi-directional synchronization in Node.js using Socket.io to support live collaboration features.",
+        "Step 2: Learn Docker containerization fundamentals by writing multi-stage Dockerfiles for React, Next.js, and Node.js microservices.",
+        "Step 3: Implement Docker Compose for local orchestration of multi-container architectures involving Node.js APIs, MongoDB, and WebSockets.",
+        "Step 4: Study foundational Microservices Architecture principles, including service discovery, API gateways, and inter-service communication.",
+        "Step 5: Break down the monolithic backend into decoupled microservices handling authentication, real-time sync, and core data operations.",
+        "Step 6: Set up automated CI/CD pipelines using GitHub Actions to run tests and build container images automatically on push.",
+        "Step 7: Introduce Kubernetes fundamentals (Pods, Deployments, Services) to manage containerized workloads at scale.",
+        "Step 8: Deploy the enterprise microservices application to a cloud Kubernetes cluster (EKS or GKE) with proper ingress routing.",
+        "Step 9: Configure horizontal pod autoscaling and resource limits for production scaling and reliability.",
+        "Step 10: Build and deploy the final Enterprise Microservices App integrating React/Next.js frontend, WebSocket synchronization, and Kubernetes-orchestrated backends."
+      ],
+      "resources": [
+        "https://socket.io/docs/v4/",
+        "https://docs.docker.com/get-started/",
+        "https://kubernetes.io/docs/tutorials/hello-mini-kube/",
+        "https://docs.github.com/en/actions",
+        "https://www.udemy.com/course/microservices-with-node-js-and-react/",
+        "https://aws.amazon.com/kubernetes/"
+      ],
+      "rawText": "{\n  \"roadmap\": [\n    \"Step 1: Master WebSockets and real-time bi-directional synchronization in Node.js using Socket.io to support live collaboration features.\",\n    \"Step 2: Learn Docker containerization fundamentals by writing multi-stage Dockerfiles for React, Next.js, and Node.js microservices.\",\n    \"Step 3: Implement Docker Compose for local orchestration of multi-container architectures involving Node.js APIs, MongoDB, and WebSockets.\",\n    \"Step 4: Study foundational Microservices Architecture principles, including service discovery, API gateways, and inter-service communication.\",\n    \"Step 5: Break down the monolithic backend into decoupled microservices handling authentication, real-time sync, and core data operations.\",\n    \"Step 6: Set up automated CI/CD pipelines using GitHub Actions to run tests and build container images automatically on push.\",\n    \"Step 7: Introduce Kubernetes fundamentals (Pods, Deployments, Services) to manage containerized workloads at scale.\",\n    \"Step 8: Deploy the enterprise microservices application to a cloud Kubernetes cluster (EKS or GKE) with proper ingress routing.\",\n    \"Step 9: Configure horizontal pod autoscaling and resource limits for production scaling and reliability.\",\n    \"Step 10: Build and deploy the final Enterprise Microservices App integrating React/Next.js frontend, WebSocket synchronization, and Kubernetes-orchestrated backends.\"\n  ],\n  \"resources\": [\n    \"https://socket.io/docs/v4/\",\n    \"https://docs.docker.com/get-started/\",\n    \"https://kubernetes.io/docs/tutorials/hello-mini-kube/\",\n    \"https://docs.github.com/en/actions\",\n    \"https://www.udemy.com/course/microservices-with-node-js-and-react/\",\n    \"https://aws.amazon.com/kubernetes/\"\n  ]\n}"
+    },
+    "blindAssignment": {
+      "roadmapA": "mcp",
+      "roadmapB": "baseline"
+    },
+    "baselineScores": {
+      "personalization": 2.5,
+      "skillGapAlignment": 3,
+      "jobMarketAlignment": 4.4,
+      "learningSequence": 4.5,
+      "practicalApplicability": 4.5,
+      "resourceRelevance": 4.8,
+      "careerGoalAlignment": 4.5
+    },
+    "mcpScores": {
+      "personalization": 5,
+      "skillGapAlignment": 4,
+      "jobMarketAlignment": 5,
+      "learningSequence": 4.5,
+      "practicalApplicability": 4.5,
+      "resourceRelevance": 4.8,
+      "careerGoalAlignment": 4.5
+    },
+    "baselineMetrics": {
+      "weakSkillsTotal": 4,
+      "weakSkillsAddressed": 2,
+      "marketSkillsTotal": 5,
+      "marketSkillsAddressed": 4,
+      "unnecessaryStrongRepetition": 0,
+      "careerRequirementsTotal": 2,
+      "careerRequirementsAddressed": 1
+    },
+    "mcpMetrics": {
+      "weakSkillsTotal": 4,
+      "weakSkillsAddressed": 3,
+      "marketSkillsTotal": 5,
+      "marketSkillsAddressed": 5,
+      "unnecessaryStrongRepetition": 0,
+      "careerRequirementsTotal": 2,
+      "careerRequirementsAddressed": 1
+    }
+  }
+]

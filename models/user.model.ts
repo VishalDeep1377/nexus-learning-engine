@@ -33,6 +33,36 @@ export interface IUser {
     highest: number;
     lastActiveDate?: Date;
   };
+  // --- Adaptive Roadmap Trigger ---
+  skillSnapshot?: {
+    strengths: string[];
+    weakAreas: string[];
+    missingSkills: string[];
+    priorityAreas: string[];
+    timestamp?: Date;
+  };
+  adaptationNotice?: {
+    adaptationRequired: boolean;
+    reason: string;
+    improvedSkills: string[];
+    newWeakSkills: string[];
+    resolvedWeakSkills: string[];
+    newMissingSkills: string[];
+    changedPriorityAreas: string[];
+    timestamp?: Date;
+    dismissed?: boolean;
+  };
+  jobSearchCount?: number;
+  savedJobs?: {
+    jobId: string;
+    title: string;
+    company: string;
+    location: string;
+    jobUrl?: string;
+    salary?: string;
+    postedAgo?: string;
+    savedAt?: Date;
+  }[];
 }
 
 // Define the user schema
@@ -101,6 +131,39 @@ const userSchema = new mongoose.Schema<IUser>(
     highest: { type: Number, default: 0 },
     lastActiveDate: { type: Date },
   },
+  // --- Adaptive Roadmap Trigger ---
+  skillSnapshot: {
+    strengths: [{ type: String }],
+    weakAreas: [{ type: String }],
+    missingSkills: [{ type: String }],
+    priorityAreas: [{ type: String }],
+    timestamp: { type: Date, default: Date.now },
+  },
+  adaptationNotice: {
+    adaptationRequired: { type: Boolean, default: false },
+    reason: { type: String, default: "" },
+    improvedSkills: [{ type: String }],
+    newWeakSkills: [{ type: String }],
+    resolvedWeakSkills: [{ type: String }],
+    newMissingSkills: [{ type: String }],
+    changedPriorityAreas: [{ type: String }],
+    timestamp: { type: Date, default: Date.now },
+    dismissed: { type: Boolean, default: false },
+  },
+  // --- Job Agent Limits & Saved Jobs ---
+  jobSearchCount: { type: Number, default: 0 },
+  savedJobs: [
+    {
+      jobId: { type: String, required: true },
+      title: { type: String, required: true },
+      company: { type: String, required: true },
+      location: { type: String, required: true },
+      jobUrl: { type: String },
+      salary: { type: String },
+      postedAgo: { type: String },
+      savedAt: { type: Date, default: Date.now },
+    },
+  ],
   },
   {
     timestamps: true,

@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "mcp:dev": "npm --prefix mcp-servers/mentor-context run start",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"

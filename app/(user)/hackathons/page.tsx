@@ -573,6 +573,16 @@ export default function HackathonLabPage() {
                 tasks={buildPlan.tasks}
                 totalDays={buildPlan.totalDays}
                 overview={buildPlan.overview}
+                onStatusChange={(taskId, status) => {
+                  setBuildPlan((prev) =>
+                    prev
+                      ? {
+                          ...prev,
+                          tasks: prev.tasks.map((t) => (t.id === taskId ? { ...t, status } : t)),
+                        }
+                      : prev
+                  );
+                }}
               />
 
               <div className="flex flex-wrap gap-3 pt-2 border-t border-slate-700/40">

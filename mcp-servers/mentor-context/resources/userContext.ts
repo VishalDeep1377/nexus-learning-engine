@@ -1,128 +1,149 @@
+/**
+ * mcp-servers/mentor-context/resources/userContext.ts
+ *
+ * Thin wrapper that delegates to the shared buildLearnerContext function.
+ * This keeps the MCP resource handler clean and avoids duplicating
+ * the MongoDB aggregation logic that already exists.
+ */
+
 import mongoose from "mongoose";
+import { buildLearnerContext, CareerParams, JobContext, SkillSignal } from "../lib/buildLearnerContext.js";
 
-// ── Minimal inline schemas (avoids importing from main Next.js project
-//    which uses @/ path aliases incompatible with a standalone Node process) ──
+// ── MCP Response Types ────────────────────────────────────────────────────────
 
-const roadmapSchema = new mongoose.Schema({
-  title: String,
-  steps: [String],
-  resources: [String],
-  completedSteps: [
-    {
-      userId: mongoose.Schema.Types.ObjectId,
-      stepIndices: [Number],
+export interface MCPContextRequest {
+  userId: string;
+  careerParams?: Partial<CareerParams>;
+  jobData?: JobContext[];
+  topSkills?: SkillSignal[];
+}
+
+export interface MCPContextResponse {
+  source: "mcp";
+  available: boolean;
+  contextVersion: "1.0";
+  generatedAt: string;
+  context: Record<string, any>;
+}
+
+// ── Safe empty response returned on any error ─────────────────────────────────
+function emptyMCPResponse(userId: string): MCPContextResponse {
+  return {
+    source: "mcp",
+    available: true,
+    contextVersion: "1.0",
+    generatedAt: new Date().toISOString(),
+    context: {
+      profile: { userId, name: "", experienceLevel: "", currentSkills: [] },
+      learning: { activeRoadmapTitles: [], totalCompletedSteps: 0, completedTopics: [] },
+      performance: { coding: undefined, quiz: undefined, aptitude: undefined, speech: undefined },
+      skillGap: { strengths: [], weakAreas: [], missingSkills: [] },
+      career: { skill: "", experience: "", learningPreference: "", expectedOutcome: "" },
+      projects: { activeHackathonProjects: [] },
+      jobMarket: undefined,
+      summary: {
+        currentLevel: "",
+        targetRole: "",
+        strongSkills: [],
+        weakSkills: [],
+        topMarketSkills: [],
+        priorityAreas: [],
+      },
     },
-  ],
-}, { timestamps: true });
+  };
+}
 
-const userSchema = new mongoose.Schema({
-  name: String,
-  email: String,
-  roadmaps: [{ type: mongoose.Schema.Types.ObjectId, ref: "Roadmap" }],
-}, { timestamps: true });
+// ── Ensure MongoDB is connected ───────────────────────────────────────────────
+async function ensureConnected(): Promise<void> {
+  if (mongoose.connection.readyState === 1) return; // already connected
 
-// Avoid "Cannot overwrite model once compiled" in long-running process
-const RoadmapModel =
-  mongoose.models.Roadmap || mongoose.model("Roadmap", roadmapSchema);
-const UserModel =
-  mongoose.models.User || mongoose.model("User", userSchema);
+  const uri = process.env.MONGODB_URI;
+  if (!uri) throw new Error("[mentor-context] MONGODB_URI environment variable is not set");
 
-// ── Structured context shape returned by this resource ──────────────────────
+  await mongoose.connect(uri, { bufferCommands: false, maxPoolSize: 5 });
+  console.log("[mentor-context] MongoDB connected");
+}
+
+// ── Main context handler ──────────────────────────────────────────────────────
+
+/**
+ * Build and return the full MCP context response for a user.
+ * Never throws — returns a safe empty context on any error.
+ */
+export async function getUserMCPContext(request: MCPContextRequest): Promise<MCPContextResponse> {
+  const { userId, careerParams, jobData = [], topSkills = [] } = request;
+
+  try {
+    // Validate userId format
+    if (!userId || !mongoose.Types.ObjectId.isValid(userId)) {
+      console.warn("[mentor-context] Invalid or missing userId:", userId);
+      return emptyMCPResponse(userId ?? "unknown");
+    }
+
+    await ensureConnected();
+
+    const career: CareerParams = {
+      skill: careerParams?.skill ?? "",
+      experience: careerParams?.experience ?? "",
+      learningPreference: careerParams?.learningPreference ?? "",
+      expectedOutcome: careerParams?.expectedOutcome ?? "",
+    };
+
+    const context = await buildLearnerContext(userId, career, jobData, topSkills);
+
+    return {
+      source: "mcp",
+      available: true,
+      contextVersion: "1.0",
+      generatedAt: new Date().toISOString(),
+      context,
+    };
+  } catch (err) {
+    // Never crash the roadmap request due to context fetch failure
+    console.error("[mentor-context] getUserMCPContext error:", err);
+    return emptyMCPResponse(userId ?? "unknown");
+  }
+}
+
+// ── Legacy: keep backward-compatible getUserContext for existing /resource use ─
+
 export interface UserContextResult {
   userId: string;
   studentName: string;
   hasRoadmap: boolean;
   targetRoles: string[];
   currentWeakAreas: string[];
-  latestInterview: {
-    weakArea: string;
-    executionSucceeded: boolean;
-    timeComplexity: string;
-    spaceComplexity: string;
-    finalFeedback: string;
-    completedAt: string;
-  } | null;
+  latestInterview: null;
 }
 
-// ── Safe empty fallback returned on any DB error ─────────────────────────────
-const EMPTY_CONTEXT = (userId: string): UserContextResult => ({
-  userId,
-  studentName: "",
-  hasRoadmap: false,
-  targetRoles: [],
-  currentWeakAreas: [],
-  latestInterview: null,
-});
-
-// ── Best-effort: infer weak areas from roadmap steps ─────────────────────────
-// Assumption: "weak areas" aren't stored as a separate field on the roadmap.
-// We treat the first 2 foundational steps as current weak areas, since they
-// represent the most basic topics the student is still working through.
-function inferWeakAreas(steps: string[]): string[] {
-  if (!steps || steps.length === 0) return [];
-
-  const foundationalKeywords = [
-    "basic", "beginner", "intro", "introduction", "fundamentals",
-    "foundation", "setup", "install", "overview", "concepts",
-  ];
-
-  const foundational = steps.filter((step) =>
-    foundationalKeywords.some((kw) => step.toLowerCase().includes(kw))
-  );
-
-  // Fall back to first 2 steps if no keyword matches
-  return foundational.length > 0
-    ? foundational.slice(0, 3)
-    : steps.slice(0, 2);
-}
-
-// ── Main resource handler ─────────────────────────────────────────────────────
 export async function getUserContext(userId: string): Promise<UserContextResult> {
   try {
-    // Connect if not already connected (this server manages its own connection)
-    if (mongoose.connection.readyState === 0) {
-      const uri = process.env.MONGODB_URI;
-      if (!uri) throw new Error("MONGODB_URI not set");
-      await mongoose.connect(uri, { bufferCommands: false, maxPoolSize: 5 });
-    }
+    await ensureConnected();
 
-    const user = await UserModel.findById(userId)
-      .populate<{ roadmaps: any[] }>("roadmaps")
-      .lean();
-
-    if (!user) return EMPTY_CONTEXT(userId);
-
-    const roadmaps: any[] = user.roadmaps ?? [];
-
-    if (roadmaps.length === 0) {
-      return {
-        ...EMPTY_CONTEXT(userId),
-        studentName: user.name ?? "",
-      };
-    }
-
-    // Use the most recently created roadmap (last in array = most recent)
-    const latestRoadmap = roadmaps[roadmaps.length - 1];
-    const targetRoles: string[] = roadmaps
-      .map((r: any) => r.title)
-      .filter(Boolean);
-    const weakAreas = inferWeakAreas(latestRoadmap?.steps ?? []);
-
-    // latestInterview: null until interviewSession.model.ts is built
-    // (placeholder — wire in by querying InterviewSession.findOne({ userId }).sort({ createdAt: -1 }))
-    const latestInterview = null;
+    const context = await buildLearnerContext(
+      userId,
+      { skill: "", experience: "", learningPreference: "", expectedOutcome: "" },
+      [],
+      []
+    );
 
     return {
       userId,
-      studentName: user.name ?? "",
-      hasRoadmap: true,
-      targetRoles,
-      currentWeakAreas: weakAreas,
-      latestInterview,
+      studentName: context.profile?.name ?? "",
+      hasRoadmap: (context.learning?.activeRoadmapTitles ?? []).length > 0,
+      targetRoles: context.learning?.activeRoadmapTitles ?? [],
+      currentWeakAreas: context.skillGap?.weakAreas ?? [],
+      latestInterview: null,
     };
   } catch (err) {
-    // Never throw from here — mentor chat must never break due to context fetch
     console.error("[mentor-context] getUserContext error:", err);
-    return EMPTY_CONTEXT(userId);
+    return {
+      userId,
+      studentName: "",
+      hasRoadmap: false,
+      targetRoles: [],
+      currentWeakAreas: [],
+      latestInterview: null,
+    };
   }
 }

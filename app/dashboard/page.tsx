@@ -4,12 +4,13 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence, Variants } from 'framer-motion';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
+import toast from 'react-hot-toast';
 import {
   User, BookOpen, Brain, Trophy, Zap, MessageSquare,
   HelpCircle, MessageCircle, Github, Linkedin, ArrowRight,
   BarChart3, Code2, Mic, ClipboardList, Sparkles, Target,
   TrendingUp, Clock, CheckCircle2, Circle, ChevronRight,
-  MapPin, ExternalLink, Plus, Loader2
+  MapPin, ExternalLink, Plus, Loader2, Bookmark, Briefcase, Trash2
 } from 'lucide-react';
 
 // Lazy-load the canvas component so it doesn't block SSR
@@ -27,6 +28,9 @@ interface DashboardData {
   telemetry: { aptitude: number | null; speech: number | null; coding: number | null; quiz: number | null };
   hackathon: { id: string; title: string; status: string; progress: number; totalTasks: number; completedTasks: number } | null;
   recentPosts: { id: string; title: string; description: string; tags: string[]; authorName: string; authorImage?: string; status: string; createdAt: string }[];
+  savedJobs?: { jobId: string; title: string; company: string; location: string; jobUrl?: string; salary?: string; postedAgo?: string }[];
+  jobSearchCount?: number;
+  remainingSearches?: number;
 }
 
 // ─── Animation Variants ───────────────────────────────────────────────────────
@@ -124,6 +128,30 @@ export default function DashboardPage() {
       .then(d => { setData(d); setLoading(false); })
       .catch(() => setLoading(false));
   }, []);
+
+  const handleUnsaveJob = async (jobId: string, title: string, company: string) => {
+    try {
+      const res = await fetch('/api/jobs/save', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ jobId, title, company }),
+      });
+      const resData = await res.json();
+      if (resData.success) {
+        toast.success('Opportunity removed from saved jobs');
+        setData((prev) =>
+          prev
+            ? {
+                ...prev,
+                savedJobs: (prev.savedJobs || []).filter((j) => j.jobId !== jobId),
+              }
+            : prev
+        );
+      }
+    } catch (err) {
+      console.error('Error unsaving job from dashboard:', err);
+    }
+  };
 
   const greeting = () => {
     const h = new Date().getHours();
@@ -258,11 +286,11 @@ export default function DashboardPage() {
                   </div>
 
                   {/* Stats row */}
-                  <div className="flex gap-6 shrink-0 border-l border-white/5 pl-6">
+                  <div className="flex flex-wrap gap-4 shrink-0 border-l border-white/5 pl-6">
                     <StatPill icon={BookOpen} label="Roadmaps" value={data.user.roadmapCount} color="bg-indigo-600" />
                     <StatPill icon={MessageSquare} label="Chats" value={data.user.chatCount} color="bg-violet-600" />
+                    <StatPill icon={Bookmark} label="Saved Jobs" value={data.savedJobs?.length || 0} color="bg-amber-600" />
                     <StatPill icon={HelpCircle} label="Questions" value={data.user.questionsAsked} color="bg-cyan-600" />
-                    <StatPill icon={MessageCircle} label="Answers" value={data.user.answersGiven} color="bg-emerald-600" />
                   </div>
 
                   {/* CTAs */}
@@ -510,6 +538,70 @@ export default function DashboardPage() {
                   </Link>
                 </GlassCard>
               </div>
+
+              {/* ══════════════════════════════════════════
+                  ROW 4: Saved Jobs Opportunities
+                ══════════════════════════════════════════ */}
+              <GlassCard>
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center gap-2">
+                    <div className="w-8 h-8 rounded-lg bg-amber-600/20 flex items-center justify-center">
+                      <Bookmark className="w-4 h-4 text-amber-400" />
+                    </div>
+                    <div>
+                      <span className="text-xs font-bold uppercase tracking-widest text-slate-500 block">Saved Opportunities</span>
+                      <span className="text-[10px] text-slate-400 font-semibold">Bookmarked from Job Intelligence Agent</span>
+                    </div>
+                  </div>
+                  <Link href="/job-search" className="text-amber-400 hover:text-amber-300 transition-colors text-xs flex items-center gap-1 font-semibold">
+                    Find More Jobs ({data.remainingSearches ?? 3}/3 Searches Left) <ChevronRight className="w-3.5 h-3.5" />
+                  </Link>
+                </div>
+
+                {data.savedJobs && data.savedJobs.length > 0 ? (
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    {data.savedJobs.map((job) => (
+                      <div key={job.jobId} className="p-4 rounded-xl bg-white/[0.025] border border-white/[0.07] hover:border-amber-500/30 transition-all flex flex-col justify-between">
+                        <div>
+                          <div className="flex items-start justify-between gap-2 mb-1">
+                            <h4 className="font-bold text-white text-sm line-clamp-1">{job.title}</h4>
+                            <div className="flex items-center gap-1.5 shrink-0">
+                              <span className="text-[10px] px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-300 border border-amber-500/20">Saved</span>
+                              <button
+                                onClick={() => handleUnsaveJob(job.jobId, job.title, job.company)}
+                                className="p-1 rounded-lg bg-white/5 hover:bg-rose-500/20 text-slate-400 hover:text-rose-400 transition-colors"
+                                title="Remove saved opportunity"
+                              >
+                                <Trash2 className="w-3.5 h-3.5" />
+                              </button>
+                            </div>
+                          </div>
+                          <p className="text-xs text-slate-400 mb-3">{job.company} • {job.location}</p>
+                        </div>
+                        <div className="flex items-center justify-between pt-2 border-t border-white/5 mt-2">
+                          <span className="text-[11px] text-slate-500">{job.salary || job.postedAgo || 'Full-time'}</span>
+                          <a
+                            href={job.jobUrl || '#'}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-xs font-bold text-amber-400 hover:text-amber-300 flex items-center gap-1"
+                          >
+                            Apply <ExternalLink className="w-3 h-3" />
+                          </a>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="flex flex-col items-center justify-center py-6 gap-2 text-center">
+                    <Briefcase className="w-8 h-8 text-slate-600" />
+                    <p className="text-xs text-slate-400 font-medium">No saved jobs yet. Run the Job Intelligence Agent to bookmark opportunities!</p>
+                    <Link href="/job-search" className="mt-1 px-4 py-2 rounded-xl bg-amber-500/20 border border-amber-500/30 text-amber-300 font-bold text-xs hover:bg-amber-500/30 transition-all flex items-center gap-1.5">
+                      <Target className="w-3.5 h-3.5" /> Search Jobs Now
+                    </Link>
+                  </div>
+                )}
+              </GlassCard>
 
             </motion.div>
           ) : (

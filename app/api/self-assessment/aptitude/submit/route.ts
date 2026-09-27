@@ -6,9 +6,11 @@ import { connectDb } from '@/config/db.config';
 import AptitudeAttempt from '@/models/aptitudeAttempt.model';
 import mongoose from 'mongoose';
 
+import { checkAndTriggerAdaptation } from '@/lib/adaptiveRoadmapTrigger';
+
 export async function POST(req: NextRequest) {
   try {
-    const session = await getServerSession(authOptions as any);
+    const session = (await getServerSession(authOptions as any)) as any;
     if (!session?.user) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
@@ -21,6 +23,7 @@ export async function POST(req: NextRequest) {
     }
 
     const result = gradeAptitudeTest({ questions, userAnswers, timeTaken: timeTaken || 0 });
+    let adaptationNotice = null;
 
     // Save attempt
     try {
@@ -41,12 +44,14 @@ export async function POST(req: NextRequest) {
           timeTaken: result.timeTaken,
           weakCategories,
         });
+
+        adaptationNotice = await checkAndTriggerAdaptation(userId.toString());
       }
     } catch (dbErr) {
       console.warn('[aptitude/submit] DB save failed (non-fatal):', dbErr);
     }
 
-    return NextResponse.json({ success: true, data: result });
+    return NextResponse.json({ success: true, data: result, adaptationNotice });
   } catch (err: unknown) {
     const message = err instanceof Error ? err.message : 'Failed to submit aptitude test.';
     console.error('[/api/self-assessment/aptitude/submit]', message);

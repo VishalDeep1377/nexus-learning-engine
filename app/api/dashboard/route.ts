@@ -108,6 +108,17 @@ export async function GET(req: NextRequest) {
         status: p.status,
         createdAt: p.createdAt,
       })),
+      savedJobs: ((user as any).savedJobs || []).map((j: any) => ({
+        jobId: j.jobId,
+        title: j.title,
+        company: j.company,
+        location: j.location,
+        jobUrl: j.jobUrl || '#',
+        salary: j.salary,
+        postedAgo: j.postedAgo,
+      })),
+      jobSearchCount: (user as any).jobSearchCount || 0,
+      remainingSearches: Math.max(0, 3 - ((user as any).jobSearchCount || 0)),
     });
   } catch (err) {
     console.error('[Dashboard API Error]', err);

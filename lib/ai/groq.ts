@@ -8,6 +8,12 @@
 
 const GROQ_BASE_URL = "https://api.groq.com/openai/v1/chat/completions";
 
+const DEFAULT_MODELS = [
+  "openai/gpt-oss-120b",
+  "openai/gpt-oss-20b",
+  "qwen/qwen3.8-27b",
+];
+
 function getGroqConfig() {
   const apiKey = process.env.GROQ_API_KEY;
   if (!apiKey) {
@@ -15,8 +21,7 @@ function getGroqConfig() {
       "[Groq] GROQ_API_KEY is not set. Add it to your .env.local file."
     );
   }
-  const model =
-    process.env.GROQ_MODEL || "openai/gpt-oss-20b";
+  const model = process.env.GROQ_MODEL || DEFAULT_MODELS[0];
   return { apiKey, model };
 }
 
@@ -34,69 +39,81 @@ export interface GenerateStructuredOptions {
 
 /**
  * Generates a response from Groq and attempts to parse it as JSON.
- * Throws if the API key is missing or the response is not valid JSON.
+ * Includes automatic model fallback for 429 rate limits & invalid model names.
  */
 export async function generateStructured<T>(
   options: GenerateStructuredOptions
 ): Promise<T> {
-  const { apiKey, model } = getGroqConfig();
+  const { apiKey, model: configuredModel } = getGroqConfig();
+
+  const candidateModels = [configuredModel, ...DEFAULT_MODELS.filter(m => m !== configuredModel)];
 
   const messages: GroqMessage[] = [
     { role: "system", content: options.systemPrompt },
     { role: "user", content: options.userPrompt },
   ];
 
-  const body = {
-    model,
-    messages,
-    temperature: options.temperature ?? 0.4,
-    max_tokens: options.maxTokens ?? 4096,
-  };
+  let lastError: any = null;
 
-  let response;
-  let attempt = 0;
-  const maxAttempts = 3;
+  for (const currentModel of candidateModels) {
+    const body = {
+      model: currentModel,
+      messages,
+      temperature: options.temperature ?? 0.4,
+      max_tokens: options.maxTokens ?? 4096,
+    };
 
-  while (attempt < maxAttempts) {
-    response = await fetch(GROQ_BASE_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${apiKey}`,
-      },
-      body: JSON.stringify(body),
-      signal: AbortSignal.timeout(60_000),
-    });
+    let response;
+    let attempt = 0;
+    const maxAttempts = 2;
 
-    if (response.status === 429) {
-      attempt++;
-      if (attempt >= maxAttempts) break;
-      await new Promise((res) => setTimeout(res, 3000 * attempt));
-      continue;
+    while (attempt < maxAttempts) {
+      try {
+        response = await fetch(GROQ_BASE_URL, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${apiKey}`,
+          },
+          body: JSON.stringify(body),
+          signal: AbortSignal.timeout(30_000),
+        });
+
+        if (response.status === 429) {
+          attempt++;
+          if (attempt >= maxAttempts) break;
+          await new Promise((res) => setTimeout(res, 2000 * attempt));
+          continue;
+        }
+        break;
+      } catch (err: any) {
+        lastError = err;
+        attempt++;
+        await new Promise((res) => setTimeout(res, 1000));
+      }
     }
-    break;
-  }
 
-  if (!response || !response.ok) {
-    const errorText = await (response?.text().catch(() => "Unknown error") || "No response");
-
-    if (response?.status === 429) {
-      throw new Error("[Groq] Rate limit exceeded cleanly after retries. Please try again later.");
+    if (response && response.ok) {
+      const json = await response.json();
+      const rawContent: string | undefined = json?.choices?.[0]?.message?.content;
+      if (rawContent) {
+        return parseGroqJson<T>(rawContent);
+      }
     }
+
     if (response?.status === 401) {
       throw new Error("[Groq] Invalid API key. Check your GROQ_API_KEY.");
     }
-    throw new Error(`[Groq] API error ${response?.status || 'unknown'}: ${errorText}`);
+
+    const errText = await response?.text().catch(() => "") || "";
+    console.warn(`[Groq] Model ${currentModel} returned status ${response?.status || 'error'}: ${errText.slice(0, 150)}. Trying fallback model...`);
+    lastError = new Error(`[Groq] API error ${response?.status || 'unknown'}: ${errText}`);
   }
 
-  const json = await response.json();
-  const rawContent: string | undefined = json?.choices?.[0]?.message?.content;
+  throw lastError || new Error("[Groq] All model attempts failed or hit rate limits.");
+}
 
-  if (!rawContent) {
-    throw new Error("[Groq] Empty response from API.");
-  }
-
-  // Attempt JSON parse with recovery
+function parseGroqJson<T>(rawContent: string): T {
   try {
     return JSON.parse(rawContent) as T;
   } catch {
@@ -116,10 +133,10 @@ export async function generateStructured<T>(
     const lastBrace = rawContent.lastIndexOf('}');
     const firstBracket = rawContent.indexOf('[');
     const lastBracket = rawContent.lastIndexOf(']');
-    
+
     const first = (firstBrace !== -1 && (firstBracket === -1 || firstBrace < firstBracket)) ? firstBrace : firstBracket;
     const last = (lastBrace !== -1 && (lastBracket === -1 || lastBrace > lastBracket)) ? lastBrace : lastBracket;
-    
+
     if (first !== -1 && last !== -1) {
       try {
         return JSON.parse(rawContent.substring(first, last + 1)) as T;

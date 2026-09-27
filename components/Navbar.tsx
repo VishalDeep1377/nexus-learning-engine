@@ -85,7 +85,8 @@ function SelfAssessmentDropdown({ pathname }: { pathname: string }) {
     >
       {/* Trigger */}
       <button
-        className={`flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 ${isSelfAssessmentActive
+        onClick={() => setOpen((prev) => !prev)}
+        className={`flex items-center gap-1.5 whitespace-nowrap shrink-0 px-1.5 xl:px-2.5 2xl:px-3 py-2 rounded-lg text-xs 2xl:text-sm font-semibold transition-all duration-200 ${isSelfAssessmentActive
             ? 'text-indigo-500 dark:text-indigo-400'
             : 'text-slate-700 dark:text-slate-200 hover:text-indigo-500 dark:hover:text-indigo-400'
           }`}
@@ -99,7 +100,7 @@ function SelfAssessmentDropdown({ pathname }: { pathname: string }) {
 
       {/* Premium dropdown panel */}
       <div
-        className={`absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[340px] transition-all duration-200 origin-top ${open ? 'opacity-100 scale-100 pointer-events-auto' : 'opacity-0 scale-95 pointer-events-none'
+        className={`absolute top-full left-1/2 -translate-x-1/2 pt-2 w-[340px] transition-all duration-200 origin-top ${open ? 'opacity-100 scale-100 pointer-events-auto' : 'opacity-0 scale-95 pointer-events-none'
           }`}
         style={{ zIndex: 9999 }}
       >
@@ -200,13 +201,13 @@ function LearningDropdown({ pathname }: { pathname: string }) {
 
   return (
     <div ref={ref} className="relative flex items-center h-full" onMouseEnter={() => setOpen(true)} onMouseLeave={() => setOpen(false)}>
-      <button className={`flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 ${isActive ? 'text-indigo-500 dark:text-indigo-400' : 'text-slate-700 dark:text-slate-200 hover:text-indigo-500 dark:hover:text-indigo-400'}`}>
+      <button onClick={() => setOpen((prev) => !prev)} className={`flex items-center gap-1.5 whitespace-nowrap shrink-0 px-1.5 xl:px-2.5 2xl:px-3.5 py-2 rounded-lg text-xs 2xl:text-sm font-semibold transition-all duration-200 ${isActive ? 'text-indigo-500 dark:text-indigo-400' : 'text-slate-700 dark:text-slate-200 hover:text-indigo-500 dark:hover:text-indigo-400'}`}>
         <GraduationCap className="w-4 h-4" />
         Learning
         <ChevronDown className={`w-3.5 h-3.5 opacity-60 transition-transform duration-200 ${open ? 'rotate-180' : ''}`} />
       </button>
 
-      <div className={`absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[340px] transition-all duration-200 origin-top ${open ? 'opacity-100 scale-100 pointer-events-auto' : 'opacity-0 scale-95 pointer-events-none'}`} style={{ zIndex: 9999 }}>
+      <div className={`absolute top-full left-1/2 -translate-x-1/2 pt-2 w-[340px] transition-all duration-200 origin-top ${open ? 'opacity-100 scale-100 pointer-events-auto' : 'opacity-0 scale-95 pointer-events-none'}`} style={{ zIndex: 9999 }}>
         <div className="relative overflow-hidden rounded-2xl border border-slate-200/80 dark:border-white/10 bg-white/80 dark:bg-slate-900/90 backdrop-blur-xl shadow-2xl shadow-black/20 dark:shadow-black/60">
           <div className="h-0.5 w-full bg-gradient-to-r from-blue-500 via-indigo-500 to-violet-500" />
           <div className="p-3 space-y-1">
@@ -292,13 +293,13 @@ function MoreDropdown({ pathname }: { pathname: string }) {
 
   return (
     <div ref={ref} className="relative flex items-center h-full" onMouseEnter={() => setOpen(true)} onMouseLeave={() => setOpen(false)}>
-      <button className={`flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 ${isActive ? 'text-indigo-500 dark:text-indigo-400' : 'text-slate-700 dark:text-slate-200 hover:text-indigo-500 dark:hover:text-indigo-400'}`}>
+      <button onClick={() => setOpen((prev) => !prev)} className={`flex items-center gap-1.5 whitespace-nowrap shrink-0 px-1.5 xl:px-2.5 2xl:px-3.5 py-2 rounded-lg text-xs 2xl:text-sm font-semibold transition-all duration-200 ${isActive ? 'text-indigo-500 dark:text-indigo-400' : 'text-slate-700 dark:text-slate-200 hover:text-indigo-500 dark:hover:text-indigo-400'}`}>
         <MoreHorizontal className="w-4 h-4" />
         More
         <ChevronDown className={`w-3.5 h-3.5 opacity-60 transition-transform duration-200 ${open ? 'rotate-180' : ''}`} />
       </button>
 
-      <div className={`absolute top-full right-0 mt-2 w-[340px] transition-all duration-200 origin-top-right ${open ? 'opacity-100 scale-100 pointer-events-auto' : 'opacity-0 scale-95 pointer-events-none'}`} style={{ zIndex: 9999 }}>
+      <div className={`absolute top-full right-0 pt-2 w-[340px] transition-all duration-200 origin-top-right ${open ? 'opacity-100 scale-100 pointer-events-auto' : 'opacity-0 scale-95 pointer-events-none'}`} style={{ zIndex: 9999 }}>
         <div className="relative overflow-hidden rounded-2xl border border-slate-200/80 dark:border-white/10 bg-white/80 dark:bg-slate-900/90 backdrop-blur-xl shadow-2xl shadow-black/20 dark:shadow-black/60">
           <div className="h-0.5 w-full bg-gradient-to-r from-emerald-500 via-cyan-500 to-blue-500" />
           <div className="p-3 space-y-1">
@@ -344,8 +345,8 @@ function Navbar({ isDarkMode, setIsDarkMode }: NavbarProps) {
   }, []);
 
   return (
-    <div className="navbar sticky top-0 w-full dark:bg-black/70 bg-white/70 backdrop-blur-sm shadow-md z-50 dark:text-white text-black">
-      <div className="navbar-start">
+    <div className="navbar sticky top-0 w-full dark:bg-black/70 bg-white/70 backdrop-blur-sm shadow-md z-50 dark:text-white text-black px-2 lg:px-4 flex items-center justify-between">
+      <div className="navbar-start shrink-0 !w-auto min-w-max mr-2 xl:mr-4">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -438,61 +439,61 @@ function Navbar({ isDarkMode, setIsDarkMode }: NavbarProps) {
         </div>
 
         {session ? (
-          <Link href={"/home"} className="flex items-center gap-2">
-            <Image src="/icons/icon-144x144.png" alt="CodeToCareer Logo" width={32} height={32} className="hidden lg:block" />
-            <h1 className="text-xl font-semibold">CodeToCareer</h1>
+          <Link href={"/home"} className="flex items-center gap-2 whitespace-nowrap">
+            <Image src="/icons/icon-144x144.png" alt="CodeToCareer Logo" width={32} height={32} className="hidden lg:block shrink-0" />
+            <h1 className="text-lg xl:text-xl font-semibold whitespace-nowrap">CodeToCareer</h1>
           </Link>
         ) : (
-          <Link href={"/"} className="flex items-center gap-2">
-            <Image src="/icons/icon-144x144.png" alt="CodeToCareer Logo" width={32} height={32} className="hidden lg:block" />
-            <h1>CodeToCareer</h1>
+          <Link href={"/"} className="flex items-center gap-2 whitespace-nowrap">
+            <Image src="/icons/icon-144x144.png" alt="CodeToCareer Logo" width={32} height={32} className="hidden lg:block shrink-0" />
+            <h1 className="text-lg xl:text-xl font-semibold whitespace-nowrap">CodeToCareer</h1>
           </Link>
         )}
       </div>
 
       {session ? (
-        <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1 text-base font-medium items-center">
-            <li className="relative flex items-center h-full">
-              <Link href={"/dashboard"} className={`flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 ${pathname?.startsWith('/dashboard') ? 'text-indigo-500 dark:text-indigo-400' : 'text-slate-700 dark:text-slate-200 hover:text-indigo-500 dark:hover:text-indigo-400'}`}>
-                <LayoutGrid className="w-4 h-4" />
+        <div className="navbar-center hidden lg:flex flex-1 justify-center min-w-0">
+          <ul className="flex flex-row flex-nowrap items-center whitespace-nowrap px-0.5 text-base font-medium gap-0.5 xl:gap-1.5">
+            <li className="relative flex items-center h-full shrink-0">
+              <Link href={"/dashboard"} className={`flex items-center gap-1.5 whitespace-nowrap shrink-0 px-1.5 xl:px-2.5 2xl:px-3.5 py-2 rounded-lg text-xs 2xl:text-sm font-semibold transition-all duration-200 ${pathname?.startsWith('/dashboard') ? 'text-indigo-500 dark:text-indigo-400' : 'text-slate-700 dark:text-slate-200 hover:text-indigo-500 dark:hover:text-indigo-400'}`}>
+                <LayoutGrid className="w-4 h-4 shrink-0" />
                 Dashboard
               </Link>
             </li>
-            <li className="relative flex items-center h-full">
-              <Link href={"/learning-path"} className={`flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 ${pathname?.startsWith('/learning-path') ? 'text-indigo-500 dark:text-indigo-400' : 'text-slate-700 dark:text-slate-200 hover:text-indigo-500 dark:hover:text-indigo-400'}`}>
-                <BookOpen className="w-4 h-4" />
+            <li className="relative flex items-center h-full shrink-0">
+              <Link href={"/learning-path"} className={`flex items-center gap-1.5 whitespace-nowrap shrink-0 px-1.5 xl:px-2.5 2xl:px-3.5 py-2 rounded-lg text-xs 2xl:text-sm font-semibold transition-all duration-200 ${pathname?.startsWith('/learning-path') ? 'text-indigo-500 dark:text-indigo-400' : 'text-slate-700 dark:text-slate-200 hover:text-indigo-500 dark:hover:text-indigo-400'}`}>
+                <BookOpen className="w-4 h-4 shrink-0" />
                 Learning Paths
               </Link>
             </li>
-            <li className="relative flex items-center h-full">
+            <li className="relative flex items-center h-full shrink-0">
               <LearningDropdown pathname={pathname || ''} />
             </li>
 
-            <li className="relative flex items-center h-full">
-              <Link href={"/code-reviewer"} className={`flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 ${pathname?.startsWith('/code-reviewer') ? 'text-indigo-500 dark:text-indigo-400' : 'text-slate-700 dark:text-slate-200 hover:text-indigo-500 dark:hover:text-indigo-400'}`}>
-                <Code2 className="w-4 h-4" />
+            <li className="relative flex items-center h-full shrink-0">
+              <Link href={"/code-reviewer"} className={`flex items-center gap-1.5 whitespace-nowrap shrink-0 px-1.5 xl:px-2.5 2xl:px-3.5 py-2 rounded-lg text-xs 2xl:text-sm font-semibold transition-all duration-200 ${pathname?.startsWith('/code-reviewer') ? 'text-indigo-500 dark:text-indigo-400' : 'text-slate-700 dark:text-slate-200 hover:text-indigo-500 dark:hover:text-indigo-400'}`}>
+                <Code2 className="w-4 h-4 shrink-0" />
                 Code Editor
               </Link>
             </li>
 
-            <li className="relative flex items-center h-full">
+            <li className="relative flex items-center h-full shrink-0">
               <Link
                 href={"/hackathons"}
-                className={`flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 ${pathname?.startsWith('/hackathons') ? 'text-indigo-500 dark:text-indigo-400' : 'text-slate-700 dark:text-slate-200 hover:text-indigo-500 dark:hover:text-indigo-400'
+                className={`flex items-center gap-1.5 whitespace-nowrap shrink-0 px-1.5 xl:px-2.5 2xl:px-3.5 py-2 rounded-lg text-xs 2xl:text-sm font-semibold transition-all duration-200 ${pathname?.startsWith('/hackathons') ? 'text-indigo-500 dark:text-indigo-400' : 'text-slate-700 dark:text-slate-200 hover:text-indigo-500 dark:hover:text-indigo-400'
                   }`}
               >
-                <Trophy className="w-4 h-4" />
+                <Trophy className="w-4 h-4 shrink-0" />
                 Hackathons
               </Link>
             </li>
 
             {/* Self Assessment — fully custom dropdown */}
-            <li className="relative flex items-center">
+            <li className="relative flex items-center shrink-0">
               <SelfAssessmentDropdown pathname={pathname || ''} />
             </li>
 
-            <li className="relative flex items-center h-full">
+            <li className="relative flex items-center h-full shrink-0">
               <MoreDropdown pathname={pathname || ''} />
             </li>
           </ul>
@@ -506,7 +507,7 @@ function Navbar({ isDarkMode, setIsDarkMode }: NavbarProps) {
         </div>
       )}
 
-      <div className="navbar-end flex gap-2">
+      <div className="navbar-end shrink-0 !w-auto min-w-max ml-auto flex items-center gap-2">
         {session ? (
           <button
             className="px-2 py-1 sm:px-3 sm:py-2 text-xs sm:text-sm font-medium rounded-lg bg-red-500 text-white hover:bg-red-600 transition-colors"

@@ -6,9 +6,11 @@ import { connectDb } from '@/config/db.config';
 import CodingAttempt from '@/models/codingAttempt.model';
 import mongoose from 'mongoose';
 
+import { checkAndTriggerAdaptation } from '@/lib/adaptiveRoadmapTrigger';
+
 export async function POST(req: NextRequest) {
   try {
-    const session = await getServerSession(authOptions as any);
+    const session = (await getServerSession(authOptions as any)) as any;
     if (!session?.user) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
@@ -24,6 +26,8 @@ export async function POST(req: NextRequest) {
     }
 
     const result = await reviewCode({ challenge, userCode, language });
+
+    let adaptationNotice = null;
 
     // Save attempt to DB
     try {
@@ -48,12 +52,15 @@ export async function POST(req: NextRequest) {
             suggestions: result.suggestions,
           },
         });
+
+        // Trigger adaptive roadmap check
+        adaptationNotice = await checkAndTriggerAdaptation(userId.toString());
       }
     } catch (dbErr) {
       console.warn('[coding/review] DB save failed (non-fatal):', dbErr);
     }
 
-    return NextResponse.json({ success: true, data: result });
+    return NextResponse.json({ success: true, data: result, adaptationNotice });
   } catch (err: unknown) {
     const message = err instanceof Error ? err.message : 'Failed to review code.';
     console.error('[/api/self-assessment/coding/review]', message);

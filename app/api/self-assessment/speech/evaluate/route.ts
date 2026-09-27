@@ -6,9 +6,11 @@ import { connectDb } from '@/config/db.config';
 import SpeechAttempt from '@/models/speechAttempt.model';
 import mongoose from 'mongoose';
 
+import { checkAndTriggerAdaptation } from '@/lib/adaptiveRoadmapTrigger';
+
 export async function POST(req: NextRequest) {
   try {
-    const session = await getServerSession(authOptions as any);
+    const session = (await getServerSession(authOptions as any)) as any;
     if (!session?.user) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
@@ -24,6 +26,7 @@ export async function POST(req: NextRequest) {
     }
 
     const evaluation = await evaluateSpeechResponse({ question, transcript, category: category || 'general' });
+    let adaptationNotice = null;
 
     // Save attempt
     try {
@@ -48,12 +51,14 @@ export async function POST(req: NextRequest) {
           suggestions: evaluation.suggestions,
           improvedAnswer: evaluation.improvedAnswer,
         });
+
+        adaptationNotice = await checkAndTriggerAdaptation(userId.toString());
       }
     } catch (dbErr) {
       console.warn('[speech/evaluate] DB save failed (non-fatal):', dbErr);
     }
 
-    return NextResponse.json({ success: true, data: evaluation });
+    return NextResponse.json({ success: true, data: evaluation, adaptationNotice });
   } catch (err: unknown) {
     const message = err instanceof Error ? err.message : 'Failed to evaluate speech response.';
     console.error('[/api/self-assessment/speech/evaluate]', message);
