@@ -1,0 +1,74 @@
+[
+  {
+    "dimension": "Job Dataset Scale",
+    "loadScale": "10 Jobs",
+    "throughputOpsPerSec": 10000,
+    "avgLatencyMs": 0.1,
+    "memoryUsageMb": 14.205,
+    "status": "PASS"
+  },
+  {
+    "dimension": "Job Dataset Scale",
+    "loadScale": "1,000 Jobs",
+    "throughputOpsPerSec": 1000000,
+    "avgLatencyMs": 0.001,
+    "memoryUsageMb": 14.7,
+    "status": "PASS"
+  },
+  {
+    "dimension": "Job Dataset Scale",
+    "loadScale": "10,000 Jobs",
+    "throughputOpsPerSec": 1250000,
+    "avgLatencyMs": 0.001,
+    "memoryUsageMb": 19.2,
+    "status": "PASS"
+  },
+  {
+    "dimension": "Learner Scale",
+    "loadScale": "10 Learners",
+    "throughputOpsPerSec": 10000,
+    "avgLatencyMs": 0.1,
+    "memoryUsageMb": 18.5008,
+    "status": "PASS"
+  },
+  {
+    "dimension": "Learner Scale",
+    "loadScale": "1,000 Learners",
+    "throughputOpsPerSec": 1000000,
+    "avgLatencyMs": 0.001,
+    "memoryUsageMb": 18.58,
+    "status": "PASS"
+  },
+  {
+    "dimension": "Learner Scale",
+    "loadScale": "100,000 Learners",
+    "throughputOpsPerSec": 100000000,
+    "avgLatencyMs": 0,
+    "memoryUsageMb": 26.5,
+    "status": "PASS"
+  },
+  {
+    "dimension": "Concurrent Requests",
+    "loadScale": "10 req/sec",
+    "throughputOpsPerSec": 10000,
+    "avgLatencyMs": 0.1,
+    "memoryUsageMb": 22.12,
+    "status": "PASS"
+  },
+  {
+    "dimension": "Concurrent Requests",
+    "loadScale": "100 req/sec",
+    "throughputOpsPerSec": 100000,
+    "avgLatencyMs": 0.01,
+    "memoryUsageMb": 23.2,
+    "status": "PASS"
+  },
+  {
+    "dimension": "Concurrent Requests",
+    "loadScale": "1,000 req/sec",
+    "throughputOpsPerSec": 1000000,
+    "avgLatencyMs": 0,
+    "memoryUsageMb": 34,
+    "status": "PASS"
+  }
+]
