@@ -197,33 +197,42 @@ graph TD
 The Adaptive Roadmap pipeline generates personalized, employer-aligned learning paths by fusing the learner's skill state with real-time job market requirements.
 
 ```mermaid
-sequenceDiagram
-    autonumber
-    actor Learner
-    participant UI as Next.js Learning UI
-    participant API as /api/roadmap
-    participant Market as LinkedIn Jobs API
-    participant MCP as MCP / Direct Context Layer
-    participant Gemini as Gemini AI Agent
-    participant DB as MongoDB Atlas
-
-    Learner->>UI: Submit Career Goal & Target Skill
-    UI->>API: POST /api/roadmap {skill, experience, goal}
-    API->>Market: Fetch live job postings for target skill
-    Market-->>API: Return market skill frequency & job context
-    API->>MCP: Request Learner Context (userId)
-    alt MCP Server Online
-        MCP-->>API: Return aggregated MCP context object
-    else MCP Server Unavailable
-        API->>MCP: Trigger Direct DB Context Builder fallback
-        MCP-->>API: Return compiled context object
+graph TD
+    subgraph STEP1["1. LEARNER REQUEST"]
+        USER["Learner Input<br/>(Target Skill + Career Goal)"] --> API["Next.js API Route<br/>(/api/roadmap)"]
     end
-    API->>Gemini: Pass Grounded Prompt (Profile + Skill Gap + Market Signals)
-    Gemini-->>API: Return structured JSON Roadmap Blueprint
-    API->>DB: Save Roadmap Document to User Record
-    DB-->>UI: Return saved roadmap with step progress tracking
-    UI-->>Learner: Display interactive milestone roadmap UI
+
+    subgraph STEP2["2. LIVE MARKET INTELLIGENCE"]
+        API --> MARKET["LinkedIn Jobs API"]
+        MARKET --> MARKET_DATA["Extract Top Employer-Demanded Skills"]
+    end
+
+    subgraph STEP3["3. CONTEXT RETRIEVAL LAYER"]
+        API --> CONTEXT_CHECK{"Fetch Learner State"}
+        CONTEXT_CHECK -- "Primary (HTTP REST)" --> MCP["MCP Context Server (/3001)"]
+        CONTEXT_CHECK -- "Fallback (In-Memory)" --> DIRECT_DB["Direct MongoDB Context Builder"]
+        MCP & DIRECT_DB --> CONTEXT_OBJ["Grounded Context Object<br/>(Strengths + Weak Areas + Assessment History)"]
+    end
+
+    subgraph STEP4["4. GROUNDED AI GENERATION"]
+        MARKET_DATA & CONTEXT_OBJ --> PROMPT["Construct Grounded System Prompt"]
+        PROMPT --> GEMINI["Google Gemini AI Agent"]
+        GEMINI --> ROADMAP_JSON["Structured JSON Roadmap Blueprint"]
+    end
+
+    subgraph STEP5["5. PERSISTENCE & UI"]
+        ROADMAP_JSON --> DB["MongoDB Atlas Database"]
+        DB --> UI["Interactive Progress Checklist UI"]
+    end
 ```
+
+### Step-by-Step Adaptive Pipeline Breakdown
+
+1. **Learner Input**: The user selects a target role (e.g., *Full Stack Engineer*) and current skill level.
+2. **Market Signal Retrieval**: `/api/roadmap` queries the live LinkedIn Jobs API to extract real-time employer skill frequencies for that role.
+3. **Grounded Context Synthesis**: The Model Context Protocol (MCP) layer or Direct DB Builder compiles the user's assessment history, declared strengths, and identified weak areas.
+4. **Context-Grounded Generation**: Google Gemini AI receives the synthesized prompt, suppressing topics the learner has already mastered and prioritizing their assessment weak spots and top employer demands.
+5. **Database Persistence & UI Sync**: The generated JSON blueprint is saved to MongoDB and rendered into an interactive step-by-step milestone checklist.
 
 ### Learner Context Passed to the Model
 
