@@ -223,12 +223,14 @@ export async function tool_get_learner_context(userId: string): Promise<GeminiLe
 /**
  * Strips sensitive PII / credentials from context returned to agent.
  */
-function sanitizeLearnerContext(ctx: GeminiLearnerContext): GeminiLearnerContext {
+export function sanitizeLearnerContext(ctx: GeminiLearnerContext): GeminiLearnerContext {
   const sanitized = JSON.parse(JSON.stringify(ctx));
   if (sanitized.profile) {
     delete sanitized.profile.email;
     delete sanitized.profile.password;
+    delete sanitized.profile.passwordHash;
     delete sanitized.profile.token;
+    delete sanitized.profile.ssn;
   }
   return sanitized;
 }
