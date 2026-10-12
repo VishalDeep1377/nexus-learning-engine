@@ -33,6 +33,12 @@
 
 </div>
 
+## 🏗️ System Architecture
+
+<p align="center">
+  <img src="./diagram.png" alt="Nexus Learning Engine Architecture" width="100%" />
+</p>
+
 ---
 
 ## 📋 Table of Contents
