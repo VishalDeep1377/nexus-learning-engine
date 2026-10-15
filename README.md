@@ -680,45 +680,6 @@ nexus-learning-engine/
    npx tsx scripts/test_job_intelligence_agent.ts
    ```
 
----
-
-## 🔑 Environment Variables
-
-Create a `.env.local` file in the root directory:
-
-```env
-# ── Database ──────────────────────────────────────────
-MONGODB_URI=mongodb+srv://<username>:<password>@cluster.mongodb.net/codetocareer
-
-# ── Next.js Application ───────────────────────────────
-NEXT_PUBLIC_API_URL=http://localhost:3000/api
-JWT_SECRET=your_jwt_secret_key_here
-NEXTAUTH_SECRET=your_nextauth_secret_key_here
-NEXTAUTH_URL=http://localhost:3000
-
-# ── Primary AI Provider (Google Gemini) ───────────────
-GEMINI_API_KEY=your_google_gemini_api_key
-
-# ── Secondary & Tertiary AI Providers (Optional) ──────
-GROQ_API_KEY=your_groq_api_key
-OPENROUTER_API_KEY=your_openrouter_api_key
-
-# ── Authentication Providers ──────────────────────────
-GOOGLE_CLIENT_ID=your_google_client_id
-GOOGLE_CLIENT_SECRET=your_google_client_secret
-GITHUB_ID=your_github_client_id
-GITHUB_SECRET=your_github_client_secret
-
-# ── External News API ─────────────────────────────────
-NEWS_URL=https://newsapi.org/v2/top-headlines?category=technology&language=en&pageSize=30&apiKey=your_news_api_key
-
-# ── MCP Context Server Configuration ─────────────────
-MCP_SERVER_URL=http://localhost:3001
-MCP_SERVER_SECRET=your_mcp_server_secret_key
-```
-
----
-
 ## 🔮 Future Roadmap
 
 - [ ] **Formal MCP Protocol Transport**: Upgrade HTTP REST context server to formal MCP JSON-RPC stdio / SSE transport.
